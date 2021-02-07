@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home | Menu</title>
+<style>
+    /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+    #heading{
+        width: 847px; 
+        height: 64px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        line-height: 64px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        color:blue;
+    }
+
+    #menu{
+        width: 847px;
+        height: 82px;
+        font-family: Arial, Helvetica, sans-serif; 
+        line-height: 82px;
+    }
+
+
+    .con{
+        width: 500px;
+        height: 400px;
+    }
+    .con div{
+        width: 50%;
+        height: 100%;
+    }
+    .left-div{
+        float: left;
+        background-color: blue;
+    }
+    .right-div{
+        float: right;
+        text-align: center;
+        line-height: 400px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18;
+        background-color: red;
+    }
+
+    .centered{
+        position: relative;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+
+</style>
+</head>
+
+<!-- body here -->
+<body>
+    <div id=heading >
+        <h2><b>Trojan Café</b></h2>
+    </div>
+
+    <!-- Alterglam-->
+    <div id=menu>
+        <h4>Home</h4> <h4>Italian</h4> <h4>Indian</h4> <h4>Japanese</h4>
+        <h4>Desserts</h4> <h4>About</h4> <h4>Contact</h4>
+    </div>
+
+    <div id="home">
+        <img src="HW3_img/restaurant.jpeg" 
+        style="width: 915px;height: 515px;background-attachment: fixed;
+        background-repeat: no-repeat;background-position: top;">
+
+        <div class="centered">Enjoy the Senic View!!</div>
+
+
+        </div>
+    </div>
+
+    <!-- Italian -->
+    <div class="con" id="italian">
+        <div class="left-div">
+
+        </div>
+
+        </div class="right-div">
+
+        </div>
+    </div>
+
+</body>
+
+</html>
