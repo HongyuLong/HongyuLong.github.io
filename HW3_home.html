@@ -28,6 +28,7 @@
     body {
         margin: 0px;
         padding: 0px;
+        font-size: 0px;
     }
 
     #bkg-img{
@@ -39,17 +40,15 @@
         width: 860px; 
         font-family: Georgia, 'Times New Roman', Times, serif;
         text-align: center;
-        color:blue;
+        color:darkblue;
         background-color: white;
-        border-color:red; border-style: solid;
+        font-size:small;
     }
 
     ul {
         width: 860px;
         height: 30px;
-        background-color: white;
-        border-color: teal;
-        border-style: solid;
+        background-color:blanchedalmond;
     }
     li {
 
@@ -63,6 +62,7 @@
         line-height: 30px;
         text-align: center;
         text-decoration: none;
+        font-size:medium;
     }
 
     a::after{
@@ -71,11 +71,11 @@
 
 
     #home{
-        width: 720px;  height: 400px; line-height: 400px; 
-        border-left: 80px; border-right: 90px;
+        width: 720px;  height: 400px;
+        border-left: 80px; border-right: 90px; border-top: 20px;
         border-style: solid; border-color: white;
         text-align: center;
-        background-color: blue;
+        color: cornsilk; font-size: 20px;
     }
 
     #explore {
@@ -84,6 +84,11 @@
         text-align: center;
         border-style: solid;
         border-color: white;
+        font-size:20px;
+        color:darkorchid;
+        text-decoration-line: underline;
+        text-decoration-style: double;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
 
@@ -98,6 +103,21 @@
         height: 270px;
     }
 
+    .small-img{
+        width:320px; height:260px;
+        border-style: solid;
+        border-width: 10px;
+    }
+
+    .text-style {
+        padding-top: 50px;
+        text-align: left;
+        font-size: medium;
+    }
+
+    h4{
+        color: mediumblue;
+    }
 
 </style>
 </head>
@@ -105,79 +125,111 @@
 <!-- body here -->
 <body>
 <div id="bkg-img">
-    <div id="header">
-        <h1><b>Trojan Café</b></h1>
-    </div>
-
-    <!-- Alterglam-->
-    <div id="navigation" >
-        <ul>
-            <li><a href="#header">Home</a></li>
-            <li><a href="#italian-section">Italian</a></li>
-            <li><a href="#indian-section">Indian</a></li>
-            <li><a href="#japanese-section">Japanese</a></li>
-            <li><a href="#desserts-section">Desserts</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
+    <div style="background-color: white;">
+        <div id="header">
+            <h1><b>Trojan Café</b></h1>
+        </div>
+    
+        <!-- Alterglam-->
+        <div id="navigation" >
+            <ul>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#italian-section">Italian</a></li>
+                <li><a href="#indian-section">Indian</a></li>
+                <li><a href="#japanese-section">Japanese</a></li>
+                <li><a href="#desserts-section">Desserts</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </div>
     </div>
 
 
     <div id="home">
-        <h2 style="color: cornsilk; font-size: large;"  >Enjoy the Senic View!!</h2>
+        <br><br><br><br>
+        <h1 style="font-family: 'Times New Roman', Times, serif;">Enjoy the Senic View!!</h1>
+        <button style="border-style: double; border-width: 5px; height: 40px; border-color: black;
+        position:absolute; top:300px; left:500px;">Book Your Reservation</button>
     </div>
 
+
     <div id="explore">
-        <h2> Explore Our Delicious Cuisines</h2>
+        <p> Explore Our Delicious Cuisines</p>
     </div>
 
 
     <table style="width:720px; background-color: white; padding-left: 80px; padding-right: 90px;">
-            <!--row 1-->
+            <!--row 1 Italian-->
           <tr id="italian-section" >
             <td>
-            <div class="left-td" style="background-color:blue"> Blue </div>
+            <div class="left-td" >
+                <img src="HW3_img/italian.jpg" style="border-color:pink" class="small-img">
+             </div>
             </td>
+
             
-            <td>
-            <div class="right-td" style="background-color:green; text-align:center;">Smith </div>
+            <td style="padding-left:30px">
+            <div class="right-td text-style">
+                <br><br>
+                <h4>Italy's finest:</h4>
+                <p>From our Lasagna to our Protein Penne, we have delicious options for every taste!</p>
+            </div>
             </td>
           </tr>
 
-          <tr style="height: 20px; background-color: white;"></tr>
+          
 
-            <!--row 1-->
+            <!--row 2-->
             <tr id="indian-section" >
                 <td>
-                <div class="left-td" style="background-color:blue"> Blue </div>
+                <div class="left-td text-style" > 
+                    <br><br>
+                    <h4>India's Flavors:</h4>
+                    <p>Our dishes are blended with masterful savory spices</p>
+                </div>
                 </td>
                 
                 <td>
-                <div class="right-td" style="background-color:green; text-align:center;">Smith </div>
+                <div class="right-td">
+                    <img src="HW3_img/indian.jpg" style="border-color:skyblue;" class="small-img">
+                </div>
                 </td>
               </tr>
 
-              <tr style="height: 20px; background-color: white;"></tr>
+             
                 <!--row 1-->
 
           <tr id="japanese-section" >
             <td>
-            <div class="left-td" style="background-color:blue"> Blue </div>
+            <div class="left-td">
+                <img src="HW3_img/japanese.jpg" style="border-color: pink;" class="small-img">
+            </div>
             </td>
             
-            <td>
-            <div class="right-td" style="background-color:green; text-align:center;">Smith </div>
+            <td style="padding-left: 30px;">
+            <div class="right-td text-style">
+                <br><br>
+                <h4>Japanese Cuisine:</h4>
+                <p>Delicious dining options from Sake to Sushi</p>
+            </div>
             </td>
           </tr>
-          <tr style="height: 20px; background-color: white;"></tr>
+          
+
             <!--row 1-->
             <tr id="desserts-section" >
                 <td>
-                <div class="left-td" style="background-color:blue"> Blue </div>
+                <div class="left-td text-style"> 
+                    <br><br>
+                    <h4>Desserts:</h4>
+                    <p>From Italian Tiramisu to Indian Gulab Jamun</p>
+                </div>
                 </td>
                 
                 <td>
-                <div class="right-td" style="background-color:green; text-align:center;">Smith </div>
+                <div class="right-td">
+                    <img src="HW3_img/desserts.jpg" style="border-color: skyblue;" class="small-img">
+                </div>
                 </td>
               </tr>
               <tr style="height: 20px; background-color: white;"></tr>
