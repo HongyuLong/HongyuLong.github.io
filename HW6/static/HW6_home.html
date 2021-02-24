@@ -1,58 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../reset.css">
-    <style>
-        html,body{
-        width: 100%;
-        height: 100%;
-        }
-
-        .right{
-            border-left: 1px solid white;
-            height:100%;
-            width: 80%;
-            float:left;
-        }
-    </style>
+    <!--
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    -->
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body style="background-color: black;">
-    <div id='top' style="height:4%;">
-        <h1 style="color:red">THE MOVIE DB</h1>
+<body>
+    <script src='/static/funcs.js'></script>
+
+    <!-- Top -->
+    <div id='top' class='top-container'>
+        <h1>THE MOVIE DB</h1>
     </div>
 
-    <div id='left' style="height:100%; width: 19%;float:left;text-align: right;">
+    <!-- Button -->
+    <div id='left' class='left-container'>
         <button id='home' onclick="displayHome()">Home</button><br>
         <button id='search' onclick="displaySearch()">Search</button>
     </div>
 
     <!-- Right-->
-    <div id='home-section' class='right'>
-        <p style="color: white;">Home Now</p>
+    <div id='home-section' class='right-container'>
+        
     </div>
 
-    <div id='search-section' class='right'>
-        <p style="color: white;">Search Now</p>
+    <div id='search-section' class='right-container'>
+        
     </div>
 
-    <script>
-        document.innerHTML = displayHome();
-        function displayHome() {
-            var home_section = document.getElementById("home-section");
-            var search_section = document.getElementById("search-section");
-            home_section.style.display = "block";
-            search_section.style.display = "none";
-        }
-
-        function displaySearch() {
-            var home_section = document.getElementById("home-section");
-            var search_section = document.getElementById("search-section");
-            home_section.style.display = "none";
-            search_section.style.display = "block";
-        }
-
-    </script>
+    
 </body>
     
 </html>
