@@ -1,11 +1,12 @@
 from flask import Flask
-import requestes
 
+# create Flask app
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def home():
-    return "Hello World!"
+    return app.send_static_file('HW6_home.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+if __name__ == '__main__':
+    app.run()
