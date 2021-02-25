@@ -29,31 +29,50 @@
 // search_section.innerHTML = "SEARCH";
 // root.appendChild(home_section);
 // root.appendChild(search_section);
+var home_section = document.getElementById('home-section');
+loadHomeBox('home-movie', '/app/home/movie');
+var slide_index = -1;
 
 function displayHome() {
-    var home_section = document.getElementById("home-section");
-    var search_section = document.getElementById("search-section");
-    loadHome();
-    home_section.style.display = "block";
-    search_section.style.display = "none";
+    var home_section = document.getElementById('home-section');
+    var search_section = document.getElementById('search-section');
+    //loadHome();
+    loadHomeBox('home-movie', '/app/home/movie');
+    home_section.style.display = 'block';
+    search_section.style.display = 'none';
 }
 
 function displaySearch() {
-    var home_section = document.getElementById("home-section");
-    var search_section = document.getElementById("search-section");
-    home_section.style.display = "none";
-    search_section.style.display = "block";
+    var home_section = document.getElementById('home-section');
+    var search_section = document.getElementById('search-section');
+    home_section.style.display = 'none';
+    search_section.style.display = 'block';
 }
 
-function loadHome() {
+function display_sliding_window(box, jsonObj) {
+    var home_box = document.getElementById(box);
+    var slides = home_box.getElementsByClassName('slide');
+    for (let i = 0; i < slides.length; i++) { // hide everything at the beginning
+        slides[i].style.display = 'none';
+    }
+    slide_index = (slide_index + 1) % slides.length;
+    //if(slide_index == slides.length) { slide_index = 1;}
+    slides[slide_index].getElementsByTagName('img')[0].setAttribute('src', 'https://image.tmdb.org/t/p/w780' + jsonObj[slide_index]['backdrop_path']);
+    //slides[slide_index].getElementsByTagName('img')[0].src = 'https://image.tmdb.org/t/p/w780' + jsonObj[slide_index]['backdrop_path'];
+    //slides[slide_index].getElementsByTagName('p')[0].textContent = jsonObj[slide_index]['title'] + '(' + jsonObj[slide_index]['release_date'];
+    slides[slide_index].getElementsByTagName('p')[0].setAttribute('textContent', jsonObj[slide_index]['title'] + '(' + jsonObj[slide_index]['release_date']);
+    slides[slide_index].style.display = 'block';
+    setTimeout(function(){display_sliding_window(box, jsonObj)}, 10000);
+}
+
+function loadHomeBox(box, route_path) {
     var xhttp = new XMLHttpRequest();
-    var home_section = document.getElementById("home-section");
     xhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
-            var result = JSON.parse(this.responseText);
-            home_section.innerHTML = "<p style='color: white;'>" + result.name + "<p>";
+            var res_ls = JSON.parse(this.responseText);
+            display_sliding_window(box, res_ls);
         }
     };
-    xhttp.open("GET", "http://127.0.0.1:5000/app/home", true);
+    xhttp.open('GET', route_path, true);
     xhttp.send();
 }

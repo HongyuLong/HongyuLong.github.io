@@ -25,6 +25,22 @@ html,body{
 .right-container{
     border-left: 1px solid white;
     height:100%;
-    width: auto;
+    width: 900px;
     float:left;
+    text-align: center;
+}
+
+h3{
+    color: white;
+}
+
+.slide{
+    position: relative;
+}
+.text-block {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    bottom: 0;
+    margin-bottom: 0;
 }
