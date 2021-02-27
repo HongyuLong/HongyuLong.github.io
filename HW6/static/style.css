@@ -12,23 +12,20 @@ html,body{
 }
 
 .left-container {
-    height:100%;
-    width: 19%;
+    width: 20%;
     float:left;
     text-align: right;
 }
-.left-container.button {
+.left-container button {
     background-color: black;
     color: white;
 }
 
 .right-container{
-    border-left: 1px solid white;
-    height:100%;
-    width: 900px;
+    width: 80%;
     float:left;
-    text-align: center;
 }
+
 
 h3{
     color: white;
@@ -37,6 +34,10 @@ h3{
 .slide{
     position: relative;
 }
+.slide img{
+    bottom: 0;
+}
+
 .text-block {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.3);

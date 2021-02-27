@@ -29,14 +29,18 @@
 // search_section.innerHTML = "SEARCH";
 // root.appendChild(home_section);
 // root.appendChild(search_section);
-var home_section = document.getElementById('home-section');
-loadHomeBox('home-movie', '/app/home/movie');
+// var home_section = document.getElementById('home-section');
+// var search_section = document.getElementById('search-section');
+// home_section.style.display = 'block';
+// search_section.style.display = 'none';
+//displayHome();
+//loadHomeBox('home-movie', '/app/home/movie');
+window.onload = displayHome;
 var slide_index = -1;
 
 function displayHome() {
     var home_section = document.getElementById('home-section');
     var search_section = document.getElementById('search-section');
-    //loadHome();
     loadHomeBox('home-movie', '/app/home/movie');
     home_section.style.display = 'block';
     search_section.style.display = 'none';
@@ -62,7 +66,7 @@ function display_sliding_window(box, jsonObj) {
     //slides[slide_index].getElementsByTagName('p')[0].textContent = jsonObj[slide_index]['title'] + '(' + jsonObj[slide_index]['release_date'];
     slides[slide_index].getElementsByTagName('p')[0].setAttribute('textContent', jsonObj[slide_index]['title'] + '(' + jsonObj[slide_index]['release_date']);
     slides[slide_index].style.display = 'block';
-    setTimeout(function(){display_sliding_window(box, jsonObj)}, 10000);
+    setTimeout(function(){display_sliding_window(box, jsonObj)}, 4000);
 }
 
 function loadHomeBox(box, route_path) {
