@@ -43,11 +43,22 @@ def load_trending_movies():
         keys = ['title', 'backdrop_path', 'release_date']
         return jsonify(filter_info(res_list, 5, keys))
     return None
-'''
+
 @app.route('/app/home/tv')
 def load_tv_airing_today():
     url = 'https://api.themoviedb.org/3/tv/airing_today?api_key=' + api_key
-'''
+    response = requests.get(url=url)
+    if response.status_code == 200:
+        rsp = response.json()
+        res_list = rsp['results']
+        keys = ['name', 'backdrop_path', 'first_air_date']
+        return jsonify(filter_info(res_list, 5, keys))
+    return None
+
+
+@app.route('app/search/fill')
+def do_valid_fill():
+    return True
 
 if __name__ == '__main__':
     app.run(debug=True)

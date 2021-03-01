@@ -8,55 +8,76 @@
 </head>
 
 <body>
+    <div id='wrap'>
+        <div id='header'>
+            <h1>THE MOVIE DB</h1>
+        </div>
+
+        <div id='container'>
+            <div id='home-section' class='center column'>  <!--home section-->
+                <div id='home-title1'>Trending Movies</div>
+                <div id='home-movie' class='slideshow-container'> <!--movie slides-->
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                </div>
+                <div id='home-title2'>TV Shows On-Air Today</div>
+                <div id='home-tv' class='slideshow-container'> <!--tv slides-->
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                    <div class='mySlides'>
+                        <img>
+                        <div class='text'> </div>
+                    </div>
+                </div> 
+                <div id='footer'></div>
+            </div>
+
+            <div id='search-section' class='center column'> <!--search section-->
+
+                <div id='footer'></div>
+            </div>
+
+
+            <div id='left' class='column'>
+                <button id='home' onclick="displayHome()">Home</button><br>
+                <button id='search' onclick="displaySearch()">Search</button>
+            </div>
+        </div>
+    </div>
+
     <script src='/static/funcs.js'></script>
-
-    <!-- Top -->
-    <div id='top' class='top-container'>
-        <h1>THE MOVIE DB</h1>
-    </div>
-
-    <!-- Button -->
-    <div id='left' class='left-container'>
-        <button id='home' onclick="displayHome()">Home</button><br>
-        <button id='search' onclick="displaySearch()">Search</button>
-    </div>
-
-    <!-- Right-->
-    <div id='home-section' class='right-container'>
-        <div id='home-movie'>
-            <h3>Trending Movies</h3>
-            <div class='slide'>
-                <img>
-                <p class="text-block"></p>
-            </div>  <!--0-->
-            <div class='slide'>
-                <img>
-                <p class="text-block"></p>
-            </div> 
-            <div class='slide'>
-                <img>
-                <p class="text-block"></p>
-            </div> 
-            <div class='slide'>
-                <img>
-                <p class="text-block"></p>
-            </div> 
-            <div class='slide'>
-                <img>
-                <p class="text-block"></p>
-            </div> <!--4-->
-        </div>
-
-        <div id='home-tv'>
-            <h3>TV Shows On-Air Today</h3>
-            <img>
-        </div>
-    </div>
-
-    <div id='search-section' class='right-container'>
-        
-    </div>
-
     
 </body>
     

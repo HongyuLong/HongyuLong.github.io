@@ -1,3 +1,5 @@
+    
+
 html,body{
     width: 100%;
     height: 100%;
@@ -6,42 +8,102 @@ html,body{
     background-color: black;
 }
 
-.top-container {
-    height:40px;
-    color: red;
+#wrap{
+    width: 100%;
+    min-width: 700px;
+    height: 100%;
 }
 
-.left-container {
-    width: 20%;
-    float:left;
+#header, #footer{
+    width: 100%;
+    height: 30px;
+    color: white;
+}
+#header {
+    padding-bottom: 10px;
+}
+#footer{
+    clear: both;
+    position:absolute;
+    top: 1100px;
+    width: 100%;
+    background-color: red;
+}
+
+#container{
+    /* padding: 0 200px;    padding-left: left content width; padding-right: right content width */
+    padding: 0 0 0 200px;
+    /*overflow: hidden;*/
+    height: 100%;
+}
+
+#container .column {
+    position:relative;
+    float: left;
+    /*text-align: center;*/
+    /*min-height: 400px;*/
+    height: 100%;
+    /*line-height: 400px;*/
+    color: white;
+}
+
+.center{
+    width: 100%;
+    /*word-break: break-all;*/
+    border-left:1px solid white;
+    position: relative;
+}
+
+#left{
+    width: 200px;
+    /*left: -200px;*/
+    right: 200px;
+    margin-left: -100%;
     text-align: right;
 }
-.left-container button {
+
+#left button{
     background-color: black;
     color: white;
 }
 
-.right-container{
-    width: 80%;
-    float:left;
+#home-title1 {
+    position:absolute;
+    top: 0;
+    left: 420px;
+    height: 20px;
 }
 
-
-h3{
-    color: white;
-}
-
-.slide{
-    position: relative;
-}
-.slide img{
-    bottom: 0;
-}
-
-.text-block {
+#home-movie{
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: white;
+    top: 40px;
+    left: 100px;
+}
+
+#home-title2{
+    position: absolute;
+    top:540px;
+    left:410px;
+    height: 20px;
+}
+#home-tv{
+    position: absolute;
+    top:580px;
+    left:100px
+}
+
+.slideshow-container{
+    position: relative;
+    width: 780px;
+}
+.mySlides {display: none;}  /*home-movie & home-tv*/
+
+.text{
+    position:absolute;
     bottom: 0;
-    margin-bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px auto;
 }
