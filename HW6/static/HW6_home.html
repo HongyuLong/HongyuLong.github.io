@@ -66,12 +66,36 @@
 
             <div id='search-section' class='center column'> <!--search section-->
                 <div id='search-box'>
-                    <p>Search</p>
-                    
-                    <button>Search</button>
-                    <button>Clear</button>
+                    <h3>Search</h3>
+                    <form id='search-form' onsubmit='load_search_results()'>
+                        <div id="search-kw">
+                            <label for="keyword">Keyword</label>
+                                <input type="text" id="keyword" name="keyword">
+                        </div>
+                        <br>
+        
+        
+                        <div id="search-cat">
+                            <label for="category">Category</label>
+                                <select id="category" name="category">
+                                    <option value=""></option>
+                                    <option value="cat_mv">Movies</option>
+                                    <option value="cat_tv">TV Shows</option>
+                                    <option value="cat_both">Movies and TV Shows</option>
+                                </select>  
+                        </div>
+                        <br>
+                        <div id="search-submit">
+                            <input type="submit" id="search-button" value="Search" class="search-box-button">
+                            <input type="button" id="clear-button" value="Clear" class="search-box-button">
+                        </div>
+                    </form>
                 </div>
 
+                <div id="search-results">
+                    <div id="show-info"></div>
+                    <div id="show-cards"></div>
+                </div>
             </div>
 
 

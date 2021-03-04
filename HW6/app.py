@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import requests
 import json
 
@@ -35,7 +35,6 @@ def filter_info(rsp_ls, num, keys):
 @app.route('/app/home/movie')
 def load_trending_movies():
     url = 'https://api.themoviedb.org/3/trending/movie/week?api_key=' + api_key
-    #url = 'https://api.themoviedb.org/3/trending/movie/week?api_key=97588ddc4a26e3091152aa0c9a40de22'
     response = requests.get(url=url)
     if response.status_code == 200:
         rsp = response.json()
@@ -55,11 +54,30 @@ def load_tv_airing_today():
         return jsonify(filter_info(res_list, 5, keys))
     return None
 
-'''
-@app.route('app/search/fill')
-def do_valid_fill():
-    return True
-'''
+@app.route('/app/search/cards')
+def load_search_result():
+    keyword = request.args.get('key')
+    category = request.args.get('cat')
+    items = []
+    keys_mv = ['id', 'title', 'overview', 'poster_path', 'release_date', 'vote_average', 'vote_count', 'genre_ids']
+    keys_tv = ['id', 'name', 'overview', 'poster_path', 'first_air_date', 'vote_average', 'vote_count', 'genre_ids']
+    if category == 'cat_mv':
+        url = 'https://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=' + keyword + '&language=en-US&page=1&include_adult=false'
+        response = requests.get(url=url)
+        if response.status_code == 200:
+            rsp = response.json()
+            results = rsp['results']
+            for i in range(len(results)):
+                item = {}
+                for key in keys_mv:
+                    item[key] = results[i][key]
+                items.append(item)
+    elif category == 'cat_tv':
+        url = 'https://api.themoviedb.org/3/search/tv?api_key=' + api_key + '&language=en-US&page=1&query=' + keyword + '&include_adult=false'
+    elif category == 'cat_both':
+        url = 'https://api.themoviedb.org/3/search/multi?api_key=' + api_key + '&language=en-US&query=' + keyword + '&page=1&include_adult=false'
+
+    return jsonify(items)
 
 if __name__ == '__main__':
     app.run(debug=True)
