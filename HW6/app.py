@@ -71,6 +71,7 @@ def load_search_result():
                 item = {}
                 for key in keys_mv:
                     item[key] = results[i][key]
+                item['media_type'] = 'movie'  # otherwise 'tv'
                 items.append(item)
     elif category == 'cat_tv':
         url = 'https://api.themoviedb.org/3/search/tv?api_key=' + api_key + '&language=en-US&page=1&query=' + keyword + '&include_adult=false'
