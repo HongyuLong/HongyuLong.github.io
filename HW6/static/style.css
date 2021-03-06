@@ -167,7 +167,7 @@ html,body{
 
 .card-right {
     word-wrap:break-word;
-    width: 100%;
+    width: 800px;
 }
 
 .card-right h2{
@@ -198,6 +198,7 @@ html,body{
 
 .card-right p{
     color: rgb(145, 145, 145);
+    word-break: break-all;
 }
 
 .card-right button{
@@ -211,4 +212,89 @@ html,body{
     cursor: pointer;
 }
 
+.overlines {
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient: vertical;
+}
 
+
+/* pop up window */
+.pop_overview {
+    width: 1000px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient: vertical;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    padding-top: 100px;  /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    z-index: 1;
+}
+
+.modal-content {
+    margin: auto;
+    padding: 20px;
+    width: 1000px;
+    height: auto;
+    color: black;
+    background-color: rgb(190, 190, 190);
+    text-align: center;
+}
+
+.close {
+    float: right;
+    color: rgb(154, 154, 154);
+    font-weight: bold;
+    font-size: 28px;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* casts */
+.casts-line {
+    margin: 10px 80px;
+}
+.casts-line::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+.cast-box {
+    float: left;
+    width: 185px;
+    margin: 10px 10px;
+}
+.cast-box div {
+    font-family: 'Raleway', sans-serif;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+
+
+/* review style*/
+.end-line {
+    border: 1px solid grey;
+    text-align:center;
+    width:80%;
+}

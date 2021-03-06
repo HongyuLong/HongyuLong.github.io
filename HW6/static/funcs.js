@@ -74,6 +74,7 @@ function load_search_results() {
             if(this.readyState == 4 && this.status == 200) {
                 var items = JSON.parse(this.responseText);
                 var search_results = document.getElementById('search-results');
+                search_results.innerHTML = ""
                 if(Object.keys(items).length == 0) {
                     search_results.innerHTML = 'No results found.'
                 }
@@ -158,6 +159,7 @@ function display_card(item) {
 
     // 4. overview
     var p = document.createElement('p');
+    p.className = 'overlines';
     p.innerHTML = item['overview'] == "" ? 'N/A' : item['overview'];
     card_right.appendChild(p);
 
@@ -166,6 +168,7 @@ function display_card(item) {
     show_more_btn.innerHTML = 'Show more';
     show_more_btn.addEventListener('click', function() {
         // pop up details
+        show_more(item['id'], item['media_type']);
     });
     card_right.appendChild(show_more_btn);
 
