@@ -46,7 +46,10 @@ def filter_info(rsp_ls, num, keys):
     for i in range(num):
         item = {}
         for key in keys:
-            item[key] = rsp_ls[i][key]
+            if key == 'release_date' or key == 'first_air_date':
+                item[key] = rsp_ls[i][key][:4] if len(rsp_ls[i][key]) > 0 else 'N/A'
+            else:
+                item[key] = rsp_ls[i][key]
         items.append(item)
     return items
    
@@ -115,7 +118,19 @@ def load_search_result():
             for i in range(len(results)):
                 item = {}
                 for key in keys_tv:
-                    item[key] = results[i][key]
+                    if key == 'first_air_date':
+                        item[key] = results[i][key][:4] if len(results[i][key]) > 0 else 'N/A'
+                    elif key == 'genre_ids':
+                        genres_str = ''
+                        for g_id in results[i][key]:
+                            if len(genres_str) > 0:
+                                genres_str = genres_str + ',' + genres_tv[g_id]
+                            else:
+                                genres_str = genres_tv[g_id]
+                        genres_str = genres_str if len(genres_str) > 0 else 'N/A'
+                        item[key] = genres_str
+                    else:
+                        item[key] = results[i][key]
                 item['media_type'] = 'tv'
                 items.append(item)
     elif category == 'cat_both':
@@ -128,12 +143,36 @@ def load_search_result():
                 item = {}
                 if results[i]['media_type'] == 'movie':
                     for key in keys_mv:
-                        item[key] = results[i][key]
+                        if key == 'release_date':
+                            item[key] = results[i][key][:4] if len(results[i][key]) > 0 else 'N/A'
+                        elif key == 'genre_ids':
+                            genres_str = ''
+                            for g_id in results[i][key]:
+                                if len(genres_str) > 0:
+                                    genres_str = genres_str + ',' + genres_mv[g_id]
+                                else:
+                                    genres_str = genres_mv[g_id]
+                            genres_str = genres_str if len(genres_str) > 0 else 'N/A'
+                            item[key] = genres_str
+                        else:
+                            item[key] = results[i][key]
                     item['media_type'] = 'movie'
                     items.append(item)
                 else:
                     for key in keys_tv:
-                        item[key] = results[i][key]
+                        if key == 'first_air_date':
+                            item[key] = results[i][key][:4] if len(results[i][key]) > 0 else 'N/A'
+                        elif key == 'genre_ids':
+                            genres_str = ''
+                            for g_id in results[i][key]:
+                                if len(genres_str) > 0:
+                                    genres_str = genres_str + ',' + genres_tv[g_id]
+                                else:
+                                    genres_str = genres_tv[g_id]
+                            genres_str = genres_str if len(genres_str) > 0 else 'N/A'
+                            item[key] = genres_str
+                        else:
+                            item[key] = results[i][key]
                     item['mdedia_type'] = 'tv'
                     items.append(item)
     return jsonify(items)
