@@ -1,2 +1,4 @@
-/HW6/myvenv
 /.idea
+/venv
+/__pycache__
+/.azure
