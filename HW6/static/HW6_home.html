@@ -4,104 +4,119 @@
     <!--
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
     -->
+    <title>The Movie DB</title>
+    <link rel='preconnect' href="https://fonts.gstatic.com/">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap">
 </head>
 
 <body>
     <div id='wrap'>
         <div id='header'>
-            <h1>THE MOVIE DB</h1>
+            THE MOVIE DB
         </div>
 
         <div id='container'>
-            <div id='home-section' class='center column'>  <!--home section-->
-                <div id='home-title1'>Trending Movies</div>
-                <div id='home-movie' class='slideshow-container'> <!--movie slides-->
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
+
+            
+                <div id='home-section' class='center column'>  <!--home section-->
+                    <div id='home-title1'>Trending Movies</div>
+                    <div id='home-movie' class='slideshow-container'> <!--movie slides-->
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
                     </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
-                    </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
-                    </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
-                    </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
+                    <div id='home-title2'>TV Shows On-Air Today</div>
+                    <div id='home-tv' class='slideshow-container'> <!--tv slides-->
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                        <div class='mySlides'>
+                            <img>
+                            <div class='text'> </div>
+                        </div>
+                    </div> 
+                    <div id='footer1'>
+                        Designed and developed by Hongyu Long <br>
+                        Powered by TMDB
                     </div>
                 </div>
-                <div id='home-title2'>TV Shows On-Air Today</div>
-                <div id='home-tv' class='slideshow-container'> <!--tv slides-->
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
+    
+                <div id='search-section' class='center column'> <!--search section-->
+                    <div id='search-box'>
+                        <h3>Search</h3>
+                        <form id='search-form' onsubmit='load_search_results()'>
+                                <div id="search-kw">
+                                    <label for="keyword">Keyword
+                                        <sup style='color:red; font-size:20px'>* &nbsp;</sup>
+                                    </label>
+                                        <input type="text" id="keyword" name="keyword" maxlength="100" size="50">
+                                </div>
+                                <br>
+                                <div id="search-cat">
+                                    <label for="category">Category
+                                        <sup style='color:red; font-size:20px'>* &nbsp;</sup>
+                                    </label>
+                                        <select id="category" name="category">
+                                            <option value=""></option>
+                                            <option value="cat_mv">Movies</option>
+                                            <option value="cat_tv">TV Shows</option>
+                                            <option value="cat_both">Movies and TV Shows</option>
+                                        </select>  
+                                </div>
+                                <br>
+                            
+                            <div id="search-submit">
+                                <input type="submit" id="search-button" value="Search" class="search-box-button">
+                                <input type="button" id="clear-button" value="Clear" class="search-box-button" onclick="clear_all()">
+                            </div>
+                        </form>
                     </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
+    
+                    <div id="search-results">
+                        <div id="show-info"></div>
+                        <div id="show-cards"></div>
                     </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
+                    <div id='footer2'>
+                        Designed and developed by Hongyu Long <br>
+                        Powered by TMDB
                     </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
-                    </div>
-                    <div class='mySlides'>
-                        <img>
-                        <div class='text'> </div>
-                    </div>
-                </div> 
-                <div id='footer'></div>
-            </div>
-
-            <div id='search-section' class='center column'> <!--search section-->
-                <div id='search-box'>
-                    <h3>Search</h3>
-                    <form id='search-form' onsubmit='load_search_results()'>
-                        <div id="search-kw">
-                            <label for="keyword">Keyword</label>
-                                <input type="text" id="keyword" name="keyword">
-                        </div>
-                        <br>
-        
-        
-                        <div id="search-cat">
-                            <label for="category">Category</label>
-                                <select id="category" name="category">
-                                    <option value=""></option>
-                                    <option value="cat_mv">Movies</option>
-                                    <option value="cat_tv">TV Shows</option>
-                                    <option value="cat_both">Movies and TV Shows</option>
-                                </select>  
-                        </div>
-                        <br>
-                        <div id="search-submit">
-                            <input type="submit" id="search-button" value="Search" class="search-box-button">
-                            <input type="button" id="clear-button" value="Clear" class="search-box-button">
-                        </div>
-                    </form>
                 </div>
-
-                <div id="search-results">
-                    <div id="show-info"></div>
-                    <div id="show-cards"></div>
-                </div>
-            </div>
-
+            
 
             <div id='left' class='column'>
-                <button id='home' onclick="displayHome()">Home</button><br>
-                <button id='search' onclick="displaySearch()">Search</button>
+                <button id='home' onclick="displayHome()">Home &nbsp; &xrarr;</button><br>
+                <button id='search' onclick="displaySearch()">Search &nbsp; &xrarr;</button>
             </div>
         </div>
     </div>

@@ -11,8 +11,11 @@ function load_details(info, modal_content, media_type) {
 
     // 2. title line
     var title = document.createElement('div');
-    title.innerHTML = info['title'];
+    //title.className = ;
+    title.classList.add('common-pop', 'pop-title');
+    title.innerHTML = info['title'] + '  ';
     var icon = document.createElement('a');
+    icon.className = 'pop-icon';
     if(media_type == 'movie') {
         icon.href = 'https://www.themoviedb.org/movie/' + info['id'];
     }
@@ -26,12 +29,13 @@ function load_details(info, modal_content, media_type) {
 
     // 3. date genres
     var date_genres = document.createElement('div');
+    date_genres.className = 'common-pop';
     date_genres.innerHTML = info['date'] + ' | ' + info['genres'];
     modal_content.appendChild(date_genres);
 
     // 4. rating
     var rating = document.createElement("div");
-    // rating.className = "modal-rate";
+    rating.className = "common-pop";
     var rating_ave = document.createElement("span");
     rating_ave.style = "color: #a22319;";
     rating_ave.textContent = '\u2605' + " " + info['vote_average'] / 2 + "/" + "5 ";
@@ -44,7 +48,7 @@ function load_details(info, modal_content, media_type) {
 
     // 5.overview
     var overview = document.createElement('div');
-    overview.className = 'overlines';
+    overview.classList.add('overlines', 'common-pop')
     content_overview = info['overview'];
     if(content_overview == '') {
         content_overview = 'N/A';
@@ -54,12 +58,15 @@ function load_details(info, modal_content, media_type) {
 
     // 6. spoken languages
     var spoken = document.createElement('div');
+    //spoken.className = 'common-pop';
+    spoken.classList.add('pop-spoken', 'common-pop');
     spoken.innerHTML = 'Spoken languages: ' + info['spoken'];
     modal_content.appendChild(spoken);
 }
 
 function load_credits(info, modal_content) {
     var cast_header = document.createElement('div');
+    cast_header.classList.add('pop-title', 'common-pop');
     cast_header.innerHTML = 'Cast';
     modal_content.appendChild(cast_header);
 
@@ -122,34 +129,41 @@ function load_credits(info, modal_content) {
 function load_reviews(info, modal_content) {
     var review_header = document.createElement('div');
     review_header.innerHTML = 'Reviews';
+    review_header.classList.add('common-pop', 'pop-title');
     modal_content.appendChild(review_header);
 
     var reviews = info['reviews'];
     for(var i in reviews) {
         var one_review = document.createElement('div');
+        one_review.className = 'common-pop';
 
         // 1. username and date
         var name_date = document.createElement('div');
         var user_name = document.createElement('span');
         user_name.innerHTML = reviews[i]['username'];
+        user_name.style = "font-family: 'Raleway', sans-serif;font-weight:bold;";
         var comment_date = document.createElement('span');
-        comment_date.innerHTML = reviews[i]['created_at'];
+        comment_date.style = "font-family: 'Raleway', sans-serif";
+        comment_date.innerHTML = ' on ' + reviews[i]['created_at'];
         name_date.appendChild(user_name);
         name_date.appendChild(comment_date);
         one_review.appendChild(name_date);
 
+        var rate_review = document.createElement('div');
+        rate_review.style = "margin-top: 15px; margin-bottom: 15px;";
         // 2. rating
         if(reviews[i]['rating'] != null) {
             var rating = document.createElement("div");
-            rating.style = "color: #a22319;";
+            rating.style = "color: #a22319";
             rating.textContent = '\u2605' + " " + reviews[i]['rating'] / 2 + "/" + "5 ";
-            one_review.append(rating);
+            rate_review.append(rating);
         }
         // 3. review content
         var review_content = document.createElement('div');
         review_content.className = 'overlines';
         review_content.innerHTML = reviews[i]['content'];
-        one_review.append(review_content);
+        rate_review.appendChild(review_content);
+        one_review.append(rate_review);
 
         // 4. end line
         var end_line = document.createElement('hr');
@@ -162,6 +176,7 @@ function load_reviews(info, modal_content) {
 }
 
 function show_more(media_id, media_type) {
+    //alert(media_id);
     //alert('click success!');
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -191,7 +206,7 @@ function show_more(media_id, media_type) {
                 search_results.appendChild(modal);
             }
             else {
-                var modal = document.getElementById(media_id + '-' + media_type).style.display = 'block';
+                document.getElementById(media_id + '-' + media_type).style.display = 'block';
             }
         }
     };

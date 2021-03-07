@@ -9,6 +9,9 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 api_key = 'ee187b6fc0dfb521936ace68e072031c'
 
+genres_mv = {}
+genres_tv = {}
+
 @app.route('/style.css')
 def upload_css():
     return app.send_static_file('style.css')
@@ -19,6 +22,22 @@ def upload_js():
 
 @app.route('/')
 def index():
+    url = 'https://api.themoviedb.org/3/genre/movie/list?api_key=' + api_key + '&language=en-US'
+    response = requests.get(url=url)
+    if response.status_code == 200:
+        rsp = response.json()
+        results = rsp['genres']
+        for i in range(len(results)):
+            genres_mv[results[i]['id']] = results[i]['name']
+    
+    url = 'https://api.themoviedb.org/3/genre/tv/list?api_key=' + api_key + '&language=en-US'
+    response = requests.get(url=url)
+    genres_dict = {}
+    if response.status_code == 200:
+        rsp = response.json()
+        results = rsp['genres']
+        for i in range(len(results)):
+            genres_tv[results[i]['id']] = results[i]['name']
     return app.send_static_file('HW6_home.html')
 
 @app.route('/app/filter')
@@ -56,6 +75,8 @@ def load_tv_airing_today():
 
 @app.route('/app/search/cards')
 def load_search_result():
+    print('genres mv!!!!!!!!!!!!!!!!!!!!!!')
+    print(genres_mv)
     keyword = request.args.get('key')
     category = request.args.get('cat')
     items = []
@@ -70,7 +91,19 @@ def load_search_result():
             for i in range(len(results)):
                 item = {}
                 for key in keys_mv:
-                    item[key] = results[i][key]
+                    if key == 'release_date':
+                        item[key] = results[i][key][:4] if len(results[i][key]) > 0 else 'N/A'
+                    elif key == 'genre_ids':
+                        genres_str = ''
+                        for g_id in results[i][key]:
+                            if len(genres_str) > 0:
+                                genres_str = genres_str + ',' + genres_mv[g_id]
+                            else:
+                                genres_str = genres_mv[g_id]
+                        genres_str = genres_str if len(genres_str) > 0 else 'N/A'
+                        item[key] = genres_str
+                    else:
+                        item[key] = results[i][key]
                 item['media_type'] = 'movie'
                 items.append(item)
     elif category == 'cat_tv':
@@ -104,6 +137,7 @@ def load_search_result():
                     item['mdedia_type'] = 'tv'
                     items.append(item)
     return jsonify(items)
+
 
 @app.route('/app/search/popup')
 def load_popup():

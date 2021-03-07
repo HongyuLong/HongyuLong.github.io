@@ -6,6 +6,7 @@ html,body{
     margin: 0;
     padding: 0;
     background-color: black;
+    font-family: 'Raleway', sans-serif;
 }
 
 #wrap{
@@ -14,22 +15,43 @@ html,body{
     height: 100%;
 }
 
-#header, #footer{
+#header{
     width: 100%;
     height: 30px;
     color: white;
 }
 #header {
+    background-image: linear-gradient(to right, black 70%, rgba(180, 40, 30, 1));
+    font-size:30px;
     color: rgba(180, 40, 30, 1);
     margin-bottom: 10px;
 }
 
-#footer{
+#footer1{
     clear: both;
-    position:absolute;
-    top: 1100px;
-    width: 100%;
-    background-color: red;
+    font-size: 12px;
+    width: 92%;
+    background-color:  rgb(86, 3, 10);
+    padding: 10px 20px;
+    color: rgb(173,128,128);
+    bottom: 0;
+    margin: 20px 10px;
+    text-align: right;
+    font-style: italic;
+}
+
+#footer2{
+    clear: both;
+    font-size: 12px;
+    width: 92%;
+    background-color:  rgb(86, 3, 10);
+    padding: 10px 20px;
+    color: rgb(173,128,128);
+    position: absolute;
+    bottom: 0;
+    margin: 20px 10px;
+    text-align: right;
+    font-style: italic;
 }
 
 #container{
@@ -53,7 +75,7 @@ html,body{
     width: 100%;
     /*word-break: break-all;*/
     border-left:1px solid white;
-    position: relative;
+    overflow: scroll;
 }
 
 #left{
@@ -65,33 +87,62 @@ html,body{
 }
 
 #left button{
+    display: inline-block;
+    font-size: 16px;
+    padding: 20px;
+    cursor: pointer;
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
     background-color: black;
-    color: white;
+    margin-right:2px
+}
+#left button::after {
+    content: "";
+    clear: both;
+    display: table;
+
 }
 
 #home-title1 {
+    /*
     position:absolute;
     top: 0;
     left: 420px;
-    height: 20px;
+    height: 20px;*/
+    font-size: 20px;
+    margin-left: 400px;
+    margin-top:20px;
+    margin-bottom: 20px;
 }
 
 #home-movie{
+    /*
     position: absolute;
     top: 40px;
     left: 100px;
+    */
+    margin-top:20px;
+    margin-left:80px;
 }
 
 #home-title2{
+    /*
     position: absolute;
     top:540px;
     left:410px;
-    height: 20px;
+    height: 20px;*/
+    margin-top:140px;
+    margin-left: 400px;
 }
 #home-tv{
+    /*
     position: absolute;
     top:580px;
-    left:100px
+    left:100px*/
+    margin-top:20px;
+    margin-left: 80px;
+    margin-bottom: 40px;
 }
 
 .slideshow-container{
@@ -107,7 +158,9 @@ html,body{
     text-align: center;
     color: white;
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px auto;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    font-size: 18px;
 }
 
 
@@ -123,6 +176,10 @@ html,body{
     padding-top: 15px;
 }
 
+#search-cat{
+    margin-left:-200px
+}
+
 .search-box-button{
     color: white;
     background-color: black;
@@ -130,8 +187,8 @@ html,body{
     width: 60px;
     border-style: none;
     border-radius: 4px;
-    padding: 2 4;
-    margin: 10 20;
+    margin-left: 20px;
+    margin-right:20px
 }
 .search-box-button:hover{
     background-color:rgba(180, 40, 30, 1);
@@ -144,8 +201,8 @@ html,body{
 
 
 .card{
-    margin: 20 10;
-    border-left: 4px solid rgba(180, 40, 30, 1);
+    margin: 20px 10px;
+    border-left: 6px solid rgba(180, 40, 30, 1);
     display: block;
 }
 
@@ -159,6 +216,7 @@ html,body{
     float: left;
     width: 185px;
     text-align: right;
+    margin-left:10px;
 }
 
 .card-left img{
@@ -168,6 +226,8 @@ html,body{
 .card-right {
     word-wrap:break-word;
     width: 800px;
+    float: left;
+    margin-left:20px;
 }
 
 .card-right h2{
@@ -198,16 +258,15 @@ html,body{
 
 .card-right p{
     color: rgb(145, 145, 145);
-    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .card-right button{
     background-color: rgb(180, 40, 30);
     color: white;
-    margin: 0px;
     border: none;
-    padding: 4px 4px;
-    font-size: 10px;
+    padding: 10px;
+    font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -218,10 +277,15 @@ html,body{
     display: -webkit-box;
     -webkit-line-clamp:3;
     -webkit-box-orient: vertical;
+    font-family: 'Raleway', sans-serif;
 }
 
 
 /* pop up window */
+.common-pop{
+    margin: 15px 90px;
+    text-align: left;
+}
 .pop_overview {
     width: 1000px;
     overflow: hidden;
@@ -248,6 +312,7 @@ html,body{
 .modal-content {
     margin: auto;
     padding: 20px;
+    padding-bottom: 140px;
     width: 1000px;
     height: auto;
     color: black;
@@ -269,7 +334,25 @@ html,body{
 }
 
 
+.pop-title {
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.pop-icon {
+    color:  rgb(180, 40, 30);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.pop-spoken{
+    font-style: italic;
+    font-size: 14px;
+}
+
 /* casts */
+
 .casts-line {
     margin: 10px 80px;
 }

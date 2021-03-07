@@ -8,6 +8,11 @@ function displayHome() {
     loadHomeBox('home-tv', '/app/home/tv');
     home_section.style.display = 'block';
     search_section.style.display = 'none';
+
+    var home_btn = document.getElementById('home');
+    home_btn.style = "color:rgb(180, 40, 30); border-bottom: 1px solid white";
+    var search_btn = document.getElementById('search');
+    search_btn.style = "color:white; border-bottom-style: none";
 }
 
 function displaySearch() {
@@ -15,6 +20,12 @@ function displaySearch() {
     var search_section = document.getElementById('search-section');
     home_section.style.display = 'none';
     search_section.style.display = 'block';
+
+    var home_btn = document.getElementById('home');
+    home_btn.style = "color:white; border-bottom-style: none";
+    var search_btn = document.getElementById('search');
+    search_btn.style = "color:rgb(180, 40, 30); border-bottom: 1px solid white";
+    document.getElementById('footer2').style.position = 'absolute';
 
     document.getElementById('search-button').onclick = function(event) {
         //alert("Click Search Submit Now!")
@@ -77,6 +88,7 @@ function load_search_results() {
                 search_results.innerHTML = ""
                 if(Object.keys(items).length == 0) {
                     search_results.innerHTML = 'No results found.'
+                    document.getElementById('footer2').style.position = 'absolute';
                 }
                 else {
                     var show_results = document.createElement('div');
@@ -87,6 +99,7 @@ function load_search_results() {
                         var item = items[i];
                         search_results.appendChild(display_card(item));
                     }
+                    document.getElementById('footer2').style.position = 'relative';
                 }
             }
         };
@@ -142,7 +155,7 @@ function display_card(item) {
             card_date = item['first_air_date'];
         }
     }
-    var genre = item['genre_ids'].length > 0 ? item['genre_ids'] : 'N/A';
+    var genre = item['genre_ids'];
     date_genre.innerHTML = card_date + ' | ' + genre;
     card_right.appendChild(date_genre);
     // 3. rates
@@ -174,4 +187,11 @@ function display_card(item) {
 
     card.appendChild(card_right);
     return card;
+}
+
+function clear_all(){
+    document.getElementById('keyword').value = "";
+    document.getElementById('category').value = "";
+    document.getElementById('search-results').innerHTML = "";
+    document.getElementById('footer2').style.position = 'absolute';
 }
