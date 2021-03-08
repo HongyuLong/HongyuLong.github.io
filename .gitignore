@@ -1,4 +1,4 @@
 /.idea
-/venv
-/__pycache__
-/.azure
+myvenv/*
+__pycache__/*
+.azure/*

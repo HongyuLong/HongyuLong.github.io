@@ -30,7 +30,7 @@ html,body{
 #footer1{
     clear: both;
     font-size: 12px;
-    width: 92%;
+    width: 100%;
     background-color:  rgb(86, 3, 10);
     padding: 10px 20px;
     color: rgb(173,128,128);
@@ -38,12 +38,13 @@ html,body{
     margin: 20px 10px;
     text-align: right;
     font-style: italic;
+    overflow-x: scroll;
 }
 
 #footer2{
     clear: both;
     font-size: 12px;
-    width: 92%;
+    width: 100%;
     background-color:  rgb(86, 3, 10);
     padding: 10px 20px;
     color: rgb(173,128,128);
@@ -52,6 +53,7 @@ html,body{
     margin: 20px 10px;
     text-align: right;
     font-style: italic;
+    overflow-x: scroll;
 }
 
 #container{
@@ -172,12 +174,20 @@ html,body{
     height: 300px;
     width: 900px;
     margin: 20px 10px;
-    text-align: center;
+    /*text-align: center;*/
     padding-top: 15px;
 }
-
+#search-title {
+    margin-left: 50%;
+}
+#search-kw{
+    margin-left:30%;
+}
 #search-cat{
-    margin-left:-200px
+    margin-left:30%;
+}
+#search-submit {
+    margin-left: 43%;
 }
 
 .search-box-button{
