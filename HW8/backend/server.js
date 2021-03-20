@@ -1,5 +1,7 @@
-var express = require('express');
-var app = express();
+const api_key = 'ee187b6fc0dfb521936ace68e072031c';
+const express = require('express');
+const app = express();
+const port = 3000;
 
 app.get('/', function(req, res){
     res.send('Hello World!');
@@ -9,7 +11,7 @@ app.get('/', function(req, res){
 app.get('/api/movie', function(req, res){
     res.send('Movie data!');
 })
-var server = app.listen(8080, function() {
-    console.log('Backend Application listening at http://localhost:8080');
+var server = app.listen(port, function() {
+    console.log('Backend Application listening at http://localhost:${port}');
 })
 
