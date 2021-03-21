@@ -6,7 +6,7 @@ const port = 3000;
 
 const API_KEY = 'ee187b6fc0dfb521936ace68e072031c';
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     let url_now_playing = 'https://api.themoviedb.org/3/movie/now_playing?api_key=' + API_KEY + '&language=en-US&page=1';  // currently playing movies
     let url_pop_mv = 'https://api.themoviedb.org/3/movie/popular?api_key=' + API_KEY + '&language=en-US&page=1';  // popular movies
     let url_top_mv = 'https://api.themoviedb.org/3/movie/top_rated?api_key=' + API_KEY + '&language=en-US&page=1';  // top rated movies
@@ -23,17 +23,52 @@ app.get('/', (req, res)=>{
         axios.get(url_pop_tv), axios.get(url_top_tv), axios.get(url_trending_tv)
     ])
     .then(responseArr => {
+        // var filter_results = {}
+        // filter_results.now_playing = filter(['id', 'title', 'poster_path'], responseArr[0].data.results, 5);
+        // filter_results.pop_mv = filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length);
+        // filter_results.top_mv = filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length);
+        // filter_results.trending_mv = filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length);
+
+        // filter_results.pop_tv = filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length);
+        // filter_results.top_tv = filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length);
+        // filter_results.trending_tv = filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length);
+
+        //res.json({filter_results})
         res.json({
-            'now_playing' : responseArr[0].data.results,
-            'pop_mv' : responseArr[1].data.results,
-            'top_mv' : responseArr[2].data.results,
-            'trending_mv' : responseArr[3].data.results,
-            'pop_tv' : responseArr[4].data.results,
-            'top_tv' : responseArr[5].data.results,
-            'trending_tv' : responseArr[6].data.results
+            'now_playing' : filter(['id', 'title', 'poster_path'], responseArr[0].data.results, 5),
+            'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length),
+            'top_mv' : filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length),
+            'trending_mv' : filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length),
+            'pop_tv' : filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length),
+            'top_tv' : filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length),
+            'trending_tv' : filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length)
         })
     })
 });
+
+
+// app.get('/', (req, res) => {
+//     axios.get('https://api.themoviedb.org/3/tv/popular?api_key=' + API_KEY + '&language=en-US&page=1')
+//     .then(response => {
+//         //var keys = ['id', 'title', 'poster_path'];
+
+//         res.json(filter(['id', 'name', 'poster_path'], response.data.results, response.data.results.length));
+//     })
+// })
+
+function filter(keys, results, n) {
+    //console.log(results);
+    var items = []
+    for(let i = 0; i < n;) {
+        if(results[i].hasOwnProperty('poster_path') && results[i].poster_path == null) {continue}
+        var item = {}
+        keys.forEach(element => {item[element] = results[i][element]});
+        //console.log(item);
+        items.push(item);
+        i++;
+    }
+    return items;
+}
 
 
 app.get('/watch/:media_type/:media_id', (req, res)=>{
