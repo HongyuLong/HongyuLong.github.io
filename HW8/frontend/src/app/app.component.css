@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+footer {
+    margin-top: 8px;
+    padding-top: 10px;
+    line-height: 20px;
+    text-align:center; 
+    color: white;
+    background-image: linear-gradient(to top, rgb(1,4,9), rgb(6,7,38));
+  }

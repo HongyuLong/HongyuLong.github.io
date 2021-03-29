@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 
+const cors = require('cors');
+app.use(cors())
+
 const port = 3000;
 
 const API_KEY = 'ee187b6fc0dfb521936ace68e072031c';
@@ -34,14 +37,23 @@ app.get('/', (req, res) => {
         // filter_results.trending_tv = filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length);
 
         //res.json({filter_results})
+        // res.json({
+        //     'now_playing' : filter(['id', 'title', 'backdrop_path'], responseArr[0].data.results, 5),
+        //     'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length),
+        //     'top_mv' : filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length),
+        //     'trending_mv' : filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length),
+        //     'pop_tv' : filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length),
+        //     'top_tv' : filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length),
+        //     'trending_tv' : filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length)
+        // })
         res.json({
-            'now_playing' : filter(['id', 'title', 'poster_path'], responseArr[0].data.results, 5),
-            'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length),
-            'top_mv' : filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length),
-            'trending_mv' : filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length),
-            'pop_tv' : filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length),
-            'top_tv' : filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length),
-            'trending_tv' : filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length)
+            'now_playing' : filter(['id', 'title', 'backdrop_path'], responseArr[0].data.results, 5, false),
+            'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length, true),
+            'top_mv' : filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length, true),
+            'trending_mv' : filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length, true),
+            'pop_tv' : filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length, true),
+            'top_tv' : filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length, true),
+            'trending_tv' : filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length, true)
         })
     })
 });
@@ -56,7 +68,7 @@ app.get('/', (req, res) => {
 //     })
 // })
 
-function filter(keys, results, n) {
+function filter(keys, results, n, flag) {
     //console.log(results);
     var items = []
     for(let i = 0; i < n;) {
@@ -67,7 +79,23 @@ function filter(keys, results, n) {
         items.push(item);
         i++;
     }
-    return items;
+
+    if(flag) {
+        var grouped_items = [];
+        for(let i = 0, j = -1; i < n; ++i) {
+            if(i % 6 == 0) {
+                j++;
+                grouped_items[j] = []
+                grouped_items[j].push(items[i]);
+            }
+            else {
+                grouped_items[j].push(items[i]);
+            }
+        }
+        return {'signle' : items, 'grouped': grouped_items};
+    } else {
+        return items;
+    }
 }
 
 
