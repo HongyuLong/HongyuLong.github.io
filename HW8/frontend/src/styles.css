@@ -33,7 +33,3 @@ ngb-carousel {
 .carousel-inner:hover .carousel-caption {
     display: block;
 }
-
-.carousel-inner:hover .carousel-item {
-    transform: scale(1.1);
-}

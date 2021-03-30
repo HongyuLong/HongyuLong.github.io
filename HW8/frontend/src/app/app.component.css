@@ -3,6 +3,10 @@
   flex-direction: row;
 }
 
+.main-body{
+  background-color: rgb(6, 7, 38);
+}
+
 footer {
     margin-top: 8px;
     padding-top: 10px;

@@ -1,21 +1,87 @@
 <div id='container'>
     <ngb-carousel [interval]="2000">
         <ng-template ngbSlide *ngFor="let item of now_playing; index as i">
-            <div class="carousel-caption">
+            <div class="carousel-caption" [routerLink]="['/watch/movie/' + item.id]">
               <h4>{{item.title}}</h4>
             </div>
-            <div class='picsum-img-wrapper'>
+            <div class='picsum-img-wrapper' [routerLink]="['/watch/movie/' + item.id]">
                 <img [src]="'https://image.tmdb.org/t/p/original' + item.backdrop_path" alt="">
             </div>
         </ng-template>
     </ngb-carousel>
 
+    <h1>Popular Movies</h1>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of pop_mv_grouped; index as i'>
-            <div class="multi-img-container" *ngFor="let item of group">
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/movie/' + item.id]">
                 <div class='multi-carousel-caption'>
                     <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <h1>Top Rated Movies</h1>
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel *ngIf='!mobile' [interval]="0">
+        <ng-template ngbSlide *ngFor='let group of top_mv_grouped; index as i'>
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <h1>Trending Movies</h1>
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel *ngIf='!mobile' [interval]="0">
+        <ng-template ngbSlide *ngFor='let group of trending_mv_grouped; index as i'>
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <h1>Popular TV Shows</h1>
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel *ngIf='!mobile' [interval]="0">
+        <ng-template ngbSlide *ngFor='let group of pop_tv_grouped; index as i'>
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/tv/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.name}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <h1>Top Rated TV Shows</h1>
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel *ngIf='!mobile' [interval]="0">
+        <ng-template ngbSlide *ngFor='let group of top_tv_grouped; index as i'>
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/tv/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.name}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <h1>Trending TV Shows</h1>
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel *ngIf='!mobile' [interval]="0">
+        <ng-template ngbSlide *ngFor='let group of trending_tv_grouped; index as i'>
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/tv/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.name}}</p>
                 </div>
                 <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
             </div>
