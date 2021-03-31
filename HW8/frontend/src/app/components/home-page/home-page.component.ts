@@ -36,6 +36,7 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.sendGetRequest().subscribe((data: any)=>{
+      console.log(data);
       this.now_playing = data.now_playing;
       this.pop_mv_single = data.pop_mv.single;
       this.pop_mv_grouped = data.pop_mv.grouped;

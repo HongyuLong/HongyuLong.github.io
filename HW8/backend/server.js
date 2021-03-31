@@ -3,6 +3,7 @@ const axios = require('axios');
 const app = express();
 
 const cors = require('cors');
+const e = require('express');
 app.use(cors())
 
 const port = 3000;
@@ -26,26 +27,6 @@ app.get('/', (req, res) => {
         axios.get(url_pop_tv), axios.get(url_top_tv), axios.get(url_trending_tv)
     ])
     .then(responseArr => {
-        // var filter_results = {}
-        // filter_results.now_playing = filter(['id', 'title', 'poster_path'], responseArr[0].data.results, 5);
-        // filter_results.pop_mv = filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length);
-        // filter_results.top_mv = filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length);
-        // filter_results.trending_mv = filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length);
-
-        // filter_results.pop_tv = filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length);
-        // filter_results.top_tv = filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length);
-        // filter_results.trending_tv = filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length);
-
-        //res.json({filter_results})
-        // res.json({
-        //     'now_playing' : filter(['id', 'title', 'backdrop_path'], responseArr[0].data.results, 5),
-        //     'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length),
-        //     'top_mv' : filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length),
-        //     'trending_mv' : filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length),
-        //     'pop_tv' : filter(['id', 'name', 'poster_path'], responseArr[4].data.results, responseArr[4].data.results.length),
-        //     'top_tv' : filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length),
-        //     'trending_tv' : filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length)
-        // })
         res.json({
             'now_playing' : filter(['id', 'title', 'backdrop_path'], responseArr[0].data.results, 5, false),
             'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length, true),
@@ -57,16 +38,6 @@ app.get('/', (req, res) => {
         })
     })
 });
-
-
-// app.get('/', (req, res) => {
-//     axios.get('https://api.themoviedb.org/3/tv/popular?api_key=' + API_KEY + '&language=en-US&page=1')
-//     .then(response => {
-//         //var keys = ['id', 'title', 'poster_path'];
-
-//         res.json(filter(['id', 'name', 'poster_path'], response.data.results, response.data.results.length));
-//     })
-// })
 
 function filter(keys, results, n, flag) {
     //console.log(results);
@@ -99,52 +70,193 @@ function filter(keys, results, n, flag) {
 }
 
 
-app.get('/watch/:media_type/:media_id', (req, res)=>{
+app.get('/watch/:media_type/:id', (req, res)=>{
     console.log('req.params.id = ', req.params.media_type);
-    console.log('req.params.id = ', req.params.media_id);
-    let url_details = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.media_id + '?api_key=' + API_KEY + '&language=en-US&page=1';
-    let url_reviews = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'  + req.params.media_id + '/reviews?api_key=' + API_KEY + '&language=en-US&page=1';
-    let url_casts = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'   + req.params.media_id + '/credits?api_key=' + API_KEY + '&language=en-US&page=1';
+    console.log('req.params.id = ', req.params.id);
+    let url_video = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '/videos?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_details = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_reviews = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'  + req.params.id + '/reviews?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_casts = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'   + req.params.id + '/credits?api_key=' + API_KEY + '&language=en-US&page=1';
+    
+    let casts_ids = [];
+    
     axios.all([
+        axios.get(url_video),
         axios.get(url_details),
         axios.get(url_reviews),
         axios.get(url_casts)
     ])
     .then(responseArr => {
         res.json({
-            'details': responseArr[0].data,
-            'reviews' : responseArr[1].data.results,
-            'casts' : responseArr[2].data.cast
+            'video': filterVideo(['site', 'type','name', 'key'], responseArr[0].data.results),
+            'details': filterDetails(req.params.media_type, responseArr[1].data),
+            'reviews' : filterReviews(responseArr[2].data.results),
+            'casts' : filterCasts(responseArr[3].data.cast, casts_ids)
         })
     })
 });
-
-/*
-app.get('/watch/movie/:id', (req, res)=>{
-    console.log('req.params.id', req.params.id);
-    let url_details = 'https://api.themoviedb.org/3/movie/' + req.params.id + '?api_key=' + API_KEY + '&language=en-US&page=1';
-    axios.get(url_details)
-        .then(response=>{
-            // handle success
-           //console.log(response)
-           res.send(response.data)
-        });
-
-    let url_reviews = 'https://api.themoviedb.org/3/movie/' + req.params.id + '/reviews?api_key=' + API_KEY + '&language=en-US&page=1';
-
-    let url_casts = 'https://api.themoviedb.org/3/movie/' + req.params.id + '/credits?api_key=' + API_KEY + '&language=en-US&page=1';
-});
-
-app.get('/watch/tv/:id', (req, res)=>{
-    console.log('req.params.id', req.params.id);
-    axios.get('url')
-        .then(response=>{
-            // handle success
-           //console.log(response)
-           res.send(response.data)
+function filterModal(casts_ids) {
+    let modals = [];
+    for(idx in casts_ids) {
+        let person_id = casts_ids[idx];
+        console.log(person_id);
+        let url_details = 'https://api.themoviedb.org/3/person/' + person_id + '?api_key=' + API_KEY + '&language=en-US&page=1';
+        let url_extra = 'https://api.themoviedb.org/3/person/' + person_id + '/external_ids?api_key='+ API_KEY + '&language=en-US&page=1';
+        //console.log(url_details);
+        let modal = {};
+        axios.all([
+            axios.get(url_details),
+            axios.get(url_extra)
+        ])
+        .then(responseArr => {
+            // details
+            modal['birthday'] = responseArr[0]['birthday'];
+            modal['place_of_birth'] = responseArr[0]['place_of_birth'];
+            if(responseArr[0]['gender'] == 1) {
+                modal['gender'] = 'Female';
+            }
+            else {
+                modal['gender'] = 'Male';
+            }
+            modal['known_for_department'] = responseArr[0]['known_for_department'];
+            let also_know_str = '';
+            for(let i = 0; i < responseArr[0]['also_known_as'].length; ++i) {
+                if(i > 0) {
+                    also_know_str = also_know_str + ',';
+                }
+                also_know_str = also_know_str + responseArr[0]['also_known_as'][i];
+            }
+            modal['also_known_as'] = also_know_str;
+            modal['biography'] = responseArr[0]['biography'];
+            // external
+            console.log(modal);
+            modals.push(modal);
         })
-});
-*/
+    }
+    return modals;
+}
+
+function filterCasts(results, casts_ids) {
+    var casts = [];
+    for(let i = 0; i < results.length; ++i) {
+        if(results[i]['profile_path'] == null) { continue;}
+        var cast = {};
+        cast['id'] = results[i]['id'];
+        casts_ids.push(results[i]['id']);
+        cast['name'] = results[i]['name'];
+        cast['character'] = results[i]['character'];
+        cast['profile_path'] = 'https://image.tmdb.org/t/p/w500/' + results[i]['profile_path'];
+        casts.push(cast);
+        //console.log(cast);
+    }
+    return casts;
+}
+
+function filterReviews(results) {
+    var reviews = [];
+    for(let i = 0; i < 10 && i < results.length; ++i) {
+        var review = {};
+        review['author'] = results[i]['author'];
+        review['content'] = results[i]['content'];
+        review['url'] = results[i]['url'];
+        if(results[i]['author_details']['rating'] == null) {
+            review['rating'] = 0;
+        }
+        else {
+            review['rating'] = results[i]['author_details']['rating'];
+        }
+        
+        if(results[i]['author_details']['avatar_path'] == null) {
+            review['avatar_path'] = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHnPmUvFLjjmoYWAbLTEmLLIRCPpV_OgxCVA&usqp=CAU';
+        }
+        else {
+            if(results[i]['author_details']['avatar_path'].includes("https://secure.gravatar.com")) {
+                review['avatar_path'] = results[i]['author_details']['avatar_path'].substr(1);
+            }
+            else {
+                review['avatar_path'] = 'https://image.tmdb.org/t/p/original' + results[i]['author_details']['avatar_path'];
+            }
+        }
+
+        let month_num = results[i]['created_at'].substr(5, 2);
+        let month_dict = {'01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December'};
+        let current_str = '';
+        let hrs_num = parseInt(results[i]['created_at'].substr(11, 2));
+        if(hrs_num > 0 && hrs_num <= 12) {
+            current_str = '' + hrs_num;
+        }
+        else if(hrs_num > 12 && hrs_num < 24) {
+            current_str = '' + (hrs_num - 12);
+        }
+        else {
+            current_str = '12';
+        }
+
+        current_str = current_str + results[i]['created_at'].substr(13, 6);
+        if(hrs_num < 12 || hrs_num == 24) {
+            current_str = current_str + ' AM';
+        }
+        else {
+            current_str = current_str + ' PM';
+        }
+        let created_str = month_dict[month_num] + ' ' + results[i]['created_at'].substr(8, 2) + ', ' + results[i]['created_at'].substr(0, 4) + ', ' + current_str;
+
+        reviews.push(review);
+    }
+    return reviews;
+}
+function filterDetails(media_type, results) {
+    let item = {};
+    let genres_list = [];  // genres list
+    let lang_list = [];  // spoken_languages list
+    item['title'] = results['title'];
+    for(let i = 0; i < results['genres'].length; ++i) {
+        genres_list.push(results['genres'][i]['name']);
+    }
+    item.genres = genres_list;
+
+    for(let i = 0; i < results['spoken_languages'].length; ++i) {
+        lang_list.push(results['spoken_languages'][i]['english_name']);
+    }
+    item.spoken_languages = lang_list;
+
+    if(media_type == 'movie') {
+        item['year'] = results['release_date'].substr(0, 4);
+        item['runtime'] = getRuntimeFormatted(results['runtime']);
+    }
+    else {
+        item['year'] = results['first_air_date'].substr(0, 4);
+        item['runtime'] = getRuntimeFormatted(results[0]['episode_run_time']);
+    }
+    item['overview'] = results['overview'];
+    item['vote_average'] = results['vote_average'];
+    item['tagline'] = results['tagline'];
+
+    return item;
+}
+function filterVideo(keys, results) {
+    var item = {};
+    for(let i = 0; i < results.length; ++i) {
+        if(results[i].site != 'YouTube')  {continue;}
+        keys.forEach(element => {item[element] = results[i][element]});
+        if(item.key == null) {
+            item.key = 'tzkWB85ULJY';
+        }
+        break;
+    }
+    return item;
+}
+
+function getRuntimeFormatted(runtime) {
+    if(runtime < 60) {
+        return runtime + 'mins';
+    }
+    else {
+        let hrs = Math.floor(runtime / 60);
+        let mins = runtime % 60;
+        return hrs + 'hrs ' + mins + 'mins';
+    }
+}
 
 /*
 app.get('/mylist', (req, res)=>{
