@@ -1,4 +1,55 @@
-<p>watch-details works!</p>
+<div id='container'>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">{{cast_info.name}}</h4>
+          <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class='card card-modal'>
+            <img class='card-img-top' [src]='cast_info.profile_path' alt="Model image cap">
+            <div class='card-body card-body-modal'>
+                <div *ngIf='cast_info.birthday'>Birth: {{cast_info.birthday}}</div>
+                <div *ngIf='cast_info.place_of_birth'>Birth Place: {{cast_info.place_of_birth}}</div>
+                <div *ngIf='cast_info.homepage'>Website: <a [href]='cast_info.homepage'>{{cast_info.homepage}}</a></div>
+                <div *ngIf='cast_info.gender'>Gender: {{cast_info.gender}}</div>
+                <div *ngIf='cast_info.known_for_department'>Know for: {{cast_info.known_for_department}}</div>
+                <div *ngIf='cast_info.also_known_as'>Also Know as: {{cast_info.also_known_as}}</div>
 
-<h1>{{media_type}}</h1>
-<h1>{{id}}</h1>
+                <!--social network links-->
+                <a *ngIf='cast_info.imdb_id' class='fa fa-imdb' aria-label="" target="_blank" rel="noopener" [href]='cast_info.imdb_id' title="Visit IMDb">
+                  </a>
+                <a *ngIf='cast_info.instagram_id' class='fa fa-instagram' aria-label="" target="_blank" rel="noopener" [href]='cast_info.instagram_id' title="Visit Instagram">
+                  </a>
+                <a *ngIf='cast_info.facebook_id' class='fa fa-facebook' aria-label="" target="_blank" rel="noopener" [href]='cast_info.facebook_id' title="Visit Facebook">
+                  </a>
+                <a *ngIf='cast_info.twitter_id' class='fa fa-twitter' aria-label="" target="_blank" rel="noopener" [href]='cast_info.twitter_id' title="Visit Twitter">
+                  </a>
+            </div>
+          </div>
+
+          <div *ngIf='cast_info.biography'>
+            <h1 style='padding-top:1%'>Biography</h1>
+            <p>{{cast_info.biography}}</p>
+          </div>
+        </div>
+      </ng-template>
+
+    <h1>Full Cast and Crew</h1>
+    <div class='inner-container'>
+        <div class='card-deck' style='flex: row nowrap;'>
+            <div class='card card-casts' *ngFor='let cast of casts' (click)='getCastInfo(cast.id, content)'>
+                <img class='card-img-top' [src]='cast.profile_path' alt="Card image cap">
+                <div class='card-body card-body-casts'>
+                    <p class='card-text'><b>{{cast.name}}</b><br> <b>AS</b><br> {{cast.character}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
+
+</div>

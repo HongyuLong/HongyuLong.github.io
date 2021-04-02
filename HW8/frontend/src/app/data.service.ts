@@ -19,4 +19,8 @@ export class DataService {
     // return this.httpClient.get(this.REST_API_SERVER, {params: params});
     return this.httpClient.get(`http://localhost:3000/watch/${media_type}/${id}`);
   }
+
+  public sendGetCastInfoReq(person_id:any) {
+    return this.httpClient.get(`${this.REST_API_SERVER}/cast/${person_id}`);
+  }
 }

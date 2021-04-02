@@ -1,6 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 
+::-webkit-scrollbar {
+    width: 1em;
+    display:block;
+    height:6px;
+  }
+   
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(128, 128, 128, 0.8);
+    border-radius:10px;
+  }
+   
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius:10px;
+  }
+
 ngb-carousel {
     max-width: 80%;
     margin-left: auto;
@@ -33,3 +50,43 @@ ngb-carousel {
 .carousel-inner:hover .carousel-caption {
     display: block;
 }
+
+.card-deck {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    padding-bottom: 1.5%;
+}
+
+.modal-dialog{
+    max-width: 60%;
+}
+
+
+.fa {
+    font-size: 30px;
+    width: 6%;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+  }
+
+  .fa-facebook {
+    background: #3B5998;
+    color: white;
+  }
+  
+  .fa-twitter {
+    color: #55ACEE;
+  }
+
+  .fa-instagram {
+    color: rgb(120,0,113);
+  }
+
+  .fa-imdb{
+    color: rgb(227,168,0);
+  }

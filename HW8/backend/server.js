@@ -71,14 +71,12 @@ function filter(keys, results, n, flag) {
 
 
 app.get('/watch/:media_type/:id', (req, res)=>{
-    console.log('req.params.id = ', req.params.media_type);
+    console.log('req.params.media_type = ', req.params.media_type);
     console.log('req.params.id = ', req.params.id);
     let url_video = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '/videos?api_key=' + API_KEY + '&language=en-US&page=1';
     let url_details = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '?api_key=' + API_KEY + '&language=en-US&page=1';
     let url_reviews = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'  + req.params.id + '/reviews?api_key=' + API_KEY + '&language=en-US&page=1';
     let url_casts = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'   + req.params.id + '/credits?api_key=' + API_KEY + '&language=en-US&page=1';
-    
-    let casts_ids = [];
     
     axios.all([
         axios.get(url_video),
@@ -91,58 +89,16 @@ app.get('/watch/:media_type/:id', (req, res)=>{
             'video': filterVideo(['site', 'type','name', 'key'], responseArr[0].data.results),
             'details': filterDetails(req.params.media_type, responseArr[1].data),
             'reviews' : filterReviews(responseArr[2].data.results),
-            'casts' : filterCasts(responseArr[3].data.cast, casts_ids)
+            'casts' : filterCasts(responseArr[3].data.cast)
         })
     })
 });
-function filterModal(casts_ids) {
-    let modals = [];
-    for(idx in casts_ids) {
-        let person_id = casts_ids[idx];
-        console.log(person_id);
-        let url_details = 'https://api.themoviedb.org/3/person/' + person_id + '?api_key=' + API_KEY + '&language=en-US&page=1';
-        let url_extra = 'https://api.themoviedb.org/3/person/' + person_id + '/external_ids?api_key='+ API_KEY + '&language=en-US&page=1';
-        //console.log(url_details);
-        let modal = {};
-        axios.all([
-            axios.get(url_details),
-            axios.get(url_extra)
-        ])
-        .then(responseArr => {
-            // details
-            modal['birthday'] = responseArr[0]['birthday'];
-            modal['place_of_birth'] = responseArr[0]['place_of_birth'];
-            if(responseArr[0]['gender'] == 1) {
-                modal['gender'] = 'Female';
-            }
-            else {
-                modal['gender'] = 'Male';
-            }
-            modal['known_for_department'] = responseArr[0]['known_for_department'];
-            let also_know_str = '';
-            for(let i = 0; i < responseArr[0]['also_known_as'].length; ++i) {
-                if(i > 0) {
-                    also_know_str = also_know_str + ',';
-                }
-                also_know_str = also_know_str + responseArr[0]['also_known_as'][i];
-            }
-            modal['also_known_as'] = also_know_str;
-            modal['biography'] = responseArr[0]['biography'];
-            // external
-            console.log(modal);
-            modals.push(modal);
-        })
-    }
-    return modals;
-}
-
-function filterCasts(results, casts_ids) {
+function filterCasts(results) {
     var casts = [];
     for(let i = 0; i < results.length; ++i) {
         if(results[i]['profile_path'] == null) { continue;}
         var cast = {};
         cast['id'] = results[i]['id'];
-        casts_ids.push(results[i]['id']);
         cast['name'] = results[i]['name'];
         cast['character'] = results[i]['character'];
         cast['profile_path'] = 'https://image.tmdb.org/t/p/w500/' + results[i]['profile_path'];
@@ -256,6 +212,56 @@ function getRuntimeFormatted(runtime) {
         let mins = runtime % 60;
         return hrs + 'hrs ' + mins + 'mins';
     }
+}
+
+
+app.get('/cast/:person_id', (req, res) => {
+    console.log('req.params.person_id = ', req.params.person_id);
+    let url_person = 'https://api.themoviedb.org/3/person/' + req.params.person_id + '?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_external = 'https://api.themoviedb.org/3/person/' + req.params.person_id + '/external_ids?api_key='+ API_KEY + '&language=en-US&page=1';
+
+    axios.all([
+        axios.get(url_person),
+        axios.get(url_external)
+    ])
+    .then(responseArr => {
+        res.json(filterCastInfo(responseArr[0].data, responseArr[1].data));
+        //console.log(responseArr[0].data)
+    })
+});
+
+function filterCastInfo(results1, results2) {
+    let modal={};
+    // details
+    modal['name'] = results1.name;
+    modal['profile_path'] = 'https://image.tmdb.org/t/p/w500/' + results1.profile_path;
+    modal['birthday'] = results1.birthday;
+    modal['place_of_birth'] = results1['place_of_birth'];
+    modal['homepage'] = results1['homepage'];
+    if(results1['gender'] == 1) {
+        modal['gender'] = 'Female';
+    }
+    else if(results1['gender'] == 2){
+        modal['gender'] = 'Male';
+    }
+    modal['known_for_department'] = results1['known_for_department'];
+    let also_know_str = '';
+    for(let i = 0; i < results1['also_known_as'].length; ++i) {
+        if(i > 0) {
+            also_know_str = also_know_str + ',';
+        }
+        also_know_str = also_know_str + results1['also_known_as'][i];
+    }
+    modal['also_known_as'] = also_know_str;
+    //modal['also_known_as'] = results1['also_known_as'];
+    modal['biography'] = results1['biography'];
+    // external
+    modal['imdb_id'] = (results2['imdb_id'] == null || results2['imdb_id'].length == 0) ? null : 'https://www.imdb.com/name/' + results2['imdb_id'];
+    modal['facebook_id'] = (results2['facebook_id'] == null || results2['facebook_id'].length == 0) ? null : 'https://www.facebook.com/' + results2['facebook_id'];
+    modal['twitter_id'] = (results2['twitter_id'] == null || results2['twitter_id'].length == 0) ? null : 'https://twitter.com/' + results2['twitter_id'];
+    modal['instagram_id'] = (results2['instagram_id'] == null || results2['instagram_id'].length == 0) ? null : 'https://www.instagram.com/' + results2['instagram_id'];
+    console.log(modal);
+    return modal;
 }
 
 /*
