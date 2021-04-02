@@ -50,6 +50,15 @@
         </div>
     </div>
 
-    <h1>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
-
+    <h1 *ngIf='reviews.length > 0'>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
+    <div class='inner-container review-card' style='display:flex' *ngFor='let review of reviews'>
+        <div class='card-review-img'>
+            <img class='review-pic' [src]='review.avatar_path' alt="Model image cap">
+        </div>
+        <div class='card-review-body'>
+            <h3 class='card-title'>A review created by {{review.author}}</h3>
+            <p>Written by {{review.author}} on {{review.created_at}}</p>
+            <p class='card-text'>{{review.content}}</p>
+        </div>
+    </div>
 </div>

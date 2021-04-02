@@ -133,7 +133,7 @@ function filterReviews(results) {
                 review['avatar_path'] = 'https://image.tmdb.org/t/p/original' + results[i]['author_details']['avatar_path'];
             }
         }
-
+        console.log(results[i]['created_at']);
         let month_num = results[i]['created_at'].substr(5, 2);
         let month_dict = {'01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December'};
         let current_str = '';
@@ -156,7 +156,7 @@ function filterReviews(results) {
             current_str = current_str + ' PM';
         }
         let created_str = month_dict[month_num] + ' ' + results[i]['created_at'].substr(8, 2) + ', ' + results[i]['created_at'].substr(0, 4) + ', ' + current_str;
-
+        review['created_at'] = created_str;
         reviews.push(review);
     }
     return reviews;

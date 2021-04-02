@@ -50,3 +50,24 @@ p{
 .card-modal img{
     width: 24%;
 }
+
+.review-pic{
+    width: 100px;
+}
+
+.review-card{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color:white;
+    margin-top:1%;
+    border-radius: 10px;
+}
+
+.card-review-body {
+    width: 80%;
+}
+
+.card-review-img {
+    width: 20%;
+    text-align: center;
+}
