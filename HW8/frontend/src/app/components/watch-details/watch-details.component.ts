@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../data.service'
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 @Component({
   selector: 'app-watch-details',
@@ -27,10 +31,19 @@ export class WatchDetailsComponent implements OnInit {
   public has_recommended:boolean = false;
   public has_similar:boolean = false;
 
+  // alert
+  private _success = new Subject<string>();
+  public add_to:boolean = true;
+  public alert_str:string = 'Added to';
+  successMessage = '';
+
+  @ViewChild('addAlert', {static: false}) addAlert: any;
+  @ViewChild('removeAlert', {static: false}) removeAlert: any;
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private youtubePlayer: YouTubePlayerModule
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +66,16 @@ export class WatchDetailsComponent implements OnInit {
       //console.log(this.details);
     });
 
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(debounceTime(5000)).subscribe(() => {
+      if (this.addAlert) {
+        this.addAlert.close();
+      }
+      if(this.removeAlert) {
+        this.removeAlert.close();
+      }
+    });
+
     if (window.screen.width === 360) { // 768px portrait
       this.mobile = true;
     }
@@ -69,5 +92,16 @@ export class WatchDetailsComponent implements OnInit {
 
   open(content:any) {
     this.modalService.open(content);
+  }
+
+  changeButtonState() {
+    if(this.add_to) {
+      this.alert_str = 'Added to';
+    }
+    else {
+      this.alert_str = 'Removed from';
+    }
+    this.add_to = !this.add_to;
+    this._success.next(`${this.alert_str} watchlist.`); 
   }
 }

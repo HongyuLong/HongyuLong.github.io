@@ -185,18 +185,30 @@ function filterReviews(results) {
 }
 function filterDetails(media_type, results) {
     let item = {};
-    let genres_list = [];  // genres list
-    let lang_list = [];  // spoken_languages list
-    item['title'] = results['title'];
-    for(let i = 0; i < results['genres'].length; ++i) {
-        genres_list.push(results['genres'][i]['name']);
+    let genres_str = '';
+    let lang_str = '';
+    if(media_type == 'movie') {
+        item['title'] = results['title'];
     }
-    item.genres = genres_list;
+    else {
+        item['title'] = results['name'];
+    }
+    
+    for(let i = 0; i < results['genres'].length; ++i) {
+        if(i > 0) {
+            genres_str = genres_str + ',';
+        }
+        genres_str = genres_str + results['genres'][i]['name'];
+    }
+    item.genres = genres_str;
 
     for(let i = 0; i < results['spoken_languages'].length; ++i) {
-        lang_list.push(results['spoken_languages'][i]['english_name']);
+        if(i > 0) {
+            lang_str = lang_str + ',';
+        }
+        lang_str = lang_str + results['spoken_languages'][i]['english_name'];
     }
-    item.spoken_languages = lang_list;
+    item.spoken_languages = lang_str;
 
     if(media_type == 'movie') {
         item['year'] = results['release_date'].substr(0, 4);

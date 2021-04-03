@@ -18,6 +18,37 @@
     margin-right: auto;
 }
 
+.top-row {
+    display: flex;
+}
+
+.col-video {
+    flex: 0 0 640px;
+}
+
+.col-text {
+    flex: 1 0 20%;
+    color: white;
+    word-wrap: break-word;
+    padding-left: 60px;
+}
+
+.col-text .title{
+    font-size: 50px;
+}
+
+.col-text .opa{
+    opacity: 0.7;
+}
+.col-text .tagline{
+    font-size: 20px;
+}
+
+.col-text button{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
 .text-opa {
     opacity: 0.6;
     font-size: 16px;

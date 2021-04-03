@@ -37,7 +37,26 @@
           </div>
         </div>
       </ng-template>
-    
+    <div class='inner-container top-row' *ngIf='details'>
+      <div class='col-video'>
+        <youtube-player [videoId]='video.key' suggestedQuality="highres"></youtube-player>
+      </div>
+      <div class='col-text'>
+        <div class='title'>{{details.title}}</div>
+        <div class='opa tagline'><i>{{details.tagline}}</i></div>
+        <div class='opa tagline' style='padding-top: 10px;padding-bottom: 10px;'>{{details.year}} | ★{{details.vote_average}} | {{details.runtime}}</div>
+        <div class='opa'>Genres: <span class='text-opa'>{{details.genres}}</span></div>
+        <div class='opa'>Spoken Languages: <span class='text-opa'>{{details.spoken_languages}}</span></div>
+        <button type="button" class="btn btn-primary" *ngIf='this.add_to' (click)='changeButtonState()'>Add to Watchlist</button>
+        <button type="button" class="btn btn-primary" *ngIf='!this.add_to' (click)='changeButtonState()'>Remove from Watchlist</button>
+        <ngb-alert #removeAlert *ngIf="successMessage && add_to" type="danger" (closed)="successMessage = ''">{{ successMessage }}
+        </ngb-alert>
+        <ngb-alert #addAlert *ngIf="successMessage && !add_to" type="success" (closed)="successMessage = ''">{{ successMessage }}
+        </ngb-alert>
+
+      </div>
+    </div>
+
     <h3>Description</h3>
     <div class='inner-container text-opa' *ngIf='details'>
         {{details.overview}}
