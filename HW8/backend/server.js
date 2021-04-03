@@ -109,7 +109,9 @@ app.get('/watch/:media_type/:id', (req, res)=>{
             'reviews' : filterReviews(responseArr[2].data.results),
             'casts' : filterCasts(responseArr[3].data.cast),
             'recommended': filter(media_keys, responseArr[4].data.results, responseArr[4].data.results.length, true),
-            'similar': filter(media_keys, responseArr[5].data.results,  responseArr[5].data.results.length, true)
+            'similar': filter(media_keys, responseArr[5].data.results,  responseArr[5].data.results.length, true),
+            'has_recommended': responseArr[4].data.results.length > 0,
+            'has_similar': responseArr[5].data.results.length > 0
         })
     })
 });

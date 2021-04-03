@@ -37,6 +37,13 @@
           </div>
         </div>
       </ng-template>
+    
+    <h3>Description</h3>
+    <div class='inner-container text-opa' *ngIf='details'>
+        {{details.overview}}
+    </div>
+    <h3>Share</h3>
+
 
     <h1>Full Cast and Crew</h1>
     <div class='inner-container'>
@@ -63,10 +70,10 @@
         </div>
     </div>
 
-    <h1 *ngIf='this.media_type == "movie"'>Recommended Movies</h1>
-    <h1 *ngIf='this.media_type == "tv"'>Recommended TV Shows</h1>
+    <h1 *ngIf='this.media_type == "movie" && has_recommended'>Recommended Movies</h1>
+    <h1 *ngIf='this.media_type == "tv" && has_recommended'>Recommended TV Shows</h1>
     <!-- Desktop section : multiple images per slide -->
-    <ngb-carousel *ngIf='!mobile' [interval]="0">
+    <ngb-carousel *ngIf='!mobile && has_recommended' [interval]="0">
       <ng-template ngbSlide *ngFor='let group of recommended_grouped; index as i'>
           <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
               <div class='multi-carousel-caption'>
@@ -77,10 +84,10 @@
       </ng-template>
     </ngb-carousel>
 
-    <h1 *ngIf='this.media_type == "movie"'>Similar Movies</h1>
-    <h1 *ngIf='this.media_type == "tv"'>Similar TV Shows</h1>
+    <h1 *ngIf='this.media_type == "movie" && has_similar'>Similar Movies</h1>
+    <h1 *ngIf='this.media_type == "tv" && has_similar'>Similar TV Shows</h1>
     <!-- Desktop section : multiple images per slide -->
-    <ngb-carousel *ngIf='!mobile' [interval]="0">
+    <ngb-carousel *ngIf='!mobile && has_similar' [interval]="0">
       <ng-template ngbSlide *ngFor='let group of similar_grouped; index as i'>
           <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
               <div class='multi-carousel-caption'>

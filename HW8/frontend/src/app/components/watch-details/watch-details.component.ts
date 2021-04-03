@@ -24,6 +24,8 @@ export class WatchDetailsComponent implements OnInit {
   public similar_grouped:any;
 
   public mobile:boolean = false;
+  public has_recommended:boolean = false;
+  public has_similar:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +48,8 @@ export class WatchDetailsComponent implements OnInit {
       this.recommended_grouped = data.recommended.grouped;
       this.similar_single = data.similar.single;
       this.similar_grouped = data.similar.grouped;
+      this.has_recommended = data.has_recommended;
+      this.has_similar = data.has_similar;
       //console.log(this.details);
     });
 
