@@ -45,7 +45,15 @@ function filter(keys, results, n, flag) {
     for(let i = 0; i < n;) {
         if(results[i].hasOwnProperty('poster_path') && results[i].poster_path == null) {continue}
         var item = {}
-        keys.forEach(element => {item[element] = results[i][element]});
+        //keys.forEach(element => {item[element] = results[i][element]});
+        for(let j = 0; j < keys.length; ++j) {
+            let key = keys[j];
+            if(key == 'name') {
+                item['title'] = results[i][key];
+            }else {
+                item[key] = results[i][key];
+            }
+        }
         //console.log(item);
         items.push(item);
         i++;
@@ -194,7 +202,7 @@ function filterDetails(media_type, results) {
     }
     else {
         item['year'] = results['first_air_date'].substr(0, 4);
-        item['runtime'] = getRuntimeFormatted(results[0]['episode_run_time']);
+        item['runtime'] = getRuntimeFormatted(results['episode_run_time']);
     }
     item['overview'] = results['overview'];
     item['vote_average'] = results['vote_average'];

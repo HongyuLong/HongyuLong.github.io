@@ -18,6 +18,11 @@ export class WatchDetailsComponent implements OnInit {
   public cast_info:any;
   public reviews: any;
 
+  public recommended_single: any;
+  public recommended_grouped: any;
+  public similar_single:any;
+  public similar_grouped:any;
+
   public mobile:boolean = false;
 
   constructor(
@@ -37,6 +42,10 @@ export class WatchDetailsComponent implements OnInit {
       this.details = data.details;
       this.casts = data.casts;
       this.reviews = data.reviews;
+      this.recommended_single = data.recommended.single;
+      this.recommended_grouped = data.recommended.grouped;
+      this.similar_single = data.similar.single;
+      this.similar_grouped = data.similar.grouped;
       //console.log(this.details);
     });
 

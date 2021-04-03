@@ -55,7 +55,7 @@
         <ng-template ngbSlide *ngFor='let group of pop_tv_grouped; index as i'>
             <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/tv/' + item.id]">
                 <div class='multi-carousel-caption'>
-                    <p>{{item.name}}</p>
+                    <p>{{item.title}}</p>
                 </div>
                 <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
             </div>
@@ -68,7 +68,7 @@
         <ng-template ngbSlide *ngFor='let group of top_tv_grouped; index as i'>
             <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/tv/' + item.id]">
                 <div class='multi-carousel-caption'>
-                    <p>{{item.name}}</p>
+                    <p>{{item.title}}</p>
                 </div>
                 <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
             </div>
@@ -81,7 +81,7 @@
         <ng-template ngbSlide *ngFor='let group of trending_tv_grouped; index as i'>
             <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/tv/' + item.id]">
                 <div class='multi-carousel-caption'>
-                    <p>{{item.name}}</p>
+                    <p>{{item.title}}</p>
                 </div>
                 <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
             </div>
