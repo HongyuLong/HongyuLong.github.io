@@ -77,19 +77,31 @@ app.get('/watch/:media_type/:id', (req, res)=>{
     let url_details = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '?api_key=' + API_KEY + '&language=en-US&page=1';
     let url_reviews = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'  + req.params.id + '/reviews?api_key=' + API_KEY + '&language=en-US&page=1';
     let url_casts = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'   + req.params.id + '/credits?api_key=' + API_KEY + '&language=en-US&page=1';
-    
+    let url_recommended = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '/recommendations?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_similar = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '/similar?api_key=' + API_KEY + '&language=en-US&page=1';
+    if(req.params.media_type == 'movie') {
+        var media_keys = ['id', 'title', 'poster_path'];
+    }
+    else {
+        var media_keys = ['id', 'name', 'poster_path'];
+    }
+
     axios.all([
         axios.get(url_video),
         axios.get(url_details),
         axios.get(url_reviews),
-        axios.get(url_casts)
+        axios.get(url_casts),
+        axios.get(url_recommended),
+        axios.get(url_similar)
     ])
     .then(responseArr => {
         res.json({
             'video': filterVideo(['site', 'type','name', 'key'], responseArr[0].data.results),
             'details': filterDetails(req.params.media_type, responseArr[1].data),
             'reviews' : filterReviews(responseArr[2].data.results),
-            'casts' : filterCasts(responseArr[3].data.cast)
+            'casts' : filterCasts(responseArr[3].data.cast),
+            'recommended': filter(media_keys, responseArr[4].data.results, responseArr[4].data.results.length, true),
+            'similar': filter(media_keys, responseArr[5].data.results,  responseArr[5].data.results.length, true)
         })
     })
 });
@@ -133,7 +145,7 @@ function filterReviews(results) {
                 review['avatar_path'] = 'https://image.tmdb.org/t/p/original' + results[i]['author_details']['avatar_path'];
             }
         }
-        console.log(results[i]['created_at']);
+        //console.log(results[i]['created_at']);
         let month_num = results[i]['created_at'].substr(5, 2);
         let month_dict = {'01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December'};
         let current_str = '';
@@ -260,7 +272,7 @@ function filterCastInfo(results1, results2) {
     modal['facebook_id'] = (results2['facebook_id'] == null || results2['facebook_id'].length == 0) ? null : 'https://www.facebook.com/' + results2['facebook_id'];
     modal['twitter_id'] = (results2['twitter_id'] == null || results2['twitter_id'].length == 0) ? null : 'https://twitter.com/' + results2['twitter_id'];
     modal['instagram_id'] = (results2['instagram_id'] == null || results2['instagram_id'].length == 0) ? null : 'https://www.instagram.com/' + results2['instagram_id'];
-    console.log(modal);
+    //console.log(modal);
     return modal;
 }
 

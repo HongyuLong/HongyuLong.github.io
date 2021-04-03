@@ -59,6 +59,12 @@ ngb-carousel {
 
 .modal-dialog{
     max-width: 60%;
+    overflow-y: initial;
+}
+
+.modal-body{
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 

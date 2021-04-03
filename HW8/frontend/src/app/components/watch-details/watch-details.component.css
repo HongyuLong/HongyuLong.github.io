@@ -67,7 +67,32 @@ p{
     width: 80%;
 }
 
+.card-review-body a{
+    text-decoration: underline;
+}
+
+.card-review-body a:visited{
+    color: rgb(92,77,111);
+}
+
 .card-review-img {
     width: 20%;
     text-align: center;
+}
+
+.overlines {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.review-rating {
+    background-color: black;
+    color: white;
+    border-radius: 16px;
+    padding: 0 10px;
+    font-size: 20px;
+    font-family: 'Raleway', sans-serif;
 }

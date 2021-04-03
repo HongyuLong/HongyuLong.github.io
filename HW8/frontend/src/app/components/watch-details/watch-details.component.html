@@ -50,15 +50,22 @@
         </div>
     </div>
 
-    <h1 *ngIf='reviews.length > 0'>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
+    <h1 *ngIf='reviews'>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
     <div class='inner-container review-card' style='display:flex' *ngFor='let review of reviews'>
         <div class='card-review-img'>
             <img class='review-pic' [src]='review.avatar_path' alt="Model image cap">
         </div>
         <div class='card-review-body'>
-            <h3 class='card-title'>A review created by {{review.author}}</h3>
-            <p>Written by {{review.author}} on {{review.created_at}}</p>
-            <p class='card-text'>{{review.content}}</p>
+            <h4 class='card-title'>A review created by {{review.author}} <span class='review-rating'>★<span style='font-size: 18px;'>&nbsp;{{review.rating}}</span></span></h4>
+            <p style='color:gray;'>Written by {{review.author}} on {{review.created_at}}</p>
+            <p class='card-text overlines'>{{review.content}}</p>
+            <a class='' aria-label="" target="_blank" rel="noopener" [href]='review.url' title="">Read the rest</a>
         </div>
     </div>
+
+    <h1 *ngIf='this.media_type == "movie"'>Recommended Movies</h1>
+    <h1 *ngIf='this.media_type == "tv"'>Recommended TV Shows</h1>
+
+    <h1 *ngIf='this.media_type == "movie"'>Similar Movies</h1>
+    <h1 *ngIf='this.media_type == "tv"'>Similar TV Shows</h1>
 </div>
