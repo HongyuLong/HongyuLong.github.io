@@ -6,6 +6,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import { Router,NavigationEnd   } from '@angular/router';
 
 @Component({
   selector: 'app-watch-details',
@@ -47,8 +48,15 @@ export class WatchDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private dataService: DataService,
     private modalService: NgbModal,
-    private youtubePlayer: YouTubePlayerModule
-  ) { }
+    private youtubePlayer: YouTubePlayerModule,
+    private router: Router
+  ) { 
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.addToFrontCont();  // when leaving the page, then add the media to the continue list
+      }
+    });
+  }
 
   ngOnInit(): void {
     var watch_str = localStorage.getItem('watchList');
@@ -58,8 +66,7 @@ export class WatchDetailsComponent implements OnInit {
     else {
       this.watch_list = JSON.parse(watch_str);
     }
-    console.log('initial watch_list=', this.watch_list);
-    //this.cont_list = JSON.parse(localStorage.getItem('contList') || '');
+    //console.log('initial watch_list=', this.watch_list);
     
     this.route.paramMap.subscribe(params => {
       this.media_type = params.get('media_type');
@@ -93,6 +100,21 @@ export class WatchDetailsComponent implements OnInit {
 
     if (window.screen.width === 360) { // 768px portrait
       this.mobile = true;
+    }
+
+  }
+
+  addToFrontCont() {
+    // add current media to the front of contList
+    var cont_str = localStorage.getItem('contList');
+    if(cont_str == null) {
+      this.cont_list = [];
+    }
+    else {
+      this.cont_list = JSON.parse(cont_str);
+    }
+    if(this.details != null) {
+      this.addToStorage(this.cont_list, true);
     }
   }
 
@@ -154,6 +176,7 @@ export class WatchDetailsComponent implements OnInit {
   }
 
   removeIfExist(list_name:any) {
+    // remove current media if already exist
     let j = -1;
     for(let i = 0; i < list_name.length; ++i) {
       if(list_name[i].id == this.id && list_name[i].media_type == this.media_type) {
@@ -173,14 +196,16 @@ export class WatchDetailsComponent implements OnInit {
     this.removeIfExist(list_name);
     this.addToFront(list_name, has_bar);
     if(has_bar) {
+      localStorage.removeItem('contList');
       localStorage.setItem('contList', JSON.stringify(list_name));
       console.log('after add to continue: ', localStorage);
+      console.log('cont_list', this.cont_list);
     }
     else {
       localStorage.removeItem('watchList');
       localStorage.setItem('watchList', JSON.stringify(list_name));
-      console.log('after add Button: ', localStorage);
-      console.log('Add to watch_list=', this.watch_list);
+      //console.log('after add Button: ', localStorage);
+      //console.log('Add to watch_list=', this.watch_list);
     }
   }
 
