@@ -221,6 +221,7 @@ function filterDetails(media_type, results) {
     item['overview'] = results['overview'];
     item['vote_average'] = results['vote_average'];
     item['tagline'] = results['tagline'];
+    item['poster_path'] = results['poster_path'];
 
     return item;
 }

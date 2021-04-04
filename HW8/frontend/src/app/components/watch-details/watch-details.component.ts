@@ -33,9 +33,13 @@ export class WatchDetailsComponent implements OnInit {
 
   // alert
   private _success = new Subject<string>();
-  public add_to:boolean = true;
+  public add_to:boolean = true;  // true if not exist in watchList
   public alert_str:string = 'Added to';
   successMessage = '';
+
+  // local storage
+  public watch_list:any;
+  public cont_list:any;
 
   @ViewChild('addAlert', {static: false}) addAlert: any;
   @ViewChild('removeAlert', {static: false}) removeAlert: any;
@@ -47,6 +51,16 @@ export class WatchDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    var watch_str = localStorage.getItem('watchList');
+    if(watch_str == null) {
+      this.watch_list = [];
+    }
+    else {
+      this.watch_list = JSON.parse(watch_str);
+    }
+    console.log('initial watch_list=', this.watch_list);
+    //this.cont_list = JSON.parse(localStorage.getItem('contList') || '');
+    
     this.route.paramMap.subscribe(params => {
       this.media_type = params.get('media_type');
       this.id = params.get('id');
@@ -66,6 +80,7 @@ export class WatchDetailsComponent implements OnInit {
       //console.log(this.details);
     });
 
+    this.add_to = this.checkIfNotExist(this.watch_list);
     this._success.subscribe(message => this.successMessage = message);
     this._success.pipe(debounceTime(5000)).subscribe(() => {
       if (this.addAlert) {
@@ -103,5 +118,78 @@ export class WatchDetailsComponent implements OnInit {
     }
     this.add_to = !this.add_to;
     this._success.next(`${this.alert_str} watchlist.`); 
+  }
+
+  clickAddButton() {
+    this.addToStorage(this.watch_list, false);
+    this.add_to = !this.add_to;
+    this._success.next('Added to watchlist.')
+  }
+
+  clickRemoveButton() {
+    this.removeFromStorage();
+    this.add_to = !this.add_to;
+    this._success.next('Removed from watchlist.')
+  }
+
+  addToFront(list_name:any, has_bar:boolean) {
+    // latest one always at the front of the array
+    list_name.unshift({'id': this.id, 'media_type': this.media_type, 'title': this.details.title, 'poster_path': this.details.poster_path});
+    if(has_bar && list_name.length > 24) {
+      list_name.pop();  // remove the last one
+    }
+  }
+
+  checkIfNotExist(list_name:any) {
+    let j = -1;
+    for(let i = 0; i < list_name.length; ++i) {
+      if(list_name[i].id == this.id && list_name[i].media_type == this.media_type) {
+        // exist, then remove it
+        j = i;
+        console.log('find the one!');
+        break;
+      }
+    }
+    return j < 0;  // true if not exist
+  }
+
+  removeIfExist(list_name:any) {
+    let j = -1;
+    for(let i = 0; i < list_name.length; ++i) {
+      if(list_name[i].id == this.id && list_name[i].media_type == this.media_type) {
+        // exist, then remove it
+        j = i;
+        console.log('find the one!');
+        break;
+      }
+    }
+
+    if(j >= 0) {
+      list_name.splice(j, 1);
+    }
+  }
+
+  addToStorage(list_name:any, has_bar:boolean) {
+    this.removeIfExist(list_name);
+    this.addToFront(list_name, has_bar);
+    if(has_bar) {
+      localStorage.setItem('contList', JSON.stringify(list_name));
+      console.log('after add to continue: ', localStorage);
+    }
+    else {
+      localStorage.removeItem('watchList');
+      localStorage.setItem('watchList', JSON.stringify(list_name));
+      console.log('after add Button: ', localStorage);
+      console.log('Add to watch_list=', this.watch_list);
+    }
+  }
+
+  removeFromStorage() {
+    // only called by 'remove from watchlist' button
+    this.removeIfExist(this.watch_list);
+    localStorage.removeItem('watchList');
+    localStorage.setItem('watchList', JSON.stringify(this.watch_list));
+    console.log('after remove Button:', localStorage);
+    console.log('remove from watch_list=', this.watch_list);
   }
 }

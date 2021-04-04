@@ -1,3 +1,18 @@
 <div class='container'>
+    <div *ngIf='my_watch_list.length == 0' class='no-items-container'>
+        <h1>No items found in Watchlist.</h1>
+    </div>
 
+    <div *ngIf='my_watch_list.length > 0' class='inner-container'>
+        <h1>My WatchList</h1>
+        <div class='row'>
+            <div class='col-2 multi-img-container' *ngFor='let item of my_watch_list' [routerLink]="['/watch/' + item.media_type + '/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </div>
+    </div>
+    
 </div>

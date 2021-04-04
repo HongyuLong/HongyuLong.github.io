@@ -9,6 +9,8 @@ import {DataService} from '../../data.service'
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+  shifts: Array<number> = [1, 2, 3, 4, 5];
+
   now_playing: any;
   pop_mv_single: any;
   pop_mv_grouped: any;
@@ -35,6 +37,7 @@ export class HomePageComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    //localStorage.clear();
     this.dataService.sendGetRequest().subscribe((data: any)=>{
       console.log(data);
       this.now_playing = data.now_playing;

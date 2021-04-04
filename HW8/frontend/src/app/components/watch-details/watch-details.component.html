@@ -47,8 +47,9 @@
         <div class='opa tagline' style='padding-top: 10px;padding-bottom: 10px;'>{{details.year}} | ★{{details.vote_average}} | {{details.runtime}}</div>
         <div class='opa'>Genres: <span class='text-opa'>{{details.genres}}</span></div>
         <div class='opa'>Spoken Languages: <span class='text-opa'>{{details.spoken_languages}}</span></div>
-        <button type="button" class="btn btn-primary" *ngIf='this.add_to' (click)='changeButtonState()'>Add to Watchlist</button>
-        <button type="button" class="btn btn-primary" *ngIf='!this.add_to' (click)='changeButtonState()'>Remove from Watchlist</button>
+        <button type="button" class="btn btn-primary" *ngIf='this.add_to' (click)='clickAddButton()'>Add to Watchlist</button>
+
+        <button type="button" class="btn btn-primary" *ngIf='!this.add_to' (click)='clickRemoveButton()'>Remove from Watchlist</button>
         <ngb-alert #removeAlert *ngIf="successMessage && add_to" type="danger" (closed)="successMessage = ''">{{ successMessage }}
         </ngb-alert>
         <ngb-alert #addAlert *ngIf="successMessage && !add_to" type="success" (closed)="successMessage = ''">{{ successMessage }}
