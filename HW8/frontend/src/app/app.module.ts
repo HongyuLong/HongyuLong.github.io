@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +25,8 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

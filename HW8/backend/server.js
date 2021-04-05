@@ -268,7 +268,7 @@ function getRuntimeFormatted(runtime) {
 
 
 app.get('/cast/:person_id', (req, res) => {
-    console.log('req.params.person_id = ', req.params.person_id);
+    //console.log('req.params.person_id = ', req.params.person_id);
     let url_person = 'https://api.themoviedb.org/3/person/' + req.params.person_id + '?api_key=' + API_KEY + '&language=en-US&page=1';
     let url_external = 'https://api.themoviedb.org/3/person/' + req.params.person_id + '/external_ids?api_key='+ API_KEY + '&language=en-US&page=1';
 
@@ -316,16 +316,35 @@ function filterCastInfo(results1, results2) {
     return modal;
 }
 
-/*
-app.get('/mylist', (req, res)=>{
-    axios.get('url')
+
+app.get('/search/:query', (req, res)=>{
+    let url_search = 'https://api.themoviedb.org/3/search/multi?api_key=' + API_KEY + '&language=enUS&query=' + req.params.query;
+    axios.get(url_search)
         .then(response=>{
-            // handle success
-           //console.log(response)
-           res.send(response.data)
+            let results = response.data.results;
+            let items = [];
+
+            for(let i = 0, j = 0; i < results.length && j < 7; ++i) {
+                if(results[i]['backdrop_path'] == null || results[i]['media_type'] == 'person') {
+                    continue;
+                }
+                let item = {};
+                item['id'] = results[i]['id'];
+                item['media_type'] = results[i]['media_type'];
+                item['backdrop_path'] = 'https://image.tmdb.org/t/p/w500' + results[i]['backdrop_path'];
+                if(results[i]['media_type'] == 'tv') {
+                    item['title'] = results[i]['name'];
+                }
+                else {
+                    item['title'] = results[i]['title'];
+                }
+                items.push(item);
+                j++;
+            }
+            res.json(items);
         })
 });
-*/
+
 
 var server = app.listen(port, function() {
     console.log(`Backend Application listening at http://localhost:${port}`);

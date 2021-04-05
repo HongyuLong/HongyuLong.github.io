@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable, OperatorFunction} from 'rxjs';
+import {debounceTime,distinctUntilChanged, map, switchMap} from 'rxjs/operators';
+import { DataService } from '../../data.service'
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   public title: string='USC Films';
-  constructor() { }
+  constructor(
+    private dataService:DataService,
+  ) { }
 
   ngOnInit(): void {
+    
   }
 
+  search = (text$: any) => {
+    return text$.pipe(
+      debounceTime(200),
+      switchMap( (searchText) =>  this.dataService.sendGetSearchReq(searchText))
+     );
+  }
+  
+  formatter = (x: {name: string}) => x.name;
 }

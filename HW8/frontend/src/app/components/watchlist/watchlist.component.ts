@@ -18,7 +18,7 @@ export class WatchlistComponent implements OnInit {
     else {
       this.my_watch_list = JSON.parse(watch_str);
     }
-    console.log('initial watch_list=', this.my_watch_list);
+    //console.log('initial watch_list=', this.my_watch_list);
   }
 
 }

@@ -23,4 +23,8 @@ export class DataService {
   public sendGetCastInfoReq(person_id:any) {
     return this.httpClient.get(`${this.REST_API_SERVER}/cast/${person_id}`);
   }
+
+  public sendGetSearchReq(query:any) {
+    return this.httpClient.get(`${this.REST_API_SERVER}/search/${query}`);
+  }
 }

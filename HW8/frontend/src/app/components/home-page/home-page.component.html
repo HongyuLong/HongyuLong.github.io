@@ -1,11 +1,11 @@
 <div id='container'>
     <ngb-carousel [interval]="2000">
         <ng-template ngbSlide *ngFor="let item of now_playing; index as i">
-            <div class="carousel-caption" [routerLink]="['/watch/movie/' + item.id]">
-              <h4>{{item.title}}</h4>
-            </div>
-            <div class='picsum-img-wrapper' [routerLink]="['/watch/movie/' + item.id]">
-                <img [src]="'https://image.tmdb.org/t/p/original' + item.backdrop_path" alt="">
+            <div class='slide-wrapper'>
+                <div class="text-wrapper">
+                    <h4>{{item.title}}</h4>
+                  </div>
+                  <img [src]="'https://image.tmdb.org/t/p/original' + item.backdrop_path" alt="">
             </div>
         </ng-template>
     </ngb-carousel>

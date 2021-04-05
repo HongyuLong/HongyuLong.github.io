@@ -96,3 +96,7 @@ ngb-carousel {
   .fa-imdb{
     color: rgb(227,168,0);
   }
+
+  .dropdown-menu {
+    background-color: rgb(6, 7, 38);
+  }
