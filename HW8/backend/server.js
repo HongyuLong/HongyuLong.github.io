@@ -43,7 +43,10 @@ function filter(keys, results, n, flag) {
     //console.log(results);
     var items = []
     for(let i = 0; i < n;) {
-        if(results[i].hasOwnProperty('poster_path') && results[i].poster_path == null) {continue}
+        if(results[i].hasOwnProperty('poster_path') && results[i].poster_path == null) {
+            i++;
+            continue;
+        }
         var item = {}
         //keys.forEach(element => {item[element] = results[i][element]});
         for(let j = 0; j < keys.length; ++j) {
@@ -61,7 +64,7 @@ function filter(keys, results, n, flag) {
 
     if(flag) {
         var grouped_items = [];
-        for(let i = 0, j = -1; i < n; ++i) {
+        for(let i = 0, j = -1; i < items.length; ++i) {
             if(i % 6 == 0) {
                 j++;
                 grouped_items[j] = []
@@ -103,15 +106,16 @@ app.get('/watch/:media_type/:id', (req, res)=>{
         axios.get(url_similar)
     ])
     .then(responseArr => {
+        //console.log(media_keys);
         res.json({
             'video': filterVideo(['site', 'type','name', 'key'], responseArr[0].data.results),
             'details': filterDetails(req.params.media_type, responseArr[1].data),
             'reviews' : filterReviews(responseArr[2].data.results),
             'casts' : filterCasts(responseArr[3].data.cast),
             'recommended': filter(media_keys, responseArr[4].data.results, responseArr[4].data.results.length, true),
-            'similar': filter(media_keys, responseArr[5].data.results,  responseArr[5].data.results.length, true),
+            'similar': filter(media_keys, responseArr[5].data.results, responseArr[5].data.results.length, true),
             'has_recommended': responseArr[4].data.results.length > 0,
-            'has_similar': responseArr[5].data.results.length > 0
+            'has_similar': responseArr[5].data.results.length > 0,
         })
     })
 });
@@ -131,6 +135,9 @@ function filterCasts(results) {
 }
 
 function filterReviews(results) {
+    if(results.length == 0) {
+        return null;
+    }
     var reviews = [];
     for(let i = 0; i < 10 && i < results.length; ++i) {
         var review = {};
@@ -220,12 +227,16 @@ function filterDetails(media_type, results) {
     }
     item['overview'] = results['overview'];
     item['vote_average'] = results['vote_average'];
-    item['tagline'] = results['tagline'];
+    item['tagline'] = results['tagline'].length == 0 ? null  : results['tagline'];
     item['poster_path'] = results['poster_path'];
 
     return item;
 }
 function filterVideo(keys, results) {
+    if(results.length == 0) {
+        return {'site': 'YouTube', 'type': 'Trailer', 'name': 'CSCI 571 HW8', 'key': 'tzkWB85ULJY'};
+    }
+    let flag = false;
     var item = {};
     for(let i = 0; i < results.length; ++i) {
         if(results[i].site != 'YouTube')  {continue;}
@@ -233,9 +244,15 @@ function filterVideo(keys, results) {
         if(item.key == null) {
             item.key = 'tzkWB85ULJY';
         }
+        flag = true;  // get a valid data
         break;
     }
-    return item;
+    if(flag) {
+        return item;
+    }
+    else {
+        return {'site': 'YouTube', 'type': 'Trailer', 'name': 'CSCI 571 HW8', 'key': 'tzkWB85ULJY'};
+    }
 }
 
 function getRuntimeFormatted(runtime) {

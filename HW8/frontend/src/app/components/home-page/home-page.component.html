@@ -10,6 +10,19 @@
         </ng-template>
     </ngb-carousel>
 
+    <h1 *ngIf='my_cont_list.length > 0'>Continue Watching</h1>
+    <!-- Desktop section : multiple images per slide -->
+    <ngb-carousel *ngIf='!mobile && my_cont_list.length > 0' [interval]="0">
+        <ng-template ngbSlide *ngFor='let group of cont_list_grouped; index as i'>
+            <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + item.media_type + '/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
     <h1>Popular Movies</h1>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">

@@ -51,11 +51,11 @@ export class WatchDetailsComponent implements OnInit {
     private youtubePlayer: YouTubePlayerModule,
     private router: Router
   ) { 
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        this.addToFrontCont();  // when leaving the page, then add the media to the continue list
-      }
-    });
+    // this.router.events.subscribe((e) => {
+    //   if (e instanceof NavigationEnd) {
+    //     this.addToFrontCont();  // when leaving the page, then add the media to the continue list
+    //   }
+    // });
   }
 
   ngOnInit(): void {
@@ -74,6 +74,8 @@ export class WatchDetailsComponent implements OnInit {
     });
 
     this.dataService.sendGetDetailsReq(this.media_type, this.id).subscribe((data: any) => {
+      window.scroll(0,0);
+      //console.log(data);
       this.video = data.video;
       this.details = data.details;
       this.casts = data.casts;
@@ -85,6 +87,7 @@ export class WatchDetailsComponent implements OnInit {
       this.has_recommended = data.has_recommended;
       this.has_similar = data.has_similar;
       //console.log(this.details);
+      this.addToFrontCont();
     });
 
     this.add_to = this.checkIfNotExist(this.watch_list);

@@ -43,7 +43,7 @@
       </div>
       <div class='col-text'>
         <div class='title'>{{details.title}}</div>
-        <div class='opa tagline'><i>{{details.tagline}}</i></div>
+        <div class='opa tagline' *ngIf='details.tagline'><i>{{details.tagline}}</i></div>
         <div class='opa tagline' style='padding-top: 10px;padding-bottom: 10px;'>{{details.year}} | ★{{details.vote_average}} | {{details.runtime}}</div>
         <div class='opa'>Genres: <span class='text-opa'>{{details.genres}}</span></div>
         <div class='opa'>Spoken Languages: <span class='text-opa'>{{details.spoken_languages}}</span></div>
@@ -68,7 +68,7 @@
     <h1>Full Cast and Crew</h1>
     <div class='inner-container'>
         <div class='card-deck' style='flex: row nowrap;'>
-            <div class='card card-casts' *ngFor='let cast of casts' (click)='getCastInfo(cast.id, content)'>
+            <div class='card card-casts col-2' *ngFor='let cast of casts' (click)='getCastInfo(cast.id, content)'>
                 <img class='card-img-top' [src]='cast.profile_path' alt="Card image cap">
                 <div class='card-body card-body-casts'>
                     <p class='card-text'><b>{{cast.name}}</b><br> <b>AS</b><br> {{cast.character}}</p>
@@ -95,11 +95,13 @@
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile && has_recommended' [interval]="0">
       <ng-template ngbSlide *ngFor='let group of recommended_grouped; index as i'>
-          <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
+          <div class="multi-img-container" *ngFor="let item of group">
+            <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
+              <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+            </a>
               <div class='multi-carousel-caption'>
                   <p>{{item.title}}</p>
               </div>
-              <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
           </div>
       </ng-template>
     </ngb-carousel>
@@ -109,11 +111,13 @@
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile && has_similar' [interval]="0">
       <ng-template ngbSlide *ngFor='let group of similar_grouped; index as i'>
-          <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
+          <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + this.media_type + '/' + this.id]">
               <div class='multi-carousel-caption'>
                   <p>{{item.title}}</p>
               </div>
-              <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+              <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
+                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+              </a>
           </div>
       </ng-template>
     </ngb-carousel>

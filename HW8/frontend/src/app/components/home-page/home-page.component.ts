@@ -30,6 +30,8 @@ export class HomePageComponent implements OnInit {
   trending_tv_single: any;
   trending_tv_grouped: any;
 
+  my_cont_list = [];  // continue watching list
+  cont_list_grouped:any; // grouped list
   mobile: boolean=false;
 
   // @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
@@ -59,9 +61,36 @@ export class HomePageComponent implements OnInit {
       this.trending_tv_single = data.trending_tv.single;
       this.trending_tv_grouped = data.trending_tv.grouped;
     }) 
+
+    this.cont_list_grouped = this.getCont2DList();
+
     if (window.screen.width === 360) { // 768px portrait
       this.mobile = true;
     }
+  }
+
+  getCont2DList() {
+    var cont_str = localStorage.getItem('contList');
+    if(cont_str == null) {
+      this.my_cont_list = [];  // null
+    }
+    else {
+      this.my_cont_list = JSON.parse(cont_str);
+    }
+
+    var j = -1;
+    var grouped = [];
+    for(var i = 0; i < this.my_cont_list.length; ++i) {
+      if(i % 6 == 0) {
+        j++;
+        grouped[j] = [];
+        grouped[j].push(this.my_cont_list[i]);
+      }
+      else {
+        grouped[j].push(this.my_cont_list[i]);
+      }
+    }
+    return grouped;
   }
 
 }
