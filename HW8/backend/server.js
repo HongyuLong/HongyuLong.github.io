@@ -74,7 +74,7 @@ function filter(keys, results, n, flag) {
                 grouped_items[j].push(items[i]);
             }
         }
-        return {'signle' : items, 'grouped': grouped_items};
+        return {'single' : items, 'grouped': grouped_items};
     } else {
         return items;
     }

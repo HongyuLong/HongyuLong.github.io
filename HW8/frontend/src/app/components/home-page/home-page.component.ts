@@ -2,6 +2,7 @@ import { analyzeAndValidateNgModules, formattedError } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../../data.service'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home-page',
@@ -31,12 +32,14 @@ export class HomePageComponent implements OnInit {
   trending_tv_grouped: any;
 
   my_cont_list = [];  // continue watching list
+  cont_list_single:any;
   cont_list_grouped:any; // grouped list
   mobile: boolean=false;
 
   // @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+    public breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
     //localStorage.clear();
@@ -64,8 +67,9 @@ export class HomePageComponent implements OnInit {
 
     this.cont_list_grouped = this.getCont2DList();
 
-    if (window.screen.width === 360) { // 768px portrait
+    if (this.breakpointObserver.isMatched('(max-width: 600px)')) {
       this.mobile = true;
+      console.log('mobile=', this.mobile);
     }
   }
 
@@ -90,6 +94,7 @@ export class HomePageComponent implements OnInit {
         grouped[j].push(this.my_cont_list[i]);
       }
     }
+    this.cont_list_single = this.my_cont_list;
     return grouped;
   }
 

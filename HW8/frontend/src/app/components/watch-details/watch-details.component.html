@@ -39,7 +39,7 @@
       </ng-template>
     
     <div class='inner-container row' *ngIf='details'>
-      <div class='col-sm-12 col-md-7'>
+      <div class='col-sm-12 col-md-7 embed-responsive'>
         <youtube-player [videoId]='video.key' suggestedQuality="highres"></youtube-player>
       </div>
       <div class='text-white col-sm-12 col-md-5'>
@@ -64,6 +64,15 @@
         {{details.overview}}
     </div>
     <h3>Share</h3>
+    <div class='inner-container'>
+      <a class="twitter-share-button"
+            href="https://twitter.com/intent/tweet?text=Watch%20{{details.title}}
+            &url=https://www.youtube.com/watch?v={{video.key}}
+            &hashtags=USC,CSCI571,FightOn"
+            data-size="large">
+            <div class="fa fa-twitter fa-2x"></div>
+            </a >
+    </div>
 
 
     <h1>Full Cast and Crew</h1>
@@ -93,6 +102,19 @@
 
     <h1 *ngIf='this.media_type == "movie" && has_recommended'>Recommended Movies</h1>
     <h1 *ngIf='this.media_type == "tv" && has_recommended'>Recommended TV Shows</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile && has_recommended' [interval]="0" [showNavigationIndicators]='!mobile'>
+      <ng-template ngbSlide *ngFor="let item of recommended_single; index as i">
+          <div class="multi-img-container">
+            <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
+              <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </a>
+              <div class='multi-carousel-caption'>
+                  <p>{{item.title}}</p>
+              </div>
+          </div>
+      </ng-template>
+  </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile && has_recommended' [interval]="0">
       <ng-template ngbSlide *ngFor='let group of recommended_grouped; index as i'>
@@ -109,6 +131,19 @@
 
     <h1 *ngIf='this.media_type == "movie" && has_similar'>Similar Movies</h1>
     <h1 *ngIf='this.media_type == "tv" && has_similar'>Similar TV Shows</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile && has_similar' [interval]="0" [showNavigationIndicators]='!mobile'>
+      <ng-template ngbSlide *ngFor="let item of similar_single; index as i">
+          <div class="multi-img-container">
+            <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
+              <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </a>
+              <div class='multi-carousel-caption'>
+                  <p>{{item.title}}</p>
+              </div>
+          </div>
+      </ng-template>
+  </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile && has_similar' [interval]="0">
       <ng-template ngbSlide *ngFor='let group of similar_grouped; index as i'>

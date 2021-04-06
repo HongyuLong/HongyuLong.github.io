@@ -7,6 +7,7 @@ import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import { Router,NavigationEnd   } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-watch-details',
@@ -42,6 +43,7 @@ export class WatchDetailsComponent implements OnInit {
   public watch_list:any;
   public cont_list:any;
 
+
   @ViewChild('addAlert', {static: false}) addAlert: any;
   @ViewChild('removeAlert', {static: false}) removeAlert: any;
   constructor(
@@ -49,7 +51,8 @@ export class WatchDetailsComponent implements OnInit {
     private dataService: DataService,
     private modalService: NgbModal,
     private youtubePlayer: YouTubePlayerModule,
-    private router: Router
+    private router: Router,
+    public breakpointObserver: BreakpointObserver
   ) { 
     // this.router.events.subscribe((e) => {
     //   if (e instanceof NavigationEnd) {
@@ -101,8 +104,9 @@ export class WatchDetailsComponent implements OnInit {
       }
     });
 
-    if (window.screen.width === 360) { // 768px portrait
+    if (this.breakpointObserver.isMatched('(max-width: 600px)')) {
       this.mobile = true;
+      console.log('mobile=', this.mobile);
     }
 
   }

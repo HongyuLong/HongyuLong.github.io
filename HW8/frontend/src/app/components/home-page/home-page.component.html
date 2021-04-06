@@ -11,6 +11,17 @@
     </ngb-carousel>
 
     <h1 *ngIf='my_cont_list.length > 0'>Continue Watching</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile && my_cont_list.length > 0' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of cont_list_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/' + item.media_type + '/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile && my_cont_list.length > 0' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of cont_list_grouped; index as i'>
@@ -24,6 +35,17 @@
     </ngb-carousel>
 
     <h1>Popular Movies</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of pop_mv_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of pop_mv_grouped; index as i'>
@@ -37,6 +59,17 @@
     </ngb-carousel>
 
     <h1>Top Rated Movies</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of top_mv_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of top_mv_grouped; index as i'>
@@ -50,6 +83,17 @@
     </ngb-carousel>
 
     <h1>Trending Movies</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of trending_mv_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of trending_mv_grouped; index as i'>
@@ -63,6 +107,17 @@
     </ngb-carousel>
 
     <h1>Popular TV Shows</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of pop_tv_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of pop_tv_grouped; index as i'>
@@ -76,6 +131,17 @@
     </ngb-carousel>
 
     <h1>Top Rated TV Shows</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of top_tv_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of top_tv_grouped; index as i'>
@@ -89,6 +155,17 @@
     </ngb-carousel>
 
     <h1>Trending TV Shows</h1>
+    <!-- Mobile section : only one image per slide -->
+    <ngb-carousel *ngIf='mobile' [interval]="0" [showNavigationIndicators]='!mobile'>
+        <ng-template ngbSlide *ngFor="let item of trending_tv_single; index as i">
+            <div class="multi-img-container" [routerLink]="['/watch/movie/' + item.id]">
+                <div class='multi-carousel-caption'>
+                    <p>{{item.title}}</p>
+                </div>
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
+            </div>
+        </ng-template>
+    </ngb-carousel>
     <!-- Desktop section : multiple images per slide -->
     <ngb-carousel *ngIf='!mobile' [interval]="0">
         <ng-template ngbSlide *ngFor='let group of trending_tv_grouped; index as i'>
