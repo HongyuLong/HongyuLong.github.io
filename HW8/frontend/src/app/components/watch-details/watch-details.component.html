@@ -65,13 +65,23 @@
     </div>
     <h3>Share</h3>
     <div class='inner-container'>
-      <a class="twitter-share-button"
+      <span>
+        <a class="twitter-share-button"
             href="https://twitter.com/intent/tweet?text=Watch%20{{details.title}}
             &url=https://www.youtube.com/watch?v={{video.key}}
             &hashtags=USC,CSCI571,FightOn"
             data-size="large">
             <div class="fa fa-twitter fa-2x"></div>
             </a >
+      </span>
+      <span class="fb-share-button" style="margin-left: 1%;"
+      data-href="https://developers.facebook.com/docs/plugins/" 
+      data-layout="button_count" 
+      data-size="large">
+        <a target="_blank" 
+            href="https://www.facebook.com/sharer/sharer.php?u=https://www.youtube.com/watch?v={{video.key}}"
+             class="fa fa-facebook-square fa-2x" style="margin: 0%;"></a >
+      </span>
     </div>
 
 

@@ -9,7 +9,8 @@ import { DataService } from '../../data.service'
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  public title: string='USC Films';
+  public isMenuCollapsed = true;
+
   constructor(
     private dataService:DataService,
   ) { }

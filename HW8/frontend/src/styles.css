@@ -73,7 +73,8 @@ ngb-carousel {
     width: 6%;
     text-align: center;
     text-decoration: none;
-    margin: 5px 2px;
+    margin: 10px 10px
+
   }
   
   .fa:hover {
@@ -82,7 +83,9 @@ ngb-carousel {
 
   .fa-facebook {
     background: #3B5998;
-    color: white;
+    background-size: 55%;
+    background-position: 70% 0;
+    background-repeat: no-repeat;
   }
   
   .fa-twitter {
@@ -101,3 +104,4 @@ ngb-carousel {
     background-color: rgb(6, 7, 38);
   }
 
+ 

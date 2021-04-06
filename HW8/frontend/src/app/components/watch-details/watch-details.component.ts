@@ -54,11 +54,6 @@ export class WatchDetailsComponent implements OnInit {
     private router: Router,
     public breakpointObserver: BreakpointObserver
   ) { 
-    // this.router.events.subscribe((e) => {
-    //   if (e instanceof NavigationEnd) {
-    //     this.addToFrontCont();  // when leaving the page, then add the media to the continue list
-    //   }
-    // });
   }
 
   ngOnInit(): void {

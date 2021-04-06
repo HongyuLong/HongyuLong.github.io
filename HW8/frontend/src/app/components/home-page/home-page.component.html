@@ -1,5 +1,17 @@
 <div id='container'>
-    <ngb-carousel [interval]="2000">
+    <!--Mobile: poster_path-->
+    <ngb-carousel [interval]="2000" *ngIf='mobile'>
+        <ng-template ngbSlide *ngFor="let item of now_playing; index as i">
+            <div class='slide-wrapper'>
+                <div class="text-wrapper">
+                    <h4>{{item.title}}</h4>
+                  </div>
+                  <img [src]="'https://image.tmdb.org/t/p/original' + item.poster_path" alt="">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+    <!--Desktop: backdrop_path-->
+    <ngb-carousel [interval]="2000" *ngIf='!mobile'>
         <ng-template ngbSlide *ngFor="let item of now_playing; index as i">
             <div class='slide-wrapper'>
                 <div class="text-wrapper">

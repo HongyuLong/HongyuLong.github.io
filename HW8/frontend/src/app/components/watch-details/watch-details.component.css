@@ -11,6 +11,9 @@
     margin-right: auto;
     margin-bottom: 25px;
 }
+#container h1{
+    font-size: 32px;
+}
 
 .inner-container {
     width: 80%;

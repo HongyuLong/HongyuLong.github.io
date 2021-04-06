@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
     ])
     .then(responseArr => {
         res.json({
-            'now_playing' : filter(['id', 'title', 'backdrop_path'], responseArr[0].data.results, 5, false),
+            'now_playing' : filter(['id', 'title', 'backdrop_path', 'poster_path'], responseArr[0].data.results, 5, false),
             'pop_mv' : filter(['id', 'title', 'poster_path'], responseArr[1].data.results, responseArr[1].data.results.length, true),
             'top_mv' : filter(['id', 'title', 'poster_path'], responseArr[2].data.results, responseArr[2].data.results.length, true),
             'trending_mv' : filter(['id', 'title', 'poster_path'], responseArr[3].data.results, responseArr[3].data.results.length, true),
@@ -36,6 +36,9 @@ app.get('/', (req, res) => {
             'top_tv' : filter(['id', 'name', 'poster_path'], responseArr[5].data.results, responseArr[5].data.results.length, true),
             'trending_tv' : filter(['id', 'name', 'poster_path'], responseArr[6].data.results, responseArr[6].data.results.length, true)
         })
+    })
+    .catch(error => {
+        console.log(error);
     })
 });
 
@@ -117,6 +120,9 @@ app.get('/watch/:media_type/:id', (req, res)=>{
             'has_recommended': responseArr[4].data.results.length > 0,
             'has_similar': responseArr[5].data.results.length > 0,
         })
+    })
+    .catch(error => {
+        console.log(error);
     })
 });
 function filterCasts(results) {
@@ -280,6 +286,9 @@ app.get('/cast/:person_id', (req, res) => {
         res.json(filterCastInfo(responseArr[0].data, responseArr[1].data));
         //console.log(responseArr[0].data)
     })
+    .catch(error => {
+        console.log(error);
+    })
 });
 
 function filterCastInfo(results1, results2) {
@@ -342,6 +351,9 @@ app.get('/search/:query', (req, res)=>{
                 j++;
             }
             res.json(items);
+        })
+        .catch(error => {
+            console.log(error);
         })
 });
 

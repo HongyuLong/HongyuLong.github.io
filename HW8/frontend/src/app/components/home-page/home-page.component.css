@@ -8,6 +8,7 @@ h1{
     color: white;
     max-width: 80%;
     margin:10px auto;
+    font-size: 32px;
 }
 .slide-wrapper {
     max-height: 300px;
