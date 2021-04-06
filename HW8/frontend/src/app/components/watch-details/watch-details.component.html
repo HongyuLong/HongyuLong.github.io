@@ -9,9 +9,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class='card card-modal'>
-            <img class='card-img-top' [src]='cast_info.profile_path' alt="Model image cap">
-            <div class='card-body card-body-modal'>
+          <div class='card card-modal row'>
+            <img class='card-img-top col-md-3 col-sm-12' [src]='cast_info.profile_path' alt="Model image cap">
+            <div class='card-body card-body-modal col-md-9 col-sm-12'>
                 <div *ngIf='cast_info.birthday'>Birth: {{cast_info.birthday}}</div>
                 <div *ngIf='cast_info.place_of_birth'>Birth Place: {{cast_info.place_of_birth}}</div>
                 <div *ngIf='cast_info.homepage'>Website: <a [href]='cast_info.homepage'>{{cast_info.homepage}}</a></div>
@@ -37,19 +37,20 @@
           </div>
         </div>
       </ng-template>
-    <div class='inner-container top-row' *ngIf='details'>
-      <div class='col-video'>
+    
+    <div class='inner-container row' *ngIf='details'>
+      <div class='col-sm-12 col-md-7'>
         <youtube-player [videoId]='video.key' suggestedQuality="highres"></youtube-player>
       </div>
-      <div class='col-text'>
+      <div class='text-white col-sm-12 col-md-5'>
         <div class='title'>{{details.title}}</div>
         <div class='opa tagline' *ngIf='details.tagline'><i>{{details.tagline}}</i></div>
         <div class='opa tagline' style='padding-top: 10px;padding-bottom: 10px;'>{{details.year}} | ★{{details.vote_average}} | {{details.runtime}}</div>
         <div class='opa'>Genres: <span class='text-opa'>{{details.genres}}</span></div>
         <div class='opa'>Spoken Languages: <span class='text-opa'>{{details.spoken_languages}}</span></div>
-        <button type="button" class="btn btn-primary" *ngIf='this.add_to' (click)='clickAddButton()'>Add to Watchlist</button>
+        <button type="button" class="btn btn-primary col-text-button" *ngIf='this.add_to' (click)='clickAddButton()'>Add to Watchlist</button>
 
-        <button type="button" class="btn btn-primary" *ngIf='!this.add_to' (click)='clickRemoveButton()'>Remove from Watchlist</button>
+        <button type="button" class="btn btn-primary col-text-button" *ngIf='!this.add_to' (click)='clickRemoveButton()'>Remove from Watchlist</button>
         <ngb-alert #removeAlert *ngIf="successMessage && add_to" type="danger" (closed)="successMessage = ''">{{ successMessage }}
         </ngb-alert>
         <ngb-alert #addAlert *ngIf="successMessage && !add_to" type="success" (closed)="successMessage = ''">{{ successMessage }}
@@ -67,8 +68,8 @@
 
     <h1>Full Cast and Crew</h1>
     <div class='inner-container'>
-        <div class='card-deck' style='flex: row nowrap;'>
-            <div class='card card-casts col-2' *ngFor='let cast of casts' (click)='getCastInfo(cast.id, content)'>
+        <div class='card-deck row' style='flex: row nowrap;'>
+            <div class='card card-casts col-md-2 col-sm-6' *ngFor='let cast of casts' (click)='getCastInfo(cast.id, content)'>
                 <img class='card-img-top' [src]='cast.profile_path' alt="Card image cap">
                 <div class='card-body card-body-casts'>
                     <p class='card-text'><b>{{cast.name}}</b><br> <b>AS</b><br> {{cast.character}}</p>
@@ -78,11 +79,11 @@
     </div>
 
     <h1 *ngIf='reviews'>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
-    <div class='inner-container review-card' style='display:flex' *ngFor='let review of reviews'>
-        <div class='card-review-img'>
+    <div class='inner-container review-card row' *ngFor='let review of reviews'>
+        <div class='col-sm-12 col-md-2'>
             <img class='review-pic' [src]='review.avatar_path' alt="Model image cap">
         </div>
-        <div class='card-review-body'>
+        <div class='card-review-body col-sm-12 col-md-10'>
             <h4 class='card-title'>A review created by {{review.author}} <span class='review-rating'>★<span style='font-size: 18px;'>&nbsp;{{review.rating}}</span></span></h4>
             <p style='color:gray;'>Written by {{review.author}} on {{review.created_at}}</p>
             <p class='card-text overlines'>{{review.content}}</p>

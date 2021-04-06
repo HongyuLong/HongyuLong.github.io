@@ -22,6 +22,9 @@ h1{
     display: inline-flex;
     position: relative;
 }
+.multi-img-container img{
+    margin:10px auto;
+}
 
 .multi-img-container .multi-carousel-caption {
     position: absolute;

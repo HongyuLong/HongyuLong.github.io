@@ -1,11 +1,23 @@
 <!-- Toolbar -->
+<!--
+
+
 <div class="toolbar" role="banner">
-    <span class='common-margin'> {{title}}</span>
+  <div class="navbar-brand" routerLink='/'>USC Films</div>
     <nav>
         <a class='common-margin' routerLink='/'>Home</a>
         <a class='common-margin' routerLink='/mylist'>My List</a>
-      </nav>
-    <div class="spacer"></div>
+    </nav>
+    <nav>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">My List</a>
+      </li>
+    </nav>
+      <div class='spacer'></div>
+    
     
     <form class="form-inline my-2 my-lg-0" id="search-bar">
       <ng-template #rt let-r="result" let-t="term">
@@ -19,3 +31,38 @@
       <hr>
     </form>
 </div>
+-->
+
+
+<nav class="navbar navbar-expand-lg" style="background-color: #010c20;">
+  <a class="navbar-brand text-white" [routerLink]="['/']">USC Films</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto nav">
+      <li class="nav-item" [routerLinkActive]="['active']">
+      <a class="nav-link  text-white" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link  text-white" [routerLink]="['/mylist']">My List</a>
+      </li>
+    </ul>
+    
+    <form class="form-inline my-2 my-lg-0" id="search-bar">
+      <ng-template #rt let-r="result" let-t="term">
+        <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click"> 
+          <img [src]="r.backdrop_path" class="mr-1" style="width: 80px">
+          <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+       </a>
+      </ng-template>
+      
+      <input id="typeahead-template" type="text" class="form-control" value="Search" onfocus="if (this.value=='Search') this.value='';" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
+      <hr>
+    </form>
+
+  </div>
+  
+</nav> 
+

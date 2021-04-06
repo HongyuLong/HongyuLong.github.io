@@ -10,6 +10,9 @@
     font-weight: 600;
 }
 
+ul li {
+  display: inline;
+}
 
 .spacer {
   flex: 1 1 auto;

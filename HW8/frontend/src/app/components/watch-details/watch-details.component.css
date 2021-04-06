@@ -18,33 +18,19 @@
     margin-right: auto;
 }
 
-.top-row {
-    display: flex;
+
+.title{
+    font-size: 40px;
 }
 
-.col-video {
-    flex: 0 0 640px;
-}
-
-.col-text {
-    flex: 1 0 20%;
-    color: white;
-    word-wrap: break-word;
-    padding-left: 60px;
-}
-
-.col-text .title{
-    font-size: 50px;
-}
-
-.col-text .opa{
+.opa{
     opacity: 0.7;
 }
-.col-text .tagline{
+.tagline{
     font-size: 20px;
 }
 
-.col-text button{
+.col-text-button{
     margin-top:10px;
     margin-bottom: 10px;
 }
@@ -67,6 +53,7 @@ p{
     margin-left:0.8%;
     margin-right:0.8%;
     border-radius: 8px;
+    min-width: 200px;
 }
 
 .card-casts img{
@@ -83,9 +70,6 @@ p{
     border:none;
 }
 
-.card-modal img{
-    width: 24%;
-}
 
 .review-pic{
     width: 100px;
@@ -99,9 +83,6 @@ p{
     border-radius: 10px;
 }
 
-.card-review-body {
-    width: 80%;
-}
 
 .card-review-body a{
     text-decoration: underline;
@@ -112,7 +93,6 @@ p{
 }
 
 .card-review-img {
-    width: 20%;
     text-align: center;
 }
 

@@ -5,12 +5,12 @@
 
     <div *ngIf='my_watch_list.length > 0' class='inner-container'>
         <h1>My WatchList</h1>
-        <div class='row'>
-            <div class='col-2 multi-img-container' *ngFor='let item of my_watch_list' [routerLink]="['/watch/' + item.media_type + '/' + item.id]">
+        <div class='row' style='text-align: center;'>
+            <div class='col-md-2 col-sm-12 multi-img-container' *ngFor='let item of my_watch_list' [routerLink]="['/watch/' + item.media_type + '/' + item.id]">
                 <div class='multi-carousel-caption'>
                     <p>{{item.title}}</p>
                 </div>
-                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+                <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
             </div>
         </div>
     </div>
