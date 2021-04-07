@@ -1,19 +1,5 @@
-<!--Mobile: poster_path-->
-<ngb-carousel [interval]="2000" *ngIf='mobile'>
-    <ng-template ngbSlide *ngFor="let item of now_playing; index as i">
-        <a [routerLink]="['/watch/movie/' + item.id]">
-            <div class="carousel-caption">
-                <h4>{{item.title}}</h4>
-              </div>
-            <div class="picsum-img-wrapper">
-                <img [src]="'https://image.tmdb.org/t/p/original' + item.poster_path" alt="">
-            </div>
-        </a>
-    </ng-template>
-</ngb-carousel>
-
 <!--Desktop: backdrop_path-->
-<ngb-carousel [interval]="2000" *ngIf='!mobile'>
+<ngb-carousel [interval]="2000" [showNavigationIndicators]='false'>
     <ng-template ngbSlide *ngFor="let item of now_playing; index as i">
         <a [routerLink]="['/watch/movie/' + item.id]">
             <div class="carousel-caption">

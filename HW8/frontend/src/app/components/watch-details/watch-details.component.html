@@ -100,7 +100,7 @@
 
     <h1 *ngIf='reviews'>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
     <div class='inner-container review-card row' *ngFor='let review of reviews'>
-        <div class='col-sm-12 col-md-2'>
+        <div class='col-sm-12 col-md-3'>
             <img class='review-pic' [src]='review.avatar_path' alt="Model image cap">
         </div>
         <div class='card-review-body col-sm-12 col-md-10'>

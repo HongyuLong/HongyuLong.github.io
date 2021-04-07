@@ -75,11 +75,9 @@ app-static-carousel .carousel-item {
 
 .fa {
     font-size: 30px;
-    width: 6%;
     text-align: center;
     text-decoration: none;
     margin: 10px 10px
-
   }
   
   .fa:hover {
@@ -91,6 +89,8 @@ app-static-carousel .carousel-item {
     background-size: 55%;
     background-position: 70% 0;
     background-repeat: no-repeat;
+    padding: 2px 3px 0px 10px;
+    color: white;
   }
   
   .fa-twitter {
