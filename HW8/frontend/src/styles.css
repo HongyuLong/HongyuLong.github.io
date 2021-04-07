@@ -109,4 +109,6 @@ app-static-carousel .carousel-item {
     background-color: rgb(6, 7, 38);
   }
 
- 
+ *:focus{
+   outline: none;
+ }
