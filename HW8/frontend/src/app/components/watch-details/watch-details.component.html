@@ -32,15 +32,15 @@
           </div>
 
           <div *ngIf='cast_info.biography'>
-            <h1 style='padding-top:1%'>Biography</h1>
+            <p style='color: black; font-size: 32px;margin-top: 6px;margin-bottom: 0;'>Biography</p>
             <p>{{cast_info.biography}}</p>
           </div>
         </div>
       </ng-template>
     
     <div class='inner-container row' *ngIf='details'>
-      <div class='col-sm-12 col-md-7 embed-responsive'>
-        <youtube-player [videoId]='video.key' suggestedQuality="highres"></youtube-player>
+      <div class='col-sm-12 col-md-7 embed-responsive embed-responsive-16by9'>
+        <youtube-player class='embed-responsive-item' [videoId]='video.key' suggestedQuality="highres"></youtube-player>
       </div>
       <div class='text-white col-sm-12 col-md-5'>
         <div class='title'>{{details.title}}</div>
@@ -65,7 +65,7 @@
     </div>
     <h3>Share</h3>
     <div class='inner-container'>
-      <span>
+      <span *ngIf='details && video'>
         <a class="twitter-share-button"
             href="https://twitter.com/intent/tweet?text=Watch%20{{details.title}}
             &url=https://www.youtube.com/watch?v={{video.key}}
@@ -74,7 +74,8 @@
             <div class="fa fa-twitter fa-2x"></div>
             </a >
       </span>
-      <span class="fb-share-button" style="margin-left: 1%;"
+      <span *ngIf='details && video'
+      class="fb-share-button" style="margin-left: 1%;"
       data-href="https://developers.facebook.com/docs/plugins/" 
       data-layout="button_count" 
       data-size="large">
@@ -115,56 +116,56 @@
     <!-- Mobile section : only one image per slide -->
     <ngb-carousel *ngIf='mobile && has_recommended' [interval]="0" [showNavigationIndicators]='!mobile'>
       <ng-template ngbSlide *ngFor="let item of recommended_single; index as i">
-          <div class="multi-img-container">
-            <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
-              <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
-            </a>
-              <div class='multi-carousel-caption'>
+          <a [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
+              <div class='col-9'>
+                  <img class="" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              </div>
+              <div class='carousel-caption'>
                   <p>{{item.title}}</p>
               </div>
+          </a>
+      </ng-template>
+  </ngb-carousel>
+  <!-- Desktop section : multiple images per slide -->
+  <ngb-carousel *ngIf='!mobile && has_recommended' [interval]="0">
+      <ng-template ngbSlide class='row' *ngFor='let group of recommended_grouped; index as i'>
+          <div class="col-2" *ngFor="let item of group">
+              <a [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
+                  <img class="" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                  <div class='carousel-caption'>
+                      <p>{{item.title}}</p>
+                  </div>
+              </a>
           </div>
       </ng-template>
   </ngb-carousel>
-    <!-- Desktop section : multiple images per slide -->
-    <ngb-carousel *ngIf='!mobile && has_recommended' [interval]="0">
-      <ng-template ngbSlide *ngFor='let group of recommended_grouped; index as i'>
-          <div class="multi-img-container" *ngFor="let item of group">
-            <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
-              <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
-            </a>
-              <div class='multi-carousel-caption'>
-                  <p>{{item.title}}</p>
-              </div>
-          </div>
-      </ng-template>
-    </ngb-carousel>
 
     <h1 *ngIf='this.media_type == "movie" && has_similar'>Similar Movies</h1>
     <h1 *ngIf='this.media_type == "tv" && has_similar'>Similar TV Shows</h1>
     <!-- Mobile section : only one image per slide -->
     <ngb-carousel *ngIf='mobile && has_similar' [interval]="0" [showNavigationIndicators]='!mobile'>
       <ng-template ngbSlide *ngFor="let item of similar_single; index as i">
-          <div class="multi-img-container">
-            <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
-              <img class="" [src]="'https://image.tmdb.org/t/p/w185' + item.poster_path">
-            </a>
-              <div class='multi-carousel-caption'>
+          <a [routerLink]="['/watch/' + this.media_type + '/' + item.id]">
+              <div class='col-9'>
+                  <img class="" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+              </div>
+              <div class='carousel-caption'>
                   <p>{{item.title}}</p>
               </div>
-          </div>
+          </a>
       </ng-template>
   </ngb-carousel>
-    <!-- Desktop section : multiple images per slide -->
-    <ngb-carousel *ngIf='!mobile && has_similar' [interval]="0">
-      <ng-template ngbSlide *ngFor='let group of similar_grouped; index as i'>
-          <div class="multi-img-container" *ngFor="let item of group" [routerLink]="['/watch/' + this.media_type + '/' + this.id]">
-              <div class='multi-carousel-caption'>
-                  <p>{{item.title}}</p>
-              </div>
-              <a [href]="'/watch/' + this.media_type + '/' + item.id" target="_blank">
-                <img class="" [src]="'https://image.tmdb.org/t/p/w154' + item.poster_path">
+  <!-- Desktop section : multiple images per slide -->
+  <ngb-carousel *ngIf='!mobile && has_similar' [interval]="0">
+      <ng-template ngbSlide class='row' *ngFor='let group of similar_grouped; index as i'>
+          <div class="col-2" *ngFor="let item of group">
+              <a [routerLink]="['../' + item.id]">
+                  <img class="" [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path">
+                  <div class='carousel-caption'>
+                      <p>{{item.title}}</p>
+                  </div>
               </a>
           </div>
       </ng-template>
-    </ngb-carousel>
+  </ngb-carousel>
 </div>

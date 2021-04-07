@@ -7,7 +7,7 @@ import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import { Router,NavigationEnd   } from '@angular/router';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-watch-details',
@@ -54,6 +54,26 @@ export class WatchDetailsComponent implements OnInit {
     private router: Router,
     public breakpointObserver: BreakpointObserver
   ) { 
+    this.route.params.subscribe(params => {
+      // this.media_type = params.get('media_type');
+      // this.id = params.get('id');
+      this.media_type = params['media_type'];
+      this.id = params['id'];
+      this.ngOnInit();
+      console.log('Now id=', this.id);
+    });
+
+    this.breakpointObserver
+      .observe(['(min-width: 600px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          console.log('Viewport is 600px or over!');
+          this.mobile = false;
+        } else {
+          console.log('Viewport is smaller than 600px!');
+          this.mobile = true;
+        }
+      });
   }
 
   ngOnInit(): void {
@@ -65,11 +85,6 @@ export class WatchDetailsComponent implements OnInit {
       this.watch_list = JSON.parse(watch_str);
     }
     //console.log('initial watch_list=', this.watch_list);
-    
-    this.route.paramMap.subscribe(params => {
-      this.media_type = params.get('media_type');
-      this.id = params.get('id');
-    });
 
     this.dataService.sendGetDetailsReq(this.media_type, this.id).subscribe((data: any) => {
       window.scroll(0,0);
@@ -98,12 +113,6 @@ export class WatchDetailsComponent implements OnInit {
         this.removeAlert.close();
       }
     });
-
-    if (this.breakpointObserver.isMatched('(max-width: 600px)')) {
-      this.mobile = true;
-      console.log('mobile=', this.mobile);
-    }
-
   }
 
   addToFrontCont() {

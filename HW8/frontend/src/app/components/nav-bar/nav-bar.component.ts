@@ -27,4 +27,10 @@ export class NavBarComponent implements OnInit {
   }
   
   formatter = (x: {name: string}) => x.name;
+
+  onSelect($event:any, input:any) {
+    $event.preventDefault();
+    input.value = "";
+    this.isMenuCollapsed = true;
+  }
 }

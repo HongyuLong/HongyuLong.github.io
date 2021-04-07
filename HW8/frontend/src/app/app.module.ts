@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { DynamicCarouselComponent } from './components/dynamic-carousel/dynamic-carousel.component';
+import { StaticCarouselComponent } from './components/static-carousel/static-carousel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     HomePageComponent,
     WatchlistComponent,
     WatchDetailsComponent,
-    NavBarComponent
+    NavBarComponent,
+    DynamicCarouselComponent,
+    StaticCarouselComponent
   ],
   imports: [
     BrowserModule,

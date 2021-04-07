@@ -24,8 +24,8 @@ ngb-carousel {
     margin-right: auto;
 }
 
-.carousel-inner {
-   text-align: center;
+.carousel-outline {
+  outline: none;
 }
 
 .carousel-item{
@@ -51,15 +51,20 @@ ngb-carousel {
     display: block;
 }
 
+app-static-carousel .carousel-item {
+  padding-left: 3%;
+}
+
 .card-deck {
     overflow-x: scroll;
     flex-wrap: nowrap;
     padding-bottom: 1.5%;
 }
 
+
 .modal-dialog{
-    max-width: 60%;
     overflow-y: initial;
+    max-width: 800px;
 }
 
 .modal-body{

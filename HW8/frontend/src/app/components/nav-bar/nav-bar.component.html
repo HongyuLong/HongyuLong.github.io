@@ -1,75 +1,3 @@
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand text-white" [routerLink]="['/']">USC Films</a>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto nav">
-      <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link  text-white" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item" [routerLinkActive]="['active']">
-        <a class="nav-link  text-white" [routerLink]="['/mylist']">My List</a>
-      </li>
-    </ul>
-    
-    <form class="form-inline my-2 my-lg-0" id="search-bar">
-      <ng-template #rt let-r="result" let-t="term">
-        <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click"> 
-          <img [src]="r.backdrop_path" class="mr-1" style="width: 80px">
-          <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
-       </a>
-      </ng-template>
-      
-      <input id="typeahead-template" type="text" class="form-control" value="Search" onfocus="if (this.value=='Search') this.value='';" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
-      <hr>
-    </form>
-
-  </div>
-  
-</nav> 
--->
-
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
--->
 <nav class="navbar navbar-expand-lg mb-3 navbar-custom">
   <a class="navbar-brand" [routerLink]="['/']">USC Films</a>
 
@@ -90,7 +18,7 @@
         <a class="nav-link" [routerLink]="['/mylist']" (click)="isMenuCollapsed = true">My List</a>
       </li>
     </ul>
-
+<!--
     <form class="form-inline my-2 my-lg-0" id="search-bar">
       <ng-template #rt let-r="result" let-t="term">
         <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click"> 
@@ -99,7 +27,18 @@
        </a>
       </ng-template>
       
-      <input id="typeahead-template" type="search" class="form-control mr-sm-2" value="Search" onfocus="if (this.value=='Search') this.value='';" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
+      <input id="typeahead-template" type="text" class="form-control mr-sm-2" value="Search" onfocus="if (this.value=='Search') this.value='';" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
+      <hr>
+    </form>
+-->
+    <form class="form-inline my-2 my-lg-0" id="search-bar">
+      <ng-template #rt let-r="result" let-t="term">
+        <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click" style="display: block; width: 100%; height:100%;"> 
+            <img [src]="r.backdrop_path" class="mr-1" style="width: 80px">
+            <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
+         </a >
+      </ng-template>
+      <input id="typeahead-template" type="text" class="form-control mr-sm-2" placeholder="Search"  (selectItem)="onSelect($event, input)" #input [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
       <hr>
     </form>
   </div>
