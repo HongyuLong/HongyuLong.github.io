@@ -1,7 +1,7 @@
 import { analyzeAndValidateNgModules, formattedError } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
-import {DataService} from '../../data.service'
+import {DataService} from '../../services/data.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({

@@ -12,25 +12,12 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <!-- Step 4: Close the menu when a link is clicked. -->
-        <a class="nav-link" [routerLink]="['/']" (click)="isMenuCollapsed = true">Home</a>
+        <a class="nav-link" [routerLink]="['/']" [routerLinkActive]="['active']" (click)="isMenuCollapsed = true">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/mylist']" (click)="isMenuCollapsed = true">My List</a>
+        <a class="nav-link" [routerLink]="['/mylist']" [routerLinkActive]="['active']" (click)="isMenuCollapsed = true">My List</a>
       </li>
     </ul>
-<!--
-    <form class="form-inline my-2 my-lg-0" id="search-bar">
-      <ng-template #rt let-r="result" let-t="term">
-        <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click"> 
-          <img [src]="r.backdrop_path" class="mr-1" style="width: 80px">
-          <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
-       </a>
-      </ng-template>
-      
-      <input id="typeahead-template" type="text" class="form-control mr-sm-2" value="Search" onfocus="if (this.value=='Search') this.value='';" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
-      <hr>
-    </form>
--->
     <form class="form-inline my-2 my-lg-0" id="search-bar">
       <ng-template #rt let-r="result" let-t="term">
         <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click" style="display: block; width: 100%; height:100%;"> 

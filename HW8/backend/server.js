@@ -334,7 +334,7 @@ app.get('/search/:query', (req, res)=>{
             let items = [];
 
             for(let i = 0, j = 0; i < results.length && j < 7; ++i) {
-                if(results[i]['backdrop_path'] == null || results[i]['media_type'] == 'person') {
+                if(results[i]['backdrop_path'] == null || results[i]['poster_path'] == null || results[i]['media_type'] == 'person') {
                     continue;
                 }
                 let item = {};

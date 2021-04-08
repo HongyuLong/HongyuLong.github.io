@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../data.service'
+import { DataService } from '../../services/data.service'
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
