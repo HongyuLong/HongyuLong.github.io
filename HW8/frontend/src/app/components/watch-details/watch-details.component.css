@@ -56,7 +56,7 @@ p{
 }
 
 .modal-body {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .card-casts{
     flex-basis:auto;
