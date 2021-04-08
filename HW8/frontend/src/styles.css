@@ -4,8 +4,8 @@
 
 ::-webkit-scrollbar {
     width: 1em;
-    display:block;
-    height:6px;
+    display: block;
+    height: 8px;
   }
    
 ::-webkit-scrollbar-track {
@@ -30,7 +30,7 @@ ngb-carousel {
 
 .carousel-item{
     padding-bottom: 4%;
-    padding-top: 4%;
+    padding-top: 3%;
 }
 
 .carousel-control-prev, .carousel-control-next {

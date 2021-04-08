@@ -45,9 +45,9 @@
       <div class='text-white col-sm-12 col-md-5'>
         <div class='title'>{{details.title}}</div>
         <div class='opa tagline' *ngIf='details.tagline'><i>{{details.tagline}}</i></div>
-        <div class='opa tagline' style='padding-top: 10px;padding-bottom: 10px;'>{{details.year}} | ★{{details.vote_average}} | {{details.runtime}}</div>
-        <div class='opa'>Genres: <span class='text-opa'>{{details.genres}}</span></div>
-        <div class='opa'>Spoken Languages: <span class='text-opa'>{{details.spoken_languages}}</span></div>
+        <div class='opa tagline' style='padding-top: 10px;padding-bottom: 10px;'>{{details.year}} | ★{{details.vote_average}} <span *ngIf='details.runtime'> | {{details.runtime}}</span></div>
+        <div class='opa' *ngIf='details.genres'>Genres: <span class='text-opa'>{{details.genres}}</span></div>
+        <div class='opa' *ngIf='details.spoken_languages'>Spoken Languages: <span class='text-opa'>{{details.spoken_languages}}</span></div>
         <button type="button" class="btn btn-primary col-text-button" *ngIf='this.add_to' (click)='clickAddButton()'>Add to Watchlist</button>
 
         <button type="button" class="btn btn-primary col-text-button" *ngIf='!this.add_to' (click)='clickRemoveButton()'>Remove from Watchlist</button>
@@ -59,8 +59,8 @@
       </div>
     </div>
 
-    <h3>Description</h3>
-    <div class='inner-container text-opa' *ngIf='details'>
+    <h3 *ngIf='details.overview'>Description</h3>
+    <div class='inner-container text-opa' *ngIf='details.overview'>
         {{details.overview}}
     </div>
     <h3>Share</h3>
@@ -88,7 +88,7 @@
 
     <h1>Full Cast and Crew</h1>
     <div class='inner-container'>
-        <div class='card-deck row' style='flex: row nowrap;'>
+        <div class='card-deck row overflow-auto' style='flex: row nowrap;'>
             <div class='card card-casts col-md-2 col-sm-6' *ngFor='let cast of casts' (click)='getCastInfo(cast.id, content)'>
                 <img class='card-img-top' [src]='cast.profile_path' alt="Card image cap">
                 <div class='card-body card-body-casts'>
@@ -100,7 +100,7 @@
 
     <h1 *ngIf='reviews'>Reviews &nbsp; <span style='opacity:0.4;'>{{reviews.length}}</span></h1>
     <div class='inner-container review-card row' *ngFor='let review of reviews'>
-        <div class='col-sm-12 col-md-3'>
+        <div class='col-sm-12 col-md-2' style='padding-left: 3%;'>
             <img class='review-pic' [src]='review.avatar_path' alt="Model image cap">
         </div>
         <div class='card-review-body col-sm-12 col-md-10'>

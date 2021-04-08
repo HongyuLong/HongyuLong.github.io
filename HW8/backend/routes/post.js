@@ -207,7 +207,7 @@ function filterDetails(media_type, results) {
         }
         genres_str = genres_str + results['genres'][i]['name'];
     }
-    item.genres = genres_str;
+    item.genres = genres_str.length > 0 ? genres_str : null;
 
     for(let i = 0; i < results['spoken_languages'].length; ++i) {
         if(i > 0) {
@@ -215,19 +215,19 @@ function filterDetails(media_type, results) {
         }
         lang_str = lang_str + results['spoken_languages'][i]['english_name'];
     }
-    item.spoken_languages = lang_str;
+    item.spoken_languages = lang_str.length > 0 ? lang_str : null;
 
     if(media_type == 'movie') {
         item['year'] = results['release_date'].substr(0, 4);
-        item['runtime'] = getRuntimeFormatted(results['runtime']);
+        item['runtime'] = (results['runtime'] == null) ? null : getRuntimeFormatted(results['runtime']);
     }
     else {
         item['year'] = results['first_air_date'].substr(0, 4);
-        item['runtime'] = getRuntimeFormatted(results['episode_run_time']);
+        item['runtime'] = (results['episode_run_time'] == null) ? null : getRuntimeFormatted(results['episode_run_time']);
     }
     item['overview'] = results['overview'];
     item['vote_average'] = results['vote_average'];
-    item['tagline'] = results['tagline'].length == 0 ? null  : results['tagline'];
+    item['tagline'] = (results['tagline'] == null || results['tagline'].length == 0) ? null  : results['tagline'];
     item['poster_path'] = results['poster_path'];
 
     return item;
