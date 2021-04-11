@@ -24,14 +24,14 @@
         <a class="nav-link" [routerLink]="['/mylist']" (click)="isMenuCollapsed = true">My List</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0" id="search-bar">
+    <form class="form-inline my-2 my-lg-0" id="search-form">
       <ng-template #rt let-r="result" let-t="term">
-        <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="dropdown-click" style="display: block; width: 100%; height:100%;"> 
+        <a [routerLink]="['/watch/' + r.media_type + '/' + r.id]" class="my-dropdown-menu" style="display: block; width: 100%; height:100%;"> 
             <img [src]="r.backdrop_path" class="mr-1" style="width: 80px">
             <ngb-highlight [result]="r.title" [term]="t"></ngb-highlight>
          </a >
       </ng-template>
-      <input id="typeahead-template" type="text" class="form-control mr-sm-2" placeholder="Search"  (selectItem)="onSelect($event, input)" #input [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
+      <input id="typeahead-template" type="text" class="my-input mr-sm-2" placeholder="Search"  (selectItem)="onSelect($event, input)" #input [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [editable]='false'/>
       <hr>
     </form>
   </div>

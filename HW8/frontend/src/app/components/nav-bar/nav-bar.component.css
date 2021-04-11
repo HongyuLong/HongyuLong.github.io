@@ -23,16 +23,15 @@ ul li {
   margin-right: 10px;
 }
 
-.form-control{
+.my-input{
   width: 200px;
 }
 
-#search-bar{
-
+#search-form{
   margin-right:5%;
 }
 
-.form-control{
+.my-input{
   background-color: #010c20;
   border-right: 0;
   border-top: 0;
@@ -41,16 +40,15 @@ ul li {
   color: rgba(255,255,255,0.4);
 }
 
-.dropdown-click{
-  text-decoration: none;
-  color:white;
-}
-
-.form-control:focus {
+.my-input:focus {
   outline: 0;
   box-shadow: 0 0 0 0rem ;
 }
 
+.my-dropdown-menu{
+  text-decoration: none;
+  color:white;
+}
 
 .navbar-custom {
   background-color: rgb(0,11,25);
