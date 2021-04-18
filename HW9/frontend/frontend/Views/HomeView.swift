@@ -7,6 +7,9 @@
 
 import SwiftUI
 import SwiftyJSON
+import Kingfisher
+
+
 
 struct HomeView: View {
     var body: some View {
@@ -23,15 +26,24 @@ struct HomeView: View {
             switch result {
             case let .success(data):
                 let json = try! JSON(data: data)
-                print(json)
+                parseDynamicCards(results: json["now_playing"])
             case let .failure(error):
                 print(error)
             }
         }
     }
+    
+    func parseDynamicCards(results: JSON) {
+        var cards:[DynamicCard] = []
+        if let cardArr = results.to(type: DynamicCard.self) {
+            cards = cardArr as! [DynamicCard]
+        }
+        print(cards)
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
+    // variables
     static var previews: some View {
         HomeView()
     }

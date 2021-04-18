@@ -21,12 +21,9 @@ class NetworkManager {
         AF.request(NetworkAPIBaseURL + path,
                    requestModifier: { $0.timeoutInterval = 15})
             .responseData { response in
-//                let json = try! JSON(data: response.data!)
-//                print(json)
                 switch response.result {
                 case let .success(data):
                     completion(.success(data))
-//                    print("Validation Successful")
                 case let .failure(error):
                     completion(.failure(error))
                 }
