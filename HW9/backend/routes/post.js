@@ -48,12 +48,12 @@ function filterNowPlaying(media_type, results) {
         else {
             item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].poster_path;
         }
-        if(results[i].backdrop_path == null) {
-            item['backdrop_path'] = null;
-        }
-        else {
-            item['backdrop_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].backdrop_path;
-        }
+        // if(results[i].backdrop_path == null) {
+        //     item['backdrop_path'] = null;
+        // }
+        // else {
+        //     item['backdrop_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].backdrop_path;
+        // }
         items.push(item);
     }
     return items;
