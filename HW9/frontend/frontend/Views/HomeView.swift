@@ -13,6 +13,7 @@ struct HomeView: View {
     @ObservedObject var homeVM = HomeViewModel()
     
     var media: String = "movie"
+    var title_dynamic: String = "Now Playing"  // when it's tv, it'll be "Trending"
     
     init() {
         homeVM.fecthAiringToday()
@@ -21,16 +22,26 @@ struct HomeView: View {
     var body: some View {
 //        Text("placeholder").padding()
         ScrollView(.vertical) {
-            VStack {
+            VStack(alignment: .leading) {
+                Text(title_dynamic)
+                    .font(.title2)
+                    .bold()
+                
                 GeometryReader { geometry in
                     CarouselDynamic(numberOfImages: 5) {
                         ForEach(homeVM.airing_today_list, id: \.id) {item in
                             UnitImageDynamicView(item.poster_path)
-                                .frame(width: 352, height: 500)
                         }
                     }
                 }
+                .frame(height: 300, alignment: .center)
+                .clipped()
+                
+                Text("Tope Rated")
+                    .font(.title2)
+                    .bold()
             }
+            
         }
         .padding()
 

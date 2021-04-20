@@ -23,7 +23,7 @@ struct CarouselDynamic<Content: View>: View {
 
         var body: some View {
             GeometryReader { geometry in
-                HStack(spacing: 7) {
+                HStack(spacing: 0) {
                     self.content
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
