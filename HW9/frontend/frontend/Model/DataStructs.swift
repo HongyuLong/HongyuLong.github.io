@@ -36,12 +36,12 @@ extension JSON {
 struct MediaItem: JSONable, Codable, Identifiable {
     let id: Int
     let title: String
-    let year: Int
+    let year: String
     let poster_path: String
     init(parameter: JSON) {
         id = parameter["id"].intValue
         title = parameter["title"].stringValue
-        year = parameter["year"].intValue
+        year = parameter["year"].stringValue
         poster_path = parameter["poster_path"].stringValue
     }
 }

@@ -16,7 +16,12 @@ struct HomeView: View {
     var title_dynamic: String = "Now Playing"  // when it's tv, it'll be "Trending"
     
     init() {
-        homeVM.fecthAiringToday()
+        homeVM.fetchAiringToday()
+        homeVM.fetchTopRatedTv()
+        homeVM.fetchPopularTv()
+        homeVM.fetchNowPlaying()
+        homeVM.fetchTopRatedMovie()
+        homeVM.fetchPopularMovie()
     }
     
     var body: some View {
@@ -37,9 +42,7 @@ struct HomeView: View {
                 .frame(height: 300, alignment: .center)
                 .clipped()
                 
-                Text("Tope Rated")
-                    .font(.title2)
-                    .bold()
+                MediaCardsView(title: "Top Rated", card_list: homeVM.top_rated_tv_list)
             }
             
         }
