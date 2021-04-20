@@ -48,6 +48,7 @@ function filterNowPlaying(media_type, results) {
         else {
             item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].poster_path;
         }
+        item['year'] = media_type == 'tv' ? results[i]['first_air_date'].substr(0, 4) : results[i]['release_date'].substr(0, 4);
         // if(results[i].backdrop_path == null) {
         //     item['backdrop_path'] = null;
         // }

@@ -9,41 +9,35 @@ import SwiftUI
 import SwiftyJSON
 import Kingfisher
 
-
-
 struct HomeView: View {
-    var body: some View {
-        Button(action: {
-            self.startLoad()
-        }) {
-            /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
-        }
-        
+    @ObservedObject var homeVM = HomeViewModel()
+    
+    var media: String = "movie"
+    
+    init() {
+        homeVM.fecthAiringToday()
     }
     
-    func startLoad() {
-        NetworkManager.shared.requestGet(path: "/home/tv") { result in
-            switch result {
-            case let .success(data):
-                let json = try! JSON(data: data)
-                parseDynamicCards(results: json["now_playing"])
-            case let .failure(error):
-                print(error)
+    var body: some View {
+//        Text("placeholder").padding()
+        ScrollView(.vertical) {
+            VStack {
+                GeometryReader { geometry in
+                    CarouselDynamic(numberOfImages: 5) {
+                        ForEach(homeVM.airing_today_list, id: \.id) {item in
+                            UnitImageDynamicView(item.poster_path)
+                                .frame(width: 352, height: 500)
+                        }
+                    }
+                }
             }
         }
-    }
-    
-    func parseDynamicCards(results: JSON) {
-        var cards:[DynamicCard] = []
-        if let cardArr = results.to(type: DynamicCard.self) {
-            cards = cardArr as! [DynamicCard]
-        }
-        print(cards)
+        .padding()
+
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
-    // variables
     static var previews: some View {
         HomeView()
     }

@@ -32,23 +32,12 @@ extension JSON {
     }
 }
 
-struct DynamicCard: JSONable {
-    let id :Int!
-    let title :String!
-    let poster_path :String!
-    init(parameter: JSON) {
-        id = parameter["id"].intValue
-        title = parameter["title"].stringValue
-        poster_path = parameter["poster_path"].stringValue
-    }
-}
-
 // Card for Movie and Tv
-struct StaticCard: JSONable {
-    let id: Int!
-    let title: String!
-    let year: Int!
-    let poster_path: String!
+struct MediaItem: JSONable, Codable, Identifiable {
+    let id: Int
+    let title: String
+    let year: Int
+    let poster_path: String
     init(parameter: JSON) {
         id = parameter["id"].intValue
         title = parameter["title"].stringValue
@@ -56,6 +45,3 @@ struct StaticCard: JSONable {
         poster_path = parameter["poster_path"].stringValue
     }
 }
-
-
-
