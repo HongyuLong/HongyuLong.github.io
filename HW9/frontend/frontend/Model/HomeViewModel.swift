@@ -20,6 +20,26 @@ class HomeViewModel: ObservableObject {
     @Published var top_rated_mv_list:[MediaItem] = []
     @Published var popular_mv_list:[MediaItem] = []
     
+    func fetchHomeTvData() {
+        AF.request(NetworkAPIBaseURL + "/home/tv").responseData { response in
+            DispatchQueue.main.async {
+                let json = try! JSON(data: response.data!)
+                self.airing_today_list = self.parseMediaItems(json["now_playing"])
+                self.top_rated_tv_list = self.parseMediaItems(json["top_rated"])
+                self.popular_tv_list = self.parseMediaItems(json["popular"])
+            }
+        }
+    }
+    func fetchHomeMovieData() {
+        AF.request(NetworkAPIBaseURL + "/home/movie").responseData { response in
+            DispatchQueue.main.async {
+                let json = try! JSON(data: response.data!)
+                self.now_playing_list = self.parseMediaItems(json["now_playing"])
+                self.top_rated_mv_list = self.parseMediaItems(json["top_rated"])
+                self.popular_mv_list = self.parseMediaItems(json["popular"])
+            }
+        }
+    }
     
     func fetchAiringToday() {
         AF.request(NetworkAPIBaseURL + "/home/tv").responseData { response in

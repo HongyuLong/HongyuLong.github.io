@@ -22,7 +22,7 @@ struct UnitImageDynamicView: View {
                 .frame(width: 358, height: 300)
                 .aspectRatio(contentMode: .fit)
                 .clipped()
-                .blur(radius: 10)
+                .blur(radius: 7)
                 
             
             // not blue image front

@@ -1,5 +1,5 @@
 //
-//  HomeMovieView.swift
+//  HomeTvView.swift
 //  frontend
 //
 //  Created by Hongyu Long on 2021/4/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct HomeMovieView: View {
+struct HomeTvView: View {
     @ObservedObject var homeVM = HomeViewModel()
     
     init() {
-        homeVM.fetchHomeMovieData()
+        homeVM.fetchHomeTvData()
     }
     
     var body: some View {
@@ -22,11 +22,11 @@ struct HomeMovieView: View {
                     .bold()
                     .padding(.bottom, 4)
                 
-                CarouselView(homeVM.now_playing_list, "Trending")
+                CarouselView(homeVM.airing_today_list, "Trending")
                 
-                MediaCardsView(title: "Top Rated", card_list: homeVM.top_rated_mv_list)
+                MediaCardsView(title: "Top Rated", card_list: homeVM.top_rated_tv_list)
                 
-                MediaCardsView(title: "Popular", card_list: homeVM.popular_mv_list)
+                MediaCardsView(title: "Popular", card_list: homeVM.popular_tv_list)
                 
             }
             
@@ -34,4 +34,3 @@ struct HomeMovieView: View {
         .padding()
     }
 }
-

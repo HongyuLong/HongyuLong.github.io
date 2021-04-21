@@ -23,23 +23,25 @@ struct MediaCardsView: View {
                 .bold()
             
             ScrollView(.horizontal) {
-                HStack {
+                HStack(alignment: .top) {
                         ForEach(self.card_list, id: \.id) {item in
                             VStack {
                                 KFImage(URL(string: item.poster_path))
                                     .resizable()
-                                    .frame(width: 80, height: 110)
+                                    .frame(width: 96, height: 130)
                                     .aspectRatio(contentMode: .fit)
                                     .clipped()
                                     .cornerRadius(8)
                                 Text(item.title)
-                                    .font(.headline)
+                                    .font(.footnote)
                                     .bold()
                                 Text("(" + item.year + ")")
-                                    .font(.subheadline)
+                                    .font(.footnote)
                                     .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.center)
                             }
-                            
+                            .frame(width: 96)
+                            .padding(.trailing, 18)
                         }
                 }
             }
