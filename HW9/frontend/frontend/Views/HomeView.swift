@@ -21,38 +21,44 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ScrollView(.vertical) {
-                VStack() {
-                    CarouselView(homeVM.now_playing_list, self.carouselTitle)
-                    
-                    MediaCardsView(title: "Top Rated", card_list: homeVM.top_rated_list)
-                    
-                    MediaCardsView(title: "Popular", card_list: homeVM.popular_list)
-                    
-                }
-            }
-            .navigationTitle("USC Films")
-            .navigationBarItems(
-                trailing:
-                    Button(self.trailingContent){
-                        if(nextShowMovieView) {
-                            homeVM.fetchHomeMovieData()
-                            self.trailingContent = "TV shows"
-                            nextShowMovieView = false
-                            self.carouselTitle = "Now Playing"
-                        }
-                        else {
-                            homeVM.fetchHomeTvData()
-                            self.trailingContent = "Movies"
-                            nextShowMovieView = true
-                            self.carouselTitle = "Trending"
-                        }
-                    })
-            
+        
+        if homeVM.fetched == false {
+            ProgressView("Fetching Data...")
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .padding()
+        else {
+            NavigationView {
+                ScrollView(.vertical) {
+                    VStack() {
+                        CarouselView(homeVM.now_playing_list, self.carouselTitle)
+                        
+                        MediaCardsView(title: "Top Rated", card_list: homeVM.top_rated_list)
+                        
+                        MediaCardsView(title: "Popular", card_list: homeVM.popular_list)
+                        
+                    }
+                }
+                .navigationTitle("USC Films")
+                .navigationBarItems(
+                    trailing:
+                        Button(self.trailingContent){
+                            if(nextShowMovieView) {
+                                homeVM.fetchHomeMovieData()
+                                self.trailingContent = "TV shows"
+                                nextShowMovieView = false
+                                self.carouselTitle = "Now Playing"
+                            }
+                            else {
+                                homeVM.fetchHomeTvData()
+                                self.trailingContent = "Movies"
+                                nextShowMovieView = true
+                                self.carouselTitle = "Trending"
+                            }
+                        })
+                
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .padding()
+        }
     }
 }
 
