@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		270F3FA1262FAC3600A3EDF0 /* HomeTvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270F3FA0262FAC3600A3EDF0 /* HomeTvView.swift */; };
 		270F3FA5262FAC5D00A3EDF0 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270F3FA4262FAC5D00A3EDF0 /* CarouselView.swift */; };
-		270F3FA8262FAF2F00A3EDF0 /* HomeMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270F3FA7262FAF2F00A3EDF0 /* HomeMovieView.swift */; };
 		278A8FD0262ECB4D00168D0B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A8FCF262ECB4D00168D0B /* HomeViewModel.swift */; };
 		278A8FD7262ECE0200168D0B /* UnitImageDynamicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A8FD6262ECE0200168D0B /* UnitImageDynamicView.swift */; };
 		278A8FDF262F1F0000168D0B /* MediaCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A8FDE262F1F0000168D0B /* MediaCardsView.swift */; };
@@ -25,9 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		270F3FA0262FAC3600A3EDF0 /* HomeTvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTvView.swift; sourceTree = "<group>"; };
 		270F3FA4262FAC5D00A3EDF0 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		270F3FA7262FAF2F00A3EDF0 /* HomeMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMovieView.swift; sourceTree = "<group>"; };
 		278A8FCF262ECB4D00168D0B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		278A8FD6262ECE0200168D0B /* UnitImageDynamicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitImageDynamicView.swift; sourceTree = "<group>"; };
 		278A8FDE262F1F0000168D0B /* MediaCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCardsView.swift; sourceTree = "<group>"; };
@@ -115,8 +111,6 @@
 				279B48A82625EBC300FF97A8 /* ContentView.swift */,
 				27A4728E26271B04006D31EF /* HomeView.swift */,
 				278C8993262D393200D8A170 /* HomeNavigationBar.swift */,
-				270F3FA0262FAC3600A3EDF0 /* HomeTvView.swift */,
-				270F3FA7262FAF2F00A3EDF0 /* HomeMovieView.swift */,
 				270F3FA4262FAC5D00A3EDF0 /* CarouselView.swift */,
 			);
 			path = Views;
@@ -260,9 +254,7 @@
 				27A4728F26271B04006D31EF /* HomeView.swift in Sources */,
 				278A8FD0262ECB4D00168D0B /* HomeViewModel.swift in Sources */,
 				278C8994262D393200D8A170 /* HomeNavigationBar.swift in Sources */,
-				270F3FA1262FAC3600A3EDF0 /* HomeTvView.swift in Sources */,
 				279B48A92625EBC300FF97A8 /* ContentView.swift in Sources */,
-				270F3FA8262FAF2F00A3EDF0 /* HomeMovieView.swift in Sources */,
 				279B48A72625EBC300FF97A8 /* frontendApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

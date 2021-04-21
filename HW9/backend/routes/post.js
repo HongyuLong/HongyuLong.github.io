@@ -43,18 +43,12 @@ function filterNowPlaying(media_type, results) {
         item['id'] = results[i].id;
         item['title'] = media_type == 'tv' ? results[i].name : results[i].title;
         if(results[i].poster_path == null) {
-            item['poster_path'] = null;
+            item['poster_path'] = "http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/movie_placeholder.png";
         }
         else {
             item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].poster_path;
         }
         item['year'] = media_type == 'tv' ? results[i]['first_air_date'].substr(0, 4) : results[i]['release_date'].substr(0, 4);
-        // if(results[i].backdrop_path == null) {
-        //     item['backdrop_path'] = null;
-        // }
-        // else {
-        //     item['backdrop_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].backdrop_path;
-        // }
         items.push(item);
     }
     return items;
@@ -68,7 +62,7 @@ function filterTopRated(media_type, results) {
         item['id'] = results[i].id;
         item['title'] = media_type == 'tv' ? results[i].name : results[i].title;
         if(results[i].poster_path == null) {
-            item['poster_path'] = null;
+            item['poster_path'] = "http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/movie_placeholder.png";
         }
         else {
             item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].poster_path;
@@ -167,7 +161,13 @@ function filterDetails(media_type, results) {
     }
     item['overview'] = results['overview'];
     item['vote_average'] = results['vote_average'];
-    item['poster_path'] = results['poster_path'] ? ('https://image.tmdb.org/t/p/w500' + results['poster_path']) : null;
+
+    if(results['poster_path'] == null) {
+        item['poster_path'] = "http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/movie_placeholder.png";
+    }
+    else {
+        item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results['poster_path'];
+    }
     return item;
 }
 
@@ -179,7 +179,12 @@ function filterCasts(results) {
         cast['id'] = results[i]['id'];
         cast['name'] = results[i]['name'];
         cast['character'] = results[i]['character'];
-        cast['profile_path'] =results[i]['profile_path'] == null ? null : ('https://image.tmdb.org/t/p/w500/' + results[i]['profile_path']);
+        if(results[i]['profile_path'] == null ) {
+            cast['profile_path'] = "http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/cast_placeholder.png";
+        }
+        else {
+            cast['profile_path'] = 'https://image.tmdb.org/t/p/w500/' + results[i]['profile_path'];
+        }
         casts.push(cast);
         //console.log(cast);
     }
@@ -205,6 +210,14 @@ function filterReviews(results) {
     }
     return reviews;
 }
+
+router.get('/shared/images', (req, res) => {
+    res.json({
+        'twitter' : 'http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/twitter.png',
+        'facebook' : 'http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/facebook-app-symbol.png',
+        'appicon' : 'http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/AppIcon.png'
+    })
+})
 
 router.get('/search/:query', (req, res)=>{
     let url_search = 'https://api.themoviedb.org/3/search/multi?api_key=' + API_KEY + '&language=enUS&query=' + req.params.query;

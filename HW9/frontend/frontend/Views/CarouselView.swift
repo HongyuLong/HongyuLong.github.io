@@ -24,7 +24,7 @@ struct CarouselView: View {
                 .bold()
             
             GeometryReader { geometry in
-                CarouselDynamic(numberOfImages: 5) {
+                CarouselDynamic(numberOfImages: self.card_list.count) {
                     ForEach(self.card_list, id: \.id) {item in
                         UnitImageDynamicView(item.poster_path)
                     }
