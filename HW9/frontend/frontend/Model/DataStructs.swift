@@ -51,7 +51,7 @@ struct VideoData: JSONable, Codable{
     let site: String
     let type: String
     let name: String
-    let key: String
+    var key: String
     init(parameter: JSON) {
         site = parameter["site"].stringValue
         type = parameter["type"].stringValue

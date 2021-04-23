@@ -134,7 +134,8 @@ function filterVideo(results) {
         item['site'] = 'YouTube';
         item['type'] = 'Trailer';
         item['name'] = results[i].name;
-        item['key'] = 'https://www.youtube.com/watch?v=' + results[i].key;
+        // item['key'] = 'https://www.youtube.com/watch?v=' + results[i].key;
+        item['key'] = results[i].key;
         flag = true;  // get a valid data
         break;
     }

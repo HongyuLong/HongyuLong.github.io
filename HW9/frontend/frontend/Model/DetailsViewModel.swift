@@ -31,6 +31,7 @@ class DetailsViewModel: ObservableObject {
             let json = try! JSON(data: response.data!)
             if(json["video"] != JSON.null) {
                 self.video = self.parseVideoData(json["video"])
+                self.hasVideo = true
             }
             self.details = self.parseDetailsData(json["details"])
             if(json["reviews"] != JSON.null) {

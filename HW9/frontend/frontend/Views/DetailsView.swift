@@ -27,6 +27,10 @@ struct DetailsView: View {
         }
         else {
             VStack(alignment: .leading) {
+                VStack {
+                    VideoView()
+                }
+                
                 Text(detailsVM.details!.title)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .bold()
