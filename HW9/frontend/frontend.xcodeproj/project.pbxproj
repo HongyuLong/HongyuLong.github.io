@@ -23,6 +23,8 @@
 		279B48AB2625EBC400FF97A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279B48AA2625EBC400FF97A8 /* Assets.xcassets */; };
 		279B48AE2625EBC400FF97A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279B48AD2625EBC400FF97A8 /* Preview Assets.xcassets */; };
 		27A4728F26271B04006D31EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4728E26271B04006D31EF /* HomeView.swift */; };
+		27B22C552632A31600866A08 /* CastsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B22C542632A31600866A08 /* CastsView.swift */; };
+		27B22C592632B51200866A08 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B22C582632B51200866A08 /* VideoView.swift */; };
 		27EB85CB26273C9500E18223 /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB85CA26273C9500E18223 /* DataStructs.swift */; };
 		2A3A76ADB761A40FEE1DF9FD /* Pods_frontend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBFCEAB5146BC9F6149AF8C /* Pods_frontend.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,8 @@
 		279B48AD2625EBC400FF97A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		279B48AF2625EBC400FF97A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27A4728E26271B04006D31EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		27B22C542632A31600866A08 /* CastsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastsView.swift; sourceTree = "<group>"; };
+		27B22C582632B51200866A08 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		27EB85CA26273C9500E18223 /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
 		8030517CC7AE314E9E96698E /* Pods-frontend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend.debug.xcconfig"; path = "Target Support Files/Pods-frontend/Pods-frontend.debug.xcconfig"; sourceTree = "<group>"; };
 		94B3FABE44CEBE55CA870EA1 /* Pods-frontend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend.release.xcconfig"; path = "Target Support Files/Pods-frontend/Pods-frontend.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				270F3FA4262FAC5D00A3EDF0 /* CarouselView.swift */,
 				270F3FAC262FE58700A3EDF0 /* WatchListView.swift */,
 				270F3FAF262FE5E900A3EDF0 /* SearchView.swift */,
+				27B22C542632A31600866A08 /* CastsView.swift */,
+				27B22C582632B51200866A08 /* VideoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				278A8FD7262ECE0200168D0B /* UnitImageDynamicView.swift in Sources */,
 				27EB85CB26273C9500E18223 /* DataStructs.swift in Sources */,
 				270F3FA5262FAC5D00A3EDF0 /* CarouselView.swift in Sources */,
+				27B22C552632A31600866A08 /* CastsView.swift in Sources */,
 				270F3FAD262FE58700A3EDF0 /* WatchListView.swift in Sources */,
 				270F3FB0262FE5E900A3EDF0 /* SearchView.swift in Sources */,
 				278A8FDF262F1F0000168D0B /* MediaCardsView.swift in Sources */,
@@ -273,6 +280,7 @@
 				27A4728F26271B04006D31EF /* HomeView.swift in Sources */,
 				278A8FD0262ECB4D00168D0B /* HomeViewModel.swift in Sources */,
 				278C8994262D393200D8A170 /* HomeNavigationBar.swift in Sources */,
+				27B22C592632B51200866A08 /* VideoView.swift in Sources */,
 				270F3FC226301A8D00A3EDF0 /* DetailsViewModel.swift in Sources */,
 				279B48A92625EBC300FF97A8 /* ContentView.swift in Sources */,
 				279B48A72625EBC300FF97A8 /* frontendApp.swift in Sources */,

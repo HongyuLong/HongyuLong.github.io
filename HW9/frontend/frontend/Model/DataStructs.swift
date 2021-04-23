@@ -66,20 +66,29 @@ struct DetailsData: JSONable, Codable {
     let spoken_languages: String
     let year: String
     let overview: String
-    let vote_average: Int
+    let vote_average: Double
     let poster_path: String
     init(parameter: JSON) {
         title = parameter["title"].stringValue
-        genres = parameter["genres"].stringValue
+        if(parameter["genres"].stringValue == "") {
+            genres = "N/A"
+        } else {
+            genres = parameter["genres"].stringValue
+        }
         spoken_languages = parameter["spoken_languages"].stringValue
-        year = parameter["year"].stringValue
+        
+        if(parameter["year"].stringValue == "") {
+            year = "N/A"
+        } else {
+            year = parameter["year"].stringValue
+        }
         overview = parameter["overview"].stringValue
-        vote_average = parameter["vote_average"].intValue
+        vote_average = parameter["vote_average"].doubleValue / 2.0
         poster_path = parameter["poster_path"].stringValue
     }
 }
 
-struct CastItem: JSONable, Codable {
+struct CastItem: JSONable, Codable, Identifiable {
     let id: Int
     let name: String
     let character: String

@@ -14,11 +14,16 @@ private let NetworkAPIBaseURL = "http://hongyu-tmdb-nodejs.us-east-2.elasticbean
 class DetailsViewModel: ObservableObject {
     @Published var fetched = false
     
-    @Published var video: VideoData? = nil
+    @Published var video: VideoData = VideoData(parameter: "")
     @Published var details: DetailsData? = nil
-    @Published var reviews: [ReviewItem]? = nil
-    @Published var casts: [CastItem]? = nil
-    @Published var recommended:[MediaItem]? = nil
+    @Published var reviews: [ReviewItem] = []
+    @Published var casts: [CastItem] = []
+    @Published var recommended:[MediaItem] = []
+    
+    @Published var hasVideo = false
+    @Published var hasReviews = false
+    @Published var hasCasts = false
+    @Published var hasRecommend = false
     
     func fetchAllData(media_type: String, media_id: Int) {
         AF.request(NetworkAPIBaseURL + "/watch/" + media_type + "/" + String(media_id)).responseData { response in
@@ -30,12 +35,15 @@ class DetailsViewModel: ObservableObject {
             self.details = self.parseDetailsData(json["details"])
             if(json["reviews"] != JSON.null) {
                 self.reviews = self.parseReviewItems(json["reviews"])
+                self.hasReviews = true
             }
             if(json["casts"] != JSON.null) {
                 self.casts = self.parseCastItems(json["casts"])
+                self.hasCasts = true
             }
             if json["recommended"] != JSON.null {
                 self.recommended = self.parseMediaItems(json["recommended"])
+                self.hasRecommend = true
             }
             
             self.fetched = true
