@@ -13,17 +13,17 @@ struct HomeView: View {
     @State private var nextShowMovieView = false   // default next show is TV Shows
     @State private var trailingContent: String = "TV shows"
     @State private var carouselTitle: String = "Now Playing"
+    @State private var media_type: String = "movie"
     
     @ObservedObject var homeVM = HomeViewModel()
-    
-    init() {
-        homeVM.fetchHomeMovieData()
-    }
     
     var body: some View {
         
         if homeVM.fetched == false {
             ProgressView("Fetching Data...")
+                .onAppear(perform: {
+                    homeVM.fetchHomeMovieData()
+                })
         }
         else {
             NavigationView {
@@ -31,12 +31,19 @@ struct HomeView: View {
                     VStack() {
                         CarouselView(homeVM.now_playing_list, self.carouselTitle)
                         
-                        MediaCardsView(title: "Top Rated", card_list: homeVM.top_rated_list)
+                        MediaCardsView(title: "Top Rated",
+                                       card_list: homeVM.top_rated_list,
+                                       media_type: self.media_type
+                        )
                         
-                        MediaCardsView(title: "Popular", card_list: homeVM.popular_list)
+                        MediaCardsView(title: "Popular",
+                                       card_list: homeVM.popular_list,
+                                       media_type: self.media_type
+                        )
                         
                     }
                 }
+                .padding()
                 .navigationTitle("USC Films")
                 .navigationBarItems(
                     trailing:
@@ -46,18 +53,19 @@ struct HomeView: View {
                                 self.trailingContent = "TV shows"
                                 nextShowMovieView = false
                                 self.carouselTitle = "Now Playing"
+                                self.media_type = "movie"
                             }
                             else {
                                 homeVM.fetchHomeTvData()
                                 self.trailingContent = "Movies"
                                 nextShowMovieView = true
                                 self.carouselTitle = "Trending"
+                                self.media_type = "tv"
                             }
                         })
                 
             }
             .navigationViewStyle(StackNavigationViewStyle())
-            .padding()
         }
     }
 }

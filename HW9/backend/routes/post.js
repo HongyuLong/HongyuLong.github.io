@@ -48,10 +48,25 @@ function filterNowPlaying(media_type, results) {
         else {
             item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].poster_path;
         }
-        item['year'] = media_type == 'tv' ? results[i]['first_air_date'].substr(0, 4) : results[i]['release_date'].substr(0, 4);
+        item['year'] = getYear(media_type, results[i])
         items.push(item);
     }
     return items;
+}
+
+function getYear(media_type, result) {
+    let year = null;
+    if(media_type == 'tv') {
+        if(result.hasOwnProperty('first_air_date') && result['first_air_date'] != "") {
+            year = result['first_air_date'].substr(0, 4);
+        }
+    }
+    else {
+        if(result.hasOwnProperty('release_date') && result['release_date'] != "") {
+            year = result['release_date'].substr(0, 4);
+        }
+    }
+    return year
 }
 
 function filterTopRated(media_type, results) {
@@ -67,7 +82,7 @@ function filterTopRated(media_type, results) {
         else {
             item['poster_path'] = 'https://image.tmdb.org/t/p/w500' + results[i].poster_path;
         }
-        item['year'] = media_type == 'tv' ? results[i]['first_air_date'].substr(0, 4) : results[i]['release_date'].substr(0, 4);
+        item['year'] = getYear(media_type, results[i]);
         items.push(item);
     }
     return items;
@@ -77,11 +92,11 @@ function filterTopRated(media_type, results) {
 router.get('/watch/:media_type/:id', (req, res)=>{
     console.log('req.params.media_type = ', req.params.media_type);
     console.log('req.params.id = ', req.params.id);
-    let url_video = head_url + req.params.media_type + '/' + req.params.id + '/videos?api_key=' + API_KEY + tail_url;
-    let url_details = head_url + req.params.media_type + '/' + req.params.id + '?api_key=' + API_KEY + tail_url;
-    let url_reviews = head_url + req.params.media_type + '/'  + req.params.id + '/reviews?api_key=' + API_KEY + tail_url;
-    let url_casts = head_url + req.params.media_type + '/'   + req.params.id + '/credits?api_key=' + API_KEY + tail_url;
-    let url_recommended = head_url + req.params.media_type + '/' + req.params.id + '/recommendations?api_key=' + API_KEY + tail_url;
+    let url_video = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '/videos?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_details = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_reviews = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'  + req.params.id + '/reviews?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_casts = 'https://api.themoviedb.org/3/' + req.params.media_type + '/'   + req.params.id + '/credits?api_key=' + API_KEY + '&language=en-US&page=1';
+    let url_recommended = 'https://api.themoviedb.org/3/' + req.params.media_type + '/' + req.params.id + '/recommendations?api_key=' + API_KEY + '&language=en-US&page=1';
     if(req.params.media_type == 'movie') {
         var media_keys = ['id', 'title', 'poster_path'];
     }
@@ -143,7 +158,7 @@ function filterDetails(media_type, results) {
         }
         genres_str = genres_str + results['genres'][i]['name'];
     }
-    item.genres = genres_str.length > 0 ? genres_str : null;
+    item['genres'] = genres_str.length > 0 ? genres_str : null;
 
     for(let i = 0; i < results['spoken_languages'].length; ++i) {
         if(i > 0) {
@@ -152,13 +167,7 @@ function filterDetails(media_type, results) {
         lang_str = lang_str + results['spoken_languages'][i]['english_name'];
     }
     item.spoken_languages = lang_str.length > 0 ? lang_str : null;
-
-    if(media_type == 'movie') {
-        item['year'] = results['release_date'].substr(0, 4);
-    }
-    else {
-        item['year'] = results['first_air_date'].substr(0, 4);
-    }
+    item['year'] = getYear(media_type, results);
     item['overview'] = results['overview'];
     item['vote_average'] = results['vote_average'];
 
@@ -236,11 +245,11 @@ router.get('/search/:query', (req, res)=>{
                 item['backdrop_path'] = 'https://image.tmdb.org/t/p/w500' + results[i]['backdrop_path'];
                 if(results[i]['media_type'] == 'tv') {
                     item['title'] = results[i]['name'];
-                    item['year'] = results[i]['first_air_date'].substr(0, 4);
+                    item['year'] = getYear(results[i]['media_type'], results[i]);
                 }
                 else {
                     item['title'] = results[i]['title'];
-                    item['year'] = results[i]['release_date'].substr(0, 4);
+                    item['year'] = getYear(results[i]['media_type'], results[i]);
                 }
                 item['vote_average'] = results[i].vote_average;
                 items.push(item);
