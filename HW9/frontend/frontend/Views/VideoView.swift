@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import youtube_ios_player_helper
 
-struct YTWrapper: UIViewRepresentable {
+struct YTWrapper: UIViewRepresentable{
     @Binding var videoKey: String
     
     func makeUIView(context: Context) -> YTPlayerView {
@@ -31,8 +31,7 @@ struct VideoView: View {
     var body: some View {
         if detailsVM.hasVideo {
             YTWrapper(videoKey: $detailsVM.video.key)
-                .frame(width: 350, height: 197, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                .frame(width: 350, height: 197)
         }
     }
 }
