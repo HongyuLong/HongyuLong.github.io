@@ -101,7 +101,7 @@ struct CastItem: JSONable, Codable, Identifiable {
     }
 }
 
-struct ReviewItem: JSONable, Codable {
+struct ReviewItem: JSONable, Codable{
     let author: String
     let content: String
     let rating: Int
@@ -111,5 +111,23 @@ struct ReviewItem: JSONable, Codable {
         content = parameter["content"].stringValue
         rating = parameter["rating"].intValue
         created_at = parameter["created_at"].stringValue
+    }
+}
+
+
+struct SearchItem: JSONable, Codable, Identifiable{
+    let id: Int
+    let media_type: String
+    let backdrop_path: String
+    let title: String
+    let year: String
+    let vote_average: Double
+    init(parameter: JSON) {
+        id = parameter["id"].intValue
+        media_type = parameter["media_type"].stringValue
+        backdrop_path = parameter["backdrop_path"].stringValue
+        title = parameter["title"].stringValue
+        year = parameter["year"].stringValue
+        vote_average = parameter["vote_average"].doubleValue / 2.0
     }
 }

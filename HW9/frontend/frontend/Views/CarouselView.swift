@@ -10,10 +10,12 @@ import SwiftUI
 struct CarouselView: View {
     var title: String
     var card_list: [MediaItem]
+    var media_type: String
     
-    init(_ card_list: [MediaItem], _ title: String) {
+    init(card_list: [MediaItem], title: String, media_type:String) {
         self.title = title
         self.card_list = card_list
+        self.media_type = media_type
     }
     
     var body: some View {
@@ -26,7 +28,9 @@ struct CarouselView: View {
             GeometryReader { geometry in
                 CarouselDynamic(numberOfImages: self.card_list.count) {
                     ForEach(self.card_list, id: \.id) {item in
-                        UnitImageDynamicView(item.poster_path)
+                        NavigationLink(destination: DetailsView(media_type: self.media_type, media_id: item.id)) {
+                            UnitImageDynamicView(item.poster_path)
+                        }
                     }
                 }
             }

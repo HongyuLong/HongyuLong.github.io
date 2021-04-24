@@ -83,6 +83,8 @@ struct DetailsView: View {
                     
                     
                     CastsView()
+                    
+                    Spacer()
                 }
                 .navigationBarItems(
                     trailing:

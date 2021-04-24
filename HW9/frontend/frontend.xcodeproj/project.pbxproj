@@ -22,6 +22,9 @@
 		279B48A92625EBC300FF97A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B48A82625EBC300FF97A8 /* ContentView.swift */; };
 		279B48AB2625EBC400FF97A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279B48AA2625EBC400FF97A8 /* Assets.xcassets */; };
 		279B48AE2625EBC400FF97A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279B48AD2625EBC400FF97A8 /* Preview Assets.xcassets */; };
+		27A2171A26338F45001FEE4D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A2171926338F45001FEE4D /* SearchViewModel.swift */; };
+		27A2172626339EDB001FEE4D /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A2172526339EDB001FEE4D /* Debouncer.swift */; };
+		27A2172C2633B114001FEE4D /* SearchCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A2172B2633B114001FEE4D /* SearchCardsView.swift */; };
 		27A4728F26271B04006D31EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4728E26271B04006D31EF /* HomeView.swift */; };
 		27B22C552632A31600866A08 /* CastsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B22C542632A31600866A08 /* CastsView.swift */; };
 		27B22C592632B51200866A08 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B22C582632B51200866A08 /* VideoView.swift */; };
@@ -47,6 +50,9 @@
 		279B48AA2625EBC400FF97A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		279B48AD2625EBC400FF97A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		279B48AF2625EBC400FF97A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27A2171926338F45001FEE4D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		27A2172526339EDB001FEE4D /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		27A2172B2633B114001FEE4D /* SearchCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardsView.swift; sourceTree = "<group>"; };
 		27A4728E26271B04006D31EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		27B22C542632A31600866A08 /* CastsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastsView.swift; sourceTree = "<group>"; };
 		27B22C582632B51200866A08 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -111,9 +117,11 @@
 		279B48B82625EC4500FF97A8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				27A2172526339EDB001FEE4D /* Debouncer.swift */,
 				27EB85CA26273C9500E18223 /* DataStructs.swift */,
 				278A8FCF262ECB4D00168D0B /* HomeViewModel.swift */,
 				270F3FC126301A8D00A3EDF0 /* DetailsViewModel.swift */,
+				27A2171926338F45001FEE4D /* SearchViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 				270F3FA4262FAC5D00A3EDF0 /* CarouselView.swift */,
 				270F3FAC262FE58700A3EDF0 /* WatchListView.swift */,
 				270F3FAF262FE5E900A3EDF0 /* SearchView.swift */,
+				27A2172B2633B114001FEE4D /* SearchCardsView.swift */,
 				27B22C542632A31600866A08 /* CastsView.swift */,
 				27B22C582632B51200866A08 /* VideoView.swift */,
 			);
@@ -274,14 +283,17 @@
 				27B22C552632A31600866A08 /* CastsView.swift in Sources */,
 				270F3FAD262FE58700A3EDF0 /* WatchListView.swift in Sources */,
 				270F3FB0262FE5E900A3EDF0 /* SearchView.swift in Sources */,
+				27A2172C2633B114001FEE4D /* SearchCardsView.swift in Sources */,
 				278A8FDF262F1F0000168D0B /* MediaCardsView.swift in Sources */,
 				270F3FBB26300E1700A3EDF0 /* DetailsView.swift in Sources */,
 				278C899B262D435900D8A170 /* CarouselDynamic.swift in Sources */,
 				27A4728F26271B04006D31EF /* HomeView.swift in Sources */,
 				278A8FD0262ECB4D00168D0B /* HomeViewModel.swift in Sources */,
+				27A2172626339EDB001FEE4D /* Debouncer.swift in Sources */,
 				278C8994262D393200D8A170 /* HomeNavigationBar.swift in Sources */,
 				27B22C592632B51200866A08 /* VideoView.swift in Sources */,
 				270F3FC226301A8D00A3EDF0 /* DetailsViewModel.swift in Sources */,
+				27A2171A26338F45001FEE4D /* SearchViewModel.swift in Sources */,
 				279B48A92625EBC300FF97A8 /* ContentView.swift in Sources */,
 				279B48A72625EBC300FF97A8 /* frontendApp.swift in Sources */,
 			);

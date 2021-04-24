@@ -170,7 +170,7 @@ function filterDetails(media_type, results) {
     item.spoken_languages = lang_str.length > 0 ? lang_str : null;
     item['year'] = getYear(media_type, results);
     item['overview'] = results['overview'];
-    item['vote_average'] = results['vote_average'];
+    item['vote_average'] = results['vote_average'] == null ? 0 : results['vote_average'];
 
     if(results['poster_path'] == null) {
         item['poster_path'] = "http://hongyu-tmdb-nodejs.us-east-2.elasticbeanstalk.com/static/images/movie_placeholder.png";
@@ -208,14 +208,29 @@ function filterReviews(results) {
     var reviews = [];
     for(let i = 0; i < 3 && i < results.length; ++i) {
         var review = {};
-        review['author'] = results[i]['author'];
+        if(results[i]['author'].length == 0) {
+            review['author'] = 'anynomous user'
+        }
+        else {
+            review['author'] = results[i]['author'];
+        }
         review['content'] = results[i]['content'];
-        review['rating'] = results[i]['author_details']['rating'];
+        if(results[i]['author_details']['rating'] == null) {
+            review['rating'] = 0;
+        }
+        else {
+            review['rating'] = results[i]['author_details']['rating'];
+        }
         //console.log(results[i]['created_at']);
-        let month_num = results[i]['created_at'].substr(5, 2);
-        let month_dict = {'01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December'};
-        let created_str = month_dict[month_num] + ' ' + results[i]['created_at'].substr(8, 2) + ', ' + results[i]['created_at'].substr(0, 4);
-        review['created_at'] = created_str;
+        if(results[i]['created_at'].length > 0) {
+            let month_num = results[i]['created_at'].substr(5, 2);
+            let month_dict = {'01': 'January', '02': 'February', '03': 'March', '04': 'April', '05': 'May', '06': 'June', '07': 'July', '08': 'August', '09': 'September', '10': 'October', '11': 'November', '12': 'December'};
+            let created_str = month_dict[month_num] + ' ' + results[i]['created_at'].substr(8, 2) + ', ' + results[i]['created_at'].substr(0, 4);
+            review['created_at'] = created_str;
+        }
+        else {
+            review['created_at'] = null
+        }
         reviews.push(review);
     }
     return reviews;
@@ -235,6 +250,7 @@ router.get('/search/:query', (req, res)=>{
         .then(response=>{
             let results = response.data.results;
             let items = [];
+            let has_items = false;
 
             for(let i = 0, j = 0; i < results.length && j < 7; ++i) {
                 if(results[i]['backdrop_path'] == null || results[i]['media_type'] == 'person') {
@@ -252,11 +268,18 @@ router.get('/search/:query', (req, res)=>{
                     item['title'] = results[i]['title'];
                     item['year'] = getYear(results[i]['media_type'], results[i]);
                 }
-                item['vote_average'] = results[i].vote_average;
+                item['vote_average'] = results[i].vote_average == null ? 0 : results[i].vote_average;
                 items.push(item);
                 j++;
+                has_items = true;
             }
-            res.json(items);
+            if(has_items) {
+                res.json(items);
+            }
+            else {
+                res.json(null);
+            }
+            
         })
         .catch(error => {
             console.log(error);

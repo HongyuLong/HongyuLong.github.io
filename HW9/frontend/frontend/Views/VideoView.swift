@@ -31,7 +31,7 @@ struct VideoView: View {
     var body: some View {
         if detailsVM.hasVideo {
             YTWrapper(videoKey: $detailsVM.video.key)
-                .frame(width: 350, height: 197)
+                .frame(height: 200)
         }
     }
 }

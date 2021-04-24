@@ -35,6 +35,7 @@ struct CastsView: View {
                             .frame(width: 96)
                             .padding(.trailing, 5)
                         }
+                        Spacer()
                     }
                 }
             }

@@ -29,7 +29,10 @@ struct HomeView: View {
             NavigationView {
                 ScrollView(.vertical) {
                     VStack() {
-                        CarouselView(homeVM.now_playing_list, self.carouselTitle)
+                        CarouselView(card_list: homeVM.now_playing_list,
+                                     title: self.carouselTitle,
+                                     media_type: self.media_type
+                        )
                         
                         MediaCardsView(title: "Top Rated",
                                        card_list: homeVM.top_rated_list,
