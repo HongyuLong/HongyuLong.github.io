@@ -12,7 +12,6 @@ struct CastsView: View {
     @EnvironmentObject var detailsVM: DetailsViewModel
     
     var body: some View {
-        if detailsVM.hasCasts {
             VStack(alignment: .leading) {
                 Text("Cast & Crew")
                     .font(.title2)
@@ -41,7 +40,5 @@ struct CastsView: View {
             }
             .padding(.top, 6)
         }
-        
-    }
 }
 

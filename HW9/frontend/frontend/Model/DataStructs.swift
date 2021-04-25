@@ -101,15 +101,16 @@ struct CastItem: JSONable, Codable, Identifiable {
     }
 }
 
-struct ReviewItem: JSONable, Codable{
+struct ReviewItem: JSONable{
+    let id = UUID()
     let author: String
     let content: String
-    let rating: Int
+    let rating: Double
     let created_at: String
     init(parameter: JSON) {
         author = parameter["author"].stringValue
         content = parameter["content"].stringValue
-        rating = parameter["rating"].intValue
+        rating = parameter["rating"].doubleValue / 2.0
         created_at = parameter["created_at"].stringValue
     }
 }

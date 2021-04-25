@@ -28,6 +28,9 @@
 		27A4728F26271B04006D31EF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A4728E26271B04006D31EF /* HomeView.swift */; };
 		27B22C552632A31600866A08 /* CastsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B22C542632A31600866A08 /* CastsView.swift */; };
 		27B22C592632B51200866A08 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B22C582632B51200866A08 /* VideoView.swift */; };
+		27B63D2726353F4C005DC744 /* ReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2626353F4C005DC744 /* ReviewsView.swift */; };
+		27B63D2A26353F73005DC744 /* ReviewDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2926353F73005DC744 /* ReviewDetailsView.swift */; };
+		27B63D2D2635545F005DC744 /* RecommendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2C2635545F005DC744 /* RecommendView.swift */; };
 		27EB85CB26273C9500E18223 /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB85CA26273C9500E18223 /* DataStructs.swift */; };
 		2A3A76ADB761A40FEE1DF9FD /* Pods_frontend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBFCEAB5146BC9F6149AF8C /* Pods_frontend.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +59,9 @@
 		27A4728E26271B04006D31EF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		27B22C542632A31600866A08 /* CastsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastsView.swift; sourceTree = "<group>"; };
 		27B22C582632B51200866A08 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		27B63D2626353F4C005DC744 /* ReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsView.swift; sourceTree = "<group>"; };
+		27B63D2926353F73005DC744 /* ReviewDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailsView.swift; sourceTree = "<group>"; };
+		27B63D2C2635545F005DC744 /* RecommendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendView.swift; sourceTree = "<group>"; };
 		27EB85CA26273C9500E18223 /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
 		8030517CC7AE314E9E96698E /* Pods-frontend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend.debug.xcconfig"; path = "Target Support Files/Pods-frontend/Pods-frontend.debug.xcconfig"; sourceTree = "<group>"; };
 		94B3FABE44CEBE55CA870EA1 /* Pods-frontend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend.release.xcconfig"; path = "Target Support Files/Pods-frontend/Pods-frontend.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 			children = (
 				278A8FDE262F1F0000168D0B /* MediaCardsView.swift */,
 				270F3FBA26300E1700A3EDF0 /* DetailsView.swift */,
+				27B63D2C2635545F005DC744 /* RecommendView.swift */,
 				278A8FD6262ECE0200168D0B /* UnitImageDynamicView.swift */,
 				278C899A262D435900D8A170 /* CarouselDynamic.swift */,
 				279B48A82625EBC300FF97A8 /* ContentView.swift */,
@@ -142,6 +149,8 @@
 				27A2172B2633B114001FEE4D /* SearchCardsView.swift */,
 				27B22C542632A31600866A08 /* CastsView.swift */,
 				27B22C582632B51200866A08 /* VideoView.swift */,
+				27B63D2626353F4C005DC744 /* ReviewsView.swift */,
+				27B63D2926353F73005DC744 /* ReviewDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +290,9 @@
 				27EB85CB26273C9500E18223 /* DataStructs.swift in Sources */,
 				270F3FA5262FAC5D00A3EDF0 /* CarouselView.swift in Sources */,
 				27B22C552632A31600866A08 /* CastsView.swift in Sources */,
+				27B63D2726353F4C005DC744 /* ReviewsView.swift in Sources */,
+				27B63D2D2635545F005DC744 /* RecommendView.swift in Sources */,
+				27B63D2A26353F73005DC744 /* ReviewDetailsView.swift in Sources */,
 				270F3FAD262FE58700A3EDF0 /* WatchListView.swift in Sources */,
 				270F3FB0262FE5E900A3EDF0 /* SearchView.swift in Sources */,
 				27A2172C2633B114001FEE4D /* SearchCardsView.swift in Sources */,

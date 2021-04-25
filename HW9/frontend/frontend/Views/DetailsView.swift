@@ -81,15 +81,22 @@ struct DetailsView: View {
                         }
                     }
                     
+                    if detailsVM.hasCasts {
+                        CastsView()
+                    }
                     
-                    CastsView()
+                    if detailsVM.hasReviews {
+                        ReviewsView()
+                    }
                     
+                    if detailsVM.hasRecommend {
+                        RecommendView(media_type: self.media_type)
+                    }
                     Spacer()
                 }
                 .navigationBarItems(
                     trailing:
-                        Text("placeholder for three icons")
-                )
+                        Text("placeholder for three icons"))
                 .padding()
                 .environmentObject(detailsVM)
             }

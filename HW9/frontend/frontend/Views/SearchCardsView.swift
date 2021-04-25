@@ -19,47 +19,60 @@ struct SearchCardsView: View {
     var body: some View {
         VStack {
             ForEach(searchVM.search_list) { result in
-                ZStack {
-                    KFImage(URL(string: result.backdrop_path))
-                        .resizable()
-                        .frame(width: 350, height: 180)
-                        .aspectRatio(contentMode: .fit)
-                        .clipped()
-                        .cornerRadius(10)
-                    
-                    VStack {
-                        HStack {
-                            Text(result.media_type)
-                                .font(.title3)
-                                .foregroundColor(.white)
-                                .bold()
-                            if(result.year != "") {
-                                Text("(" + result.year + ")")
+                NavigationLink(destination: DetailsView(media_type: result.media_type, media_id: result.id)) {
+                    ZStack {
+                        KFImage(URL(string: result.backdrop_path))
+                            .resizable()
+                            .frame(width: 350, height: 180)
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .cornerRadius(10)
+                        
+                        VStack {
+                            HStack {
+                                if(result.media_type == "tv") {
+                                    Text("TV")
+                                        .font(.title3)
+                                        .foregroundColor(.white)
+                                        .bold()
+                                }
+                                else {
+                                    Text("MOVIE")
+                                        .font(.title3)
+                                        .foregroundColor(.white)
+                                        .bold()
+                                }
+                                
+                                if(result.year != "") {
+                                    Text("(" + result.year + ")")
+                                        .font(.title3)
+                                        .foregroundColor(.white)
+                                        .bold()
+                                }
+                                Spacer()
+                                Image(systemName: "star.fill")
+                                    .foregroundColor(.red)
+                                Text(String(format: "%.1f", result.vote_average))
                                     .font(.title3)
                                     .foregroundColor(.white)
                                     .bold()
                             }
+                            .padding(10)
+                            
                             Spacer()
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.red)
-                            Text(String(format: "%.1f", result.vote_average))
-                                .font(.title3)
-                                .foregroundColor(.white)
-                                .bold()
+                            
+                            HStack {
+                                Text(result.title)
+                                    .font(.title3)
+                                    .foregroundColor(Color.white)
+                                    .bold()
+                                    .padding(10)
+                                Spacer()
+                            }
                         }
-                        Spacer()
-                        
-                        HStack {
-                            Text(result.title)
-                                .font(.title3)
-                                .foregroundColor(Color.white)
-                                .bold()
-                                .padding(10)
-                            Spacer()
-                        }
-                    }
-                    .frame(height: 180)
-                    .clipped()
+                        .frame(width:350, height: 180)
+                        .clipped()
+                    } // Zstack
                 }
             }
         }

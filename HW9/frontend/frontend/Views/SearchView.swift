@@ -13,17 +13,17 @@ struct SearchBar: UIViewRepresentable {
     
     @Binding var text: String
     var placeholder: String
-    var svm: SearchViewModel
+    var searchViewModel: SearchViewModel
     
     class Coordinator: NSObject, UISearchBarDelegate {
     
         @Binding var text: String
-        var svm: SearchViewModel
-        let debouncer = Debouncer(delay: 1)
+        var searchViewModel: SearchViewModel
+        let debouncer = Debouncer(delay: 0.5)
         
-        init(text: Binding<String>, svm: SearchViewModel) {
+        init(text: Binding<String>, searchViewModel: SearchViewModel) {
             _text = text
-            self.svm = svm
+            self.searchViewModel = searchViewModel
         }
 
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -31,7 +31,7 @@ struct SearchBar: UIViewRepresentable {
             
             if (searchText.count >= 3) {
                 debouncer.run(action: {
-                    self.svm.fetchSearchData(query: searchText)
+                    self.searchViewModel.fetchSearchData(query: searchText)
                 })
             }
         }
@@ -62,7 +62,7 @@ struct SearchBar: UIViewRepresentable {
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
-        return Coordinator(text: $text, svm: svm)
+        return Coordinator(text: $text, searchViewModel: searchViewModel)
     }
 
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
@@ -85,7 +85,7 @@ struct SearchBar: UIViewRepresentable {
 
 struct SearchView: View {
 
-    @ObservedObject var svm = SearchViewModel()
+    @ObservedObject var searchViewModel = SearchViewModel()
     @State private var searchText : String = ""
     @State private var searchResult : [SearchItem] = []
     
@@ -97,13 +97,13 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                SearchBar(text: $searchText, placeholder: "Search Movies, TVs...", svm: self.svm)
+                SearchBar(text: $searchText, placeholder: "Search Movies, TVs...", searchViewModel: self.searchViewModel)
             
                 ScrollView{
                     VStack{
                         if (self.searchText.count >= 3) {
                             
-                            if(svm.hasSearch) {
+                            if(searchViewModel.hasSearch) {
                                 SearchCardsView(self.searchText)
                             }
                             else {
@@ -114,7 +114,7 @@ struct SearchView: View {
                             }
                         }
                     }
-                    .environmentObject(svm)
+                    .environmentObject(searchViewModel)
                 }
             }
             .navigationBarTitle(Text("Search"))
