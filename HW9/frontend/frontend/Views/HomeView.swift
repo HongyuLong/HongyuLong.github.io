@@ -16,6 +16,7 @@ struct HomeView: View {
     @State private var media_type: String = "movie"
     
     @ObservedObject var homeVM = HomeViewModel()
+    @ObservedObject var watchlistVM = WatchlistViewModel()
     
     var body: some View {
         
@@ -69,6 +70,7 @@ struct HomeView: View {
                 
             }
             .navigationViewStyle(StackNavigationViewStyle())
+            .environmentObject(watchlistVM)
         }
     }
 }

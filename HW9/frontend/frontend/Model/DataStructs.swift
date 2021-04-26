@@ -132,3 +132,15 @@ struct SearchItem: JSONable, Codable, Identifiable{
         vote_average = parameter["vote_average"].doubleValue / 2.0
     }
 }
+
+
+struct WatchlistItem: Codable {
+    let id: Int
+    let media_type: String
+    let poster_path: String
+    init(id: Int, media_type: String, poster_path: String) {
+        self.id = id
+        self.media_type = media_type
+        self.poster_path = poster_path
+    }
+}

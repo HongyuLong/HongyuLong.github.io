@@ -13,6 +13,7 @@ struct DetailsView: View {
     @State private var isShowMore: Bool = false
     
     @ObservedObject var detailsVM = DetailsViewModel()
+    @EnvironmentObject var watchlistVM: WatchlistViewModel
     
     init(media_type: String, media_id: Int) {
         self.media_type = media_type
@@ -96,7 +97,26 @@ struct DetailsView: View {
                 }
                 .navigationBarItems(
                     trailing:
-                        Text("placeholder for three icons"))
+                        HStack {
+                            Button(action: {
+                                if(watchlistVM.checkIfExist(id: self.media_id, media_type: self.media_type)) {
+                                    watchlistVM.removedFromWatchlist(id: self.media_id, media_type: self.media_type)
+                                }
+                                else {
+                                    watchlistVM.addToWatchlist(id: self.media_id,
+                                                               media_type: self.media_type,
+                                                               poster_path: detailsVM.details!.poster_path)
+                                }
+                            }, label: {
+                                if(watchlistVM.checkIfExist(id: self.media_id, media_type: self.media_type)) {
+                                    Image(systemName: "bookmark.fill")
+                                }
+                                else {
+                                    Image(systemName: "bookmark")
+                                }
+                            })
+                        }
+                )
                 .padding()
                 .environmentObject(detailsVM)
             }

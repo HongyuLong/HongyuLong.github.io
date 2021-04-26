@@ -31,6 +31,7 @@
 		27B63D2726353F4C005DC744 /* ReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2626353F4C005DC744 /* ReviewsView.swift */; };
 		27B63D2A26353F73005DC744 /* ReviewDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2926353F73005DC744 /* ReviewDetailsView.swift */; };
 		27B63D2D2635545F005DC744 /* RecommendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2C2635545F005DC744 /* RecommendView.swift */; };
+		27B63D302635C1A4005DC744 /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B63D2F2635C1A4005DC744 /* WatchlistViewModel.swift */; };
 		27EB85CB26273C9500E18223 /* DataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EB85CA26273C9500E18223 /* DataStructs.swift */; };
 		2A3A76ADB761A40FEE1DF9FD /* Pods_frontend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBFCEAB5146BC9F6149AF8C /* Pods_frontend.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		27B63D2626353F4C005DC744 /* ReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsView.swift; sourceTree = "<group>"; };
 		27B63D2926353F73005DC744 /* ReviewDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailsView.swift; sourceTree = "<group>"; };
 		27B63D2C2635545F005DC744 /* RecommendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendView.swift; sourceTree = "<group>"; };
+		27B63D2F2635C1A4005DC744 /* WatchlistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistViewModel.swift; sourceTree = "<group>"; };
 		27EB85CA26273C9500E18223 /* DataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructs.swift; sourceTree = "<group>"; };
 		8030517CC7AE314E9E96698E /* Pods-frontend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend.debug.xcconfig"; path = "Target Support Files/Pods-frontend/Pods-frontend.debug.xcconfig"; sourceTree = "<group>"; };
 		94B3FABE44CEBE55CA870EA1 /* Pods-frontend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontend.release.xcconfig"; path = "Target Support Files/Pods-frontend/Pods-frontend.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				27A2172526339EDB001FEE4D /* Debouncer.swift */,
 				27EB85CA26273C9500E18223 /* DataStructs.swift */,
 				278A8FCF262ECB4D00168D0B /* HomeViewModel.swift */,
+				27B63D2F2635C1A4005DC744 /* WatchlistViewModel.swift */,
 				270F3FC126301A8D00A3EDF0 /* DetailsViewModel.swift */,
 				27A2171926338F45001FEE4D /* SearchViewModel.swift */,
 			);
@@ -290,6 +293,7 @@
 				27EB85CB26273C9500E18223 /* DataStructs.swift in Sources */,
 				270F3FA5262FAC5D00A3EDF0 /* CarouselView.swift in Sources */,
 				27B22C552632A31600866A08 /* CastsView.swift in Sources */,
+				27B63D302635C1A4005DC744 /* WatchlistViewModel.swift in Sources */,
 				27B63D2726353F4C005DC744 /* ReviewsView.swift in Sources */,
 				27B63D2D2635545F005DC744 /* RecommendView.swift in Sources */,
 				27B63D2A26353F73005DC744 /* ReviewDetailsView.swift in Sources */,

@@ -89,6 +89,7 @@ struct SearchView: View {
     @State private var searchText : String = ""
     @State private var searchResult : [SearchItem] = []
     
+    @ObservedObject var watchlistVM = WatchlistViewModel()
    
     init() {
         
@@ -115,10 +116,12 @@ struct SearchView: View {
                         }
                     }
                     .environmentObject(searchViewModel)
+                    
                 }
             }
             .navigationBarTitle(Text("Search"))
         }
+        .environmentObject(watchlistVM)
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }

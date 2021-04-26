@@ -11,6 +11,7 @@ import Kingfisher
 struct SearchCardsView: View {
     @State private var searchText : String = ""
     @EnvironmentObject var searchVM: SearchViewModel
+//    @ObservedObject var watchlistVM = WatchlistViewModel()
     
     init(_ text: String) {
         self.searchText = text
@@ -76,6 +77,7 @@ struct SearchCardsView: View {
                 }
             }
         }
+        
     }
 }
 
