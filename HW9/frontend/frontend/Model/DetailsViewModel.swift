@@ -25,6 +25,8 @@ class DetailsViewModel: ObservableObject {
     @Published var hasCasts = false
     @Published var hasRecommend = false
     
+//    @Published var showToast = false
+    
     func fetchAllData(media_type: String, media_id: Int) {
         AF.request(NetworkAPIBaseURL + "/watch/" + media_type + "/" + String(media_id)).responseData { response in
             print(response)

@@ -15,6 +15,10 @@ struct HomeView: View {
     @State private var carouselTitle: String = "Now Playing"
     @State private var media_type: String = "movie"
     
+    @State private var showToast:Bool = false
+    @State private var isAddTo: Bool = true
+    @State private var media_title: String = ""
+    
     @ObservedObject var homeVM = HomeViewModel()
     @ObservedObject var watchlistVM = WatchlistViewModel()
     
@@ -39,12 +43,18 @@ struct HomeView: View {
                         
                         MediaCardsView(title: "Top Rated",
                                        card_list: homeVM.top_rated_list,
-                                       media_type: self.media_type
+                                       media_type: self.media_type,
+                                       showToast: self.$showToast,
+                                       isAddTo: self.$isAddTo,
+                                       media_title: self.$media_title
                         )
                         
                         MediaCardsView(title: "Popular",
                                        card_list: homeVM.popular_list,
-                                       media_type: self.media_type
+                                       media_type: self.media_type,
+                                       showToast: self.$showToast,
+                                       isAddTo: self.$isAddTo,
+                                       media_title: self.$media_title
                         )
                         
                         Button(action: {
@@ -60,6 +70,9 @@ struct HomeView: View {
                                 
                         }
                     }
+                }
+                .toast(isPresented: $showToast) {
+                    Text("\(self.media_title) was \(self.isAddTo ? "added to Wachkist" : "removed from WatchList")")
                 }
                 .padding()
                 .navigationTitle("USC Films")
@@ -88,6 +101,7 @@ struct HomeView: View {
             .onAppear(perform: {
                 homeVM.fetchHomeMovieData()
             })
+            
         }
     }
 }

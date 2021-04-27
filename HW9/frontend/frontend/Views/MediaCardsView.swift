@@ -17,10 +17,17 @@ struct MediaCardsView: View {
     
     @Environment(\.openURL) var openURL
     
-    init(title: String, card_list: [MediaItem], media_type: String) {
+    @Binding var showToast: Bool
+    @Binding var isAddTo: Bool
+    @Binding var media_title: String
+    
+    init(title: String, card_list: [MediaItem], media_type: String, showToast: Binding<Bool>, isAddTo: Binding<Bool>, media_title: Binding<String>) {
         self.title = title
         self.card_list = card_list
         self.media_type = media_type
+        self._showToast = showToast
+        self._isAddTo = isAddTo
+        self._media_title = media_title
     }
     var body: some View {
         VStack(alignment: .leading) {
@@ -51,14 +58,19 @@ struct MediaCardsView: View {
                                 .frame(width: 96)
                                 .padding(.trailing, 18)
                             }
-                            .buttonStyle(PlainButtonStyle())
                             .contextMenu {
                                 Button(action: {
                                     if watchlistVM.checkIfExist(id: item.id, media_type: self.media_type) {
                                         watchlistVM.removedFromWatchlist(id: item.id, media_type: self.media_type)
+                                        self.showToast = true
+                                        self.isAddTo = false
+                                        self.media_title = item.title
                                     }
                                     else {
                                         watchlistVM.addToWatchlist(id: item.id, media_type: self.media_type, poster_path: item.poster_path)
+                                        self.showToast = true
+                                        self.isAddTo = true
+                                        self.media_title = item.title
                                     }
                                 }) {
                                     if watchlistVM.checkIfExist(id: item.id, media_type: self.media_type) {
