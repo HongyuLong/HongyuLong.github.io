@@ -13,6 +13,10 @@ struct MediaCardsView: View {
     private var card_list: [MediaItem]
     private var media_type: String
     
+    @ObservedObject var watchlistVM = WatchlistViewModel()
+    
+    @Environment(\.openURL) var openURL
+    
     init(title: String, card_list: [MediaItem], media_type: String) {
         self.title = title
         self.card_list = card_list
@@ -46,6 +50,42 @@ struct MediaCardsView: View {
                                 }
                                 .frame(width: 96)
                                 .padding(.trailing, 18)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .contextMenu {
+                                Button(action: {
+                                    if watchlistVM.checkIfExist(id: item.id, media_type: self.media_type) {
+                                        watchlistVM.removedFromWatchlist(id: item.id, media_type: self.media_type)
+                                    }
+                                    else {
+                                        watchlistVM.addToWatchlist(id: item.id, media_type: self.media_type, poster_path: item.poster_path)
+                                    }
+                                }) {
+                                    if watchlistVM.checkIfExist(id: item.id, media_type: self.media_type) {
+                                        Label("Remove from watchList", systemImage: "bookmark.fill")
+                                    }
+                                    else {
+                                        Label("Add to watchList", systemImage: "bookmark")
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    let url_tmdb: String = "https://themoviedb.org/" + self.media_type + "/" + String(item.id)
+                                    let url_fb: String = "https://www.facebook.com/sharer/sharer.php?"
+                                    let url_share_on_fb: String = url_fb + "u=" + url_tmdb
+                                    openURL(URL(string: url_share_on_fb)!)
+                                }) {
+                                    Label("Share on Facebook", image: "icon_fb")
+                                }
+                                
+                                Button(action: {
+                                    let url_tmdb: String = "https://themoviedb.org/" + self.media_type + "/" + String(item.id)
+                                    let url_tw: String = "http://twitter.com/intent/tweet?text=Check out this link: "
+                                    let url_share_on_tw: String = (url_tw + "&url=" + url_tmdb + "&hashtags=CSCI571USCFilms").replacingOccurrences(of: " ", with: "%20")
+                                    openURL(URL(string: url_share_on_tw)!)
+                                }) {
+                                    Label("Share on Twitter", image: "icon_tw")
+                                }
                             }
                         }
                 }

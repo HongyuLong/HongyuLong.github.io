@@ -18,6 +18,8 @@ struct HomeView: View {
     @ObservedObject var homeVM = HomeViewModel()
     @ObservedObject var watchlistVM = WatchlistViewModel()
     
+    @Environment(\.openURL) var openURL
+    
     var body: some View {
         
         if homeVM.fetched == false {
@@ -45,6 +47,18 @@ struct HomeView: View {
                                        media_type: self.media_type
                         )
                         
+                        Button(action: {
+                            let url_tmdb = "https://www.themoviedb.org/"
+                            openURL(URL(string: url_tmdb)!)
+                        }) {
+                            VStack {
+                                Text("Powered by TMDB")
+                                Text("Developed by Hongyu Long")
+                            }
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                                
+                        }
                     }
                 }
                 .padding()
@@ -71,6 +85,9 @@ struct HomeView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .environmentObject(watchlistVM)
+            .onAppear(perform: {
+                homeVM.fetchHomeMovieData()
+            })
         }
     }
 }

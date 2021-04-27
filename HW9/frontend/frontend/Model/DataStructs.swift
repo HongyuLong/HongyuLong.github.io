@@ -135,11 +135,12 @@ struct SearchItem: JSONable, Codable, Identifiable{
 
 
 struct WatchlistItem: Codable {
-    let id: Int
+//    var id = UUID()
+    let media_id: Int
     let media_type: String
     let poster_path: String
-    init(id: Int, media_type: String, poster_path: String) {
-        self.id = id
+    init(media_id: Int, media_type: String, poster_path: String) {
+        self.media_id = media_id
         self.media_type = media_type
         self.poster_path = poster_path
     }

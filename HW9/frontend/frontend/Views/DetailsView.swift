@@ -14,6 +14,7 @@ struct DetailsView: View {
     
     @ObservedObject var detailsVM = DetailsViewModel()
     @EnvironmentObject var watchlistVM: WatchlistViewModel
+    @Environment(\.openURL) var openURL
     
     init(media_type: String, media_id: Int) {
         self.media_type = media_type
@@ -110,11 +111,40 @@ struct DetailsView: View {
                             }, label: {
                                 if(watchlistVM.checkIfExist(id: self.media_id, media_type: self.media_type)) {
                                     Image(systemName: "bookmark.fill")
+//                                        .foregroundColor(.black)
                                 }
                                 else {
                                     Image(systemName: "bookmark")
+                                        .foregroundColor(.black)
                                 }
-                            })
+                            }) // Button1
+                            
+                            Button(action: {
+                                let url_tmdb: String = "https://themoviedb.org/" + self.media_type + "/" + String(self.media_id)
+                                let url_fb: String = "https://www.facebook.com/sharer/sharer.php?"
+                                let url_share_on_fb: String = url_fb + "u=" + url_tmdb
+                                openURL(URL(string: url_share_on_fb)!)
+                            }) {
+                                Image("icon_fb")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipped()
+                            }
+                            
+                            Button(action: {
+                                let url_tmdb: String = "https://themoviedb.org/" + self.media_type + "/" + String(self.media_id)
+                                let url_tw: String = "http://twitter.com/intent/tweet?text=Check out this link: "
+                                let url_share_on_tw: String = (url_tw + "&url=" + url_tmdb + "&hashtags=CSCI571USCFilms").replacingOccurrences(of: " ", with: "%20")
+                                openURL(URL(string: url_share_on_tw)!)
+                            }) {
+                                Image("icon_tw")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipped()
+                            }
+                            
                         }
                 )
                 .padding()

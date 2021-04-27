@@ -7,14 +7,32 @@
 
 import Foundation
 
+extension Array {
+    func chunked(into size:Int) -> [[Element]] {
+        
+        var chunkedArray = [[Element]]()
+        
+        for index in 0...self.count {
+            if index % size == 0 && index != 0 {
+                chunkedArray.append(Array(self[(index - size)..<index]))
+            } else if(index == self.count) {
+                chunkedArray.append(Array(self[index - 1..<index]))
+            }
+        }
+        
+        return chunkedArray
+    }
+}
+
 class WatchlistViewModel: ObservableObject {
     @Published var watchlist:[WatchlistItem] = []
+    @Published var currentMedia: WatchlistItem?
     
     private var myKey:String = "watchlist"
     
     func addToWatchlist(id: Int, media_type: String, poster_path: String) {
         self.readFromLocalStorage()
-        let newItem = WatchlistItem(id: id, media_type: media_type, poster_path: poster_path);
+        let newItem = WatchlistItem(media_id: id, media_type: media_type, poster_path: poster_path);
         self.watchlist.append(newItem)
         self.writeToLocalStorage()
     }
@@ -24,6 +42,27 @@ class WatchlistViewModel: ObservableObject {
         let index = self.findIndexOf(id: id, media_type: media_type)
         self.watchlist.remove(at: index)
         self.writeToLocalStorage()
+    }
+    
+    func checkIfExist(id: Int, media_type: String) -> Bool {
+        let index = self.findIndexOf(id: id, media_type: media_type)
+        if(index > -1) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    private func findIndexOf(id: Int, media_type: String) -> Int {
+        var index:Int = -1
+        for i in self.watchlist.indices {
+            if(watchlist[i].media_id == id && watchlist[i].media_type == media_type) {
+                index = i
+                break
+            }
+        }
+        return index
     }
     
     func readFromLocalStorage() {
@@ -40,7 +79,7 @@ class WatchlistViewModel: ObservableObject {
         }
     }
     
-    private func writeToLocalStorage() {
+    func writeToLocalStorage() {
         do {
             // Create JSON Encoder
             let encoder = JSONEncoder()
@@ -53,27 +92,6 @@ class WatchlistViewModel: ObservableObject {
         } catch {
             print("Unable to Encode Array of Watchlist (\(error))")
         }
-    }
-    
-    func checkIfExist(id: Int, media_type: String) -> Bool {
-        let index = self.findIndexOf(id: id, media_type: media_type)
-        if(index > -1) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    private func findIndexOf(id: Int, media_type: String) -> Int {
-        var index:Int = -1
-        for i in self.watchlist.indices {
-            if(watchlist[i].id == id && watchlist[i].media_type == media_type) {
-                index = i
-                break
-            }
-        }
-        return index
     }
     
 }

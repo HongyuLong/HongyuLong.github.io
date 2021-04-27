@@ -10,6 +10,9 @@ import Kingfisher
 
 struct WatchListView: View {
     @ObservedObject var watchlistVM = WatchlistViewModel()
+    @Namespace var animation
+    let columns = Array(repeating: GridItem(.flexible(), spacing: 10), count: 3)
+    
     var body: some View {
         
         VStack {
@@ -21,23 +24,35 @@ struct WatchListView: View {
             else {
                 NavigationView {
                     ScrollView(.vertical) {
-                        VStack(alignment: .leading) {
-                            Text("Watchlist")
-                                .font(.title)
-                                .bold()
-                            ForEach(watchlistVM.watchlist, id: \.id) { item in
-                                NavigationLink(destination: DetailsView(media_type: item.media_type, media_id: item.id))  {
+                        LazyVGrid(columns: columns, spacing: 4, content: {
+                            ForEach(watchlistVM.watchlist, id: \.media_id) { item in
+                                NavigationLink(destination: DetailsView(media_type: item.media_type, media_id: item.media_id)) {
                                     KFImage(URL(string: item.poster_path))
                                         .resizable()
-                                        .frame(width: 96, height: 130)
+                                        .frame(height: 170)
                                         .aspectRatio(contentMode: .fit)
                                         .clipped()
+                                        .onDrag({
+                                            watchlistVM.currentMedia = item
+                                            return NSItemProvider(contentsOf: URL(string: item.poster_path))!
+                                        })
+                                        .onDrop(of: [.text], delegate: DragViewDelegate(media: item, wacthlistVM: watchlistVM))
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .contextMenu {
+                                    Button(action: {
+                                        watchlistVM.removedFromWatchlist(id: item.media_id, media_type: item.media_type)
+                                    }) {
+                                        Label("Remove from watchList", systemImage: "bookmark.fill")
+                                    }
                                 }
                             }
-                            Spacer()
-                        }
+                        })
+                        .padding()
                     }
+                    .navigationTitle("Watchlist")
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .environmentObject(watchlistVM)
             }
         }
