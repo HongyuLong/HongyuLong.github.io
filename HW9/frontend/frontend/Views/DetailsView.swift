@@ -16,6 +16,9 @@ struct DetailsView: View {
     @EnvironmentObject var watchlistVM: WatchlistViewModel
     @Environment(\.openURL) var openURL
     
+    @State private var detail_showToast: Bool = false
+    @State private var detail_isAddTo: Bool = true
+    
     init(media_type: String, media_id: Int) {
         self.media_type = media_type
         self.media_id = media_id
@@ -102,27 +105,28 @@ struct DetailsView: View {
                             Button(action: {
                                 if(watchlistVM.checkIfExist(id: self.media_id, media_type: self.media_type)) {
                                     watchlistVM.removedFromWatchlist(id: self.media_id, media_type: self.media_type)
+                                    self.detail_showToast = true
+                                    self.detail_isAddTo = false
                                 }
                                 else {
                                     watchlistVM.addToWatchlist(id: self.media_id,
                                                                media_type: self.media_type,
                                                                poster_path: detailsVM.details!.poster_path)
+                                    self.detail_showToast = true
+                                    self.detail_isAddTo = true
                                 }
-                            }, label: {
+                            }) {
                                 if(watchlistVM.checkIfExist(id: self.media_id, media_type: self.media_type)) {
                                     Image(systemName: "bookmark.fill")
-//                                        .foregroundColor(.black)
                                 }
                                 else {
                                     Image(systemName: "bookmark")
                                         .foregroundColor(.black)
                                 }
-                            }) // Button1
+                            } // Button1
                             
                             Button(action: {
-                                let url_tmdb: String = "https://themoviedb.org/" + self.media_type + "/" + String(self.media_id)
-                                let url_fb: String = "https://www.facebook.com/sharer/sharer.php?"
-                                let url_share_on_fb: String = url_fb + "u=" + url_tmdb
+                                let url_share_on_fb: String = "https://www.facebook.com/sharer/sharer.php?u=https://themoviedb.org/" + self.media_type + "/" + String(self.media_id)
                                 openURL(URL(string: url_share_on_fb)!)
                             }) {
                                 Image("icon_fb")
@@ -133,9 +137,7 @@ struct DetailsView: View {
                             }
                             
                             Button(action: {
-                                let url_tmdb: String = "https://themoviedb.org/" + self.media_type + "/" + String(self.media_id)
-                                let url_tw: String = "http://twitter.com/intent/tweet?text=Check out this link: "
-                                let url_share_on_tw: String = (url_tw + "&url=" + url_tmdb + "&hashtags=CSCI571USCFilms").replacingOccurrences(of: " ", with: "%20")
+                                let url_share_on_tw: String = ("http://twitter.com/intent/tweet?text=Check out this link: &url=https://themoviedb.org/" + self.media_type + "/" + String(self.media_id) + "&hashtags=CSCI571USCFilms").replacingOccurrences(of: " ", with: "%20")
                                 openURL(URL(string: url_share_on_tw)!)
                             }) {
                                 Image("icon_tw")
@@ -149,6 +151,12 @@ struct DetailsView: View {
                 )
                 .padding()
                 .environmentObject(detailsVM)
+            }
+            
+            .toast(isPresented: $detail_showToast) {
+                Text("\(detailsVM.details!.title) was \(self.detail_isAddTo ? "added to Wachkist" : "removed from WatchList")")
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
             }
         }
     }

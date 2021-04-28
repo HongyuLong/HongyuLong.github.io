@@ -73,6 +73,8 @@ struct HomeView: View {
                 }
                 .toast(isPresented: $showToast) {
                     Text("\(self.media_title) was \(self.isAddTo ? "added to Wachkist" : "removed from WatchList")")
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
                 }
                 .padding()
                 .navigationTitle("USC Films")
@@ -98,9 +100,6 @@ struct HomeView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .environmentObject(watchlistVM)
-//            .onAppear(perform: {
-//                homeVM.fetchHomeMovieData()
-//            })
             
         }
     }
