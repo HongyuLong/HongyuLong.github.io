@@ -27,11 +27,9 @@ struct WatchListView: View {
                         LazyVGrid(columns: columns, spacing: 4, content: {
                             ForEach(watchlistVM.watchlist, id: \.id) { item in
                                 NavigationLink(destination: DetailsView(media_type: item.media_type, media_id: item.media_id)) {
-                                    KFImage(URL(string: item.poster_path))
-                                        .resizable()
+                                    RemoteImage(url: item.poster_path)
                                         .frame(height: 170)
                                         .aspectRatio(contentMode: .fit)
-                                        .clipped()
                                         .onDrag({
                                             watchlistVM.currentMedia = item
                                             return NSItemProvider(contentsOf: URL(string: item.poster_path))!

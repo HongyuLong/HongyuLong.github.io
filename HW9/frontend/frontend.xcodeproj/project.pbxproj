@@ -16,6 +16,7 @@
 		278A8FD0262ECB4D00168D0B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A8FCF262ECB4D00168D0B /* HomeViewModel.swift */; };
 		278A8FD7262ECE0200168D0B /* UnitImageDynamicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A8FD6262ECE0200168D0B /* UnitImageDynamicView.swift */; };
 		278A8FDF262F1F0000168D0B /* MediaCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A8FDE262F1F0000168D0B /* MediaCardsView.swift */; };
+		278AF8DC26398A8D00B1DADF /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278AF8DB26398A8D00B1DADF /* RemoteImage.swift */; };
 		278C8994262D393200D8A170 /* HomeNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C8993262D393200D8A170 /* HomeNavigationBar.swift */; };
 		278C899B262D435900D8A170 /* CarouselDynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278C899A262D435900D8A170 /* CarouselDynamic.swift */; };
 		27925AB62637FFC2000474C7 /* DragViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27925AB52637FFC2000474C7 /* DragViewDelegate.swift */; };
@@ -48,6 +49,7 @@
 		278A8FCF262ECB4D00168D0B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		278A8FD6262ECE0200168D0B /* UnitImageDynamicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitImageDynamicView.swift; sourceTree = "<group>"; };
 		278A8FDE262F1F0000168D0B /* MediaCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCardsView.swift; sourceTree = "<group>"; };
+		278AF8DB26398A8D00B1DADF /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		278C8993262D393200D8A170 /* HomeNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationBar.swift; sourceTree = "<group>"; };
 		278C899A262D435900D8A170 /* CarouselDynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselDynamic.swift; sourceTree = "<group>"; };
 		27925AB52637FFC2000474C7 /* DragViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragViewDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				27B22C582632B51200866A08 /* VideoView.swift */,
 				27B63D2626353F4C005DC744 /* ReviewsView.swift */,
 				27B63D2926353F73005DC744 /* ReviewDetailsView.swift */,
+				278AF8DB26398A8D00B1DADF /* RemoteImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				278A8FD0262ECB4D00168D0B /* HomeViewModel.swift in Sources */,
 				27A2172626339EDB001FEE4D /* Debouncer.swift in Sources */,
 				278C8994262D393200D8A170 /* HomeNavigationBar.swift in Sources */,
+				278AF8DC26398A8D00B1DADF /* RemoteImage.swift in Sources */,
 				27B22C592632B51200866A08 /* VideoView.swift in Sources */,
 				270F3FC226301A8D00A3EDF0 /* DetailsViewModel.swift in Sources */,
 				27A2171A26338F45001FEE4D /* SearchViewModel.swift in Sources */,

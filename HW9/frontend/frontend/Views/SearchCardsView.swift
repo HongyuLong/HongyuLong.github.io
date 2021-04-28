@@ -24,9 +24,8 @@ struct SearchCardsView: View {
                     ZStack {
                         KFImage(URL(string: result.backdrop_path))
                             .resizable()
-                            .frame(width: 350, height: 180)
                             .aspectRatio(contentMode: .fit)
-                            .clipped()
+                            .frame(width: 350)
                             .cornerRadius(10)
                         
                         VStack {

@@ -40,12 +40,11 @@ struct MediaCardsView: View {
                         ForEach(self.card_list, id: \.id) {item in
                             NavigationLink(destination: DetailsView(media_type: self.media_type, media_id: item.id)) {
                                 VStack {
-                                    KFImage(URL(string: item.poster_path))
-                                        .resizable()
-                                        .frame(width: 96, height: 130)
+                                    RemoteImage(url: item.poster_path)
                                         .aspectRatio(contentMode: .fit)
-                                        .clipped()
+                                        .frame(width: 96)
                                         .cornerRadius(8)
+                                    
                                     Text(item.title)
                                         .font(.footnote)
                                         .foregroundColor(.black)

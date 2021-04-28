@@ -19,18 +19,17 @@ struct UnitImageDynamicView: View {
             // blur image behind
             KFImage(URL(string: url))
                 .resizable()
-                .frame(width: 358, height: 300)
+                .frame(width: 358)
                 .aspectRatio(contentMode: .fit)
-                .clipped()
                 .blur(radius: 7)
                 
             
             // not blue image front
             KFImage(URL(string: url))
                 .resizable()
-                .frame(width: 200, height: 300)
+                .frame(width: 200)
                 .aspectRatio(contentMode: .fit)
-                .clipped()
+
         }
         .frame(width: 358, height: 300)
         .clipped()
