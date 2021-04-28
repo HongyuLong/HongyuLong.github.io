@@ -98,9 +98,9 @@ struct HomeView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .environmentObject(watchlistVM)
-            .onAppear(perform: {
-                homeVM.fetchHomeMovieData()
-            })
+//            .onAppear(perform: {
+//                homeVM.fetchHomeMovieData()
+//            })
             
         }
     }

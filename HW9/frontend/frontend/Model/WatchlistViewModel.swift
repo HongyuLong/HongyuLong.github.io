@@ -30,6 +30,10 @@ class WatchlistViewModel: ObservableObject {
     
     private var myKey:String = "watchlist"
     
+    init() {
+        self.readFromLocalStorage()
+    }
+    
     func addToWatchlist(id: Int, media_type: String, poster_path: String) {
         self.readFromLocalStorage()
         let newItem = WatchlistItem(media_id: id, media_type: media_type, poster_path: poster_path);
@@ -45,6 +49,7 @@ class WatchlistViewModel: ObservableObject {
     }
     
     func checkIfExist(id: Int, media_type: String) -> Bool {
+//        self.readFromLocalStorage()
         let index = self.findIndexOf(id: id, media_type: media_type)
         if(index > -1) {
             return true

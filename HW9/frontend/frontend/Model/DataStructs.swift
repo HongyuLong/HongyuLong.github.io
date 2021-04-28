@@ -135,7 +135,7 @@ struct SearchItem: JSONable, Codable, Identifiable{
 
 
 struct WatchlistItem: Codable {
-//    var id = UUID()
+    var id = UUID().uuidString
     let media_id: Int
     let media_type: String
     let poster_path: String
